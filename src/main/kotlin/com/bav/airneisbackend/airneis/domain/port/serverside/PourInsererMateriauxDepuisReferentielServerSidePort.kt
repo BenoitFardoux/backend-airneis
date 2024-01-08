@@ -1,5 +1,5 @@
 package com.bav.airneisbackend.airneis.domain.port.serverside
 
-interface PourInsererMateriauxServerSidePort {
+interface PourInsererMateriauxDepuisReferentielServerSidePort {
     fun insererMateriaux() : Int
 }

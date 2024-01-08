@@ -1,6 +1,6 @@
 package com.bav.airneisbackend.airneis.domain.usecase
 
-import com.bav.airneisbackend.airneis.domain.port.serverside.PourRecupererMateriauParMotCleServerSidePort
+import com.bav.airneisbackend.airneis.domain.port.serverside.PourRechercherMateriauParMotCleServerSidePort
 import com.bav.airneisbackend.airneis.domain.port.serverside.PourRecupererMateriauxServersidePort
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
@@ -16,7 +16,7 @@ class RecupererMateriauxTest{
     lateinit var pourRecupererMateriauxServersidePort: PourRecupererMateriauxServersidePort
 
     @Mock
-    lateinit var pourRecupererMateriauParMotCleServerSidePort: PourRecupererMateriauParMotCleServerSidePort
+    lateinit var pourRecupererMateriauParMotCleServerSidePort: PourRechercherMateriauParMotCleServerSidePort
 
     @Test
     fun `Lorsque j'apelle ma fonction je ne rencontre pas d'erreur`() {
