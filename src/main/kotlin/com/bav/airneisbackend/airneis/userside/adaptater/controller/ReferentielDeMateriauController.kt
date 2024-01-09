@@ -19,11 +19,14 @@ class ReferentielDeMateriauController : ReferentielDeMateriauxControllerDocument
 
     @GetMapping(produces = [APPLICATION_JSON_VALUE])
     override fun recupererMateriaux(
-        pageNumber: Int,
-        pageSize: Int,
-        critereDeRecherche: String
+        pageNumber: Int?,
+        pageSize: Int?,
+        critereDeRecherche: String?
     ): ResponseEntity<CollectionModel<MateriauRestRessource>> {
 
         TODO("Implementer recuperation des objets")
     }
 }
+
+
+

@@ -12,6 +12,6 @@ class InsererMateriauxRepositoryDepuisReferentiel (
     private val mongoTemplate: MongoTemplate
 ) : PourInsererMateriauxDepuisReferentielServerSidePort{
     override fun insererMateriaux(): Int {
-        TODO("Not yet implemented")
+        return 0
     }
 }

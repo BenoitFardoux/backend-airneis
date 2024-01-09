@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository
 @Repository
 class RecupererMateriauxParMotCleRepository : PourRechercherMateriauParMotCleServerSidePort{
     override fun recupererMateriauxParMotCle(pageRequest: PageRequest, critereDeRecherche: String): Page<Materiau> {
-        TODO("Not yet implemented")
+        return Page.empty()
     }
 }
