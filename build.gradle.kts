@@ -30,7 +30,9 @@ dependencies {
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
-    testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring31x:4.9.3")
+// https://mvnrepository.com/artifact/de.flapdoodle.embed/de.flapdoodle.embed.mongo.spring30x
+//    testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring30x:4.11.0")
+
 }
 
 tasks.withType<KotlinCompile> {
