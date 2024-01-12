@@ -14,16 +14,16 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.context.annotation.Profile
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.data.mongodb.core.query.Query
+import org.springframework.test.context.TestPropertySource
 import org.springframework.test.context.junit.jupiter.SpringExtension
 
-@ExtendWith(
-    SpringExtension::class
-)
-@DataMongoTest
+@SpringBootTest
+@TestPropertySource("classpath:application-test.properties")
 class RecupererMateriauxRepositoryTest {
     @Autowired
     private lateinit var mongoTemplate: MongoTemplate
@@ -40,7 +40,7 @@ class RecupererMateriauxRepositoryTest {
 
     @AfterEach
     fun tearDown() {
-//        mongoTemplate.remove(Query(), MateriauDocument::class.java)
+        mongoTemplate.remove(Query(), MateriauDocument::class.java)
     }
 
     @Test
@@ -53,6 +53,6 @@ class RecupererMateriauxRepositoryTest {
         val materiauRecupere = recupererMateriauxRepository.recupererMateriaux(pageable)
         // THEN
 
-        assertThat(materiauRecupere).isEqualTo(materiauARecuperer)
+        assertThat(materiauRecupere).usingRecursiveComparison().isEqualTo(materiauARecuperer)
     }
 }
