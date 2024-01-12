@@ -14,7 +14,7 @@ class InsererMateriauxTest {
     lateinit var pourInsererMateriauxDepuisReferentielServerSidePort: PourInsererMateriauxDepuisReferentielServerSidePort
 
     @Test
-    fun `Lorsque j'apelle ma fonction je ne rencontre pas d'erreur`() {
+    fun `Lorsque j'appelle ma fonction je ne rencontre pas d'erreur`() {
         //GIVEN
         val insererMateriaux = InsererMateriaux(pourInsererMateriauxDepuisReferentielServerSidePort)
         // WHEN THEN

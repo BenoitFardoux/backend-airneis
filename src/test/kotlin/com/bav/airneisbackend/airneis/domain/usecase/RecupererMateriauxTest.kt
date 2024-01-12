@@ -19,10 +19,20 @@ class RecupererMateriauxTest{
     lateinit var pourRecupererMateriauParMotCleServerSidePort: PourRechercherMateriauParMotCleServerSidePort
 
     @Test
-    fun `Lorsque j'apelle ma fonction je ne rencontre pas d'erreur`() {
+    fun `Lorsque j'apelle ma fonction pourrecuperermateriaux je ne rencontre pas d'erreur`() {
         //GIVEN
         val recupererMateriaux = RecupererMateriaux(pourRecupererMateriauxServersidePort,pourRecupererMateriauParMotCleServerSidePort)
         val critereDeRecherche = ""
+        val pageable = PageRequest.of(1,1)
+        // WHEN THEN
+        assertDoesNotThrow("insererMateriaux ne devrait pas lancer d'exception") { recupererMateriaux(pageable,critereDeRecherche) }
+
+    }
+    @Test
+    fun `Lorsque j'apelle ma fonction pourrecuperermateriauxParMotCle je ne rencontre pas d'erreur`() {
+        //GIVEN
+        val recupererMateriaux = RecupererMateriaux(pourRecupererMateriauxServersidePort,pourRecupererMateriauParMotCleServerSidePort)
+        val critereDeRecherche = "bois"
         val pageable = PageRequest.of(1,1)
         // WHEN THEN
         assertDoesNotThrow("insererMateriaux ne devrait pas lancer d'exception") { recupererMateriaux(pageable,critereDeRecherche) }
