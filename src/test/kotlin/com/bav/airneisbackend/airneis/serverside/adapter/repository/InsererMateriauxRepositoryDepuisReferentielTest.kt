@@ -44,6 +44,6 @@ class InsererMateriauxRepositoryDepuisReferentielTest{
         val materiauxInsere = mongoTemplate.findOne(Query(), MateriauDocument::class.java,"materiau")
         //THEN
         assertThat(nombreMateriauCree).isEqualTo(nombreDeMateriauACreer)
-        assertThat(materiauxInsere).usingRecursiveComparison().isEqualTo(materiauAInserer)
+        assertThat(materiauxInsere).usingRecursiveComparison().ignoringFields("id").isEqualTo(materiauAInserer)
     }
 }

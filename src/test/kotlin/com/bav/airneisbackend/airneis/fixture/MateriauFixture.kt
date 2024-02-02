@@ -6,8 +6,8 @@ import com.bav.airneisbackend.airneis.serverside.dto.ReferentielDeMateriauDocume
 
 class MateriauFixture {
     companion object {
-        val materiauDocument = MateriauDocument("1","Bois")
-        val referentielDeMateriauDocument = ReferentielDeMateriauDocument("1","Bois")
-        val materiau = Materiau("1","Bois")
+        val materiauDocument = MateriauDocument(materiauId = "1", name = "chene")
+        val referentielDeMateriauDocument = ReferentielDeMateriauDocument("1","chene")
+        val materiau = Materiau("1","chene")
     }
 }

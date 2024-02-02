@@ -6,7 +6,7 @@ import com.bav.airneisbackend.airneis.serverside.dto.MateriauDocument
 object MateriauMapper {
     fun MateriauDocument.toMateriau() : Materiau=
         Materiau(
-            id = id,
+            id = materiauId,
             nomMateriau = name
         )
 }
