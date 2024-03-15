@@ -7,6 +7,8 @@ object MateriauMapper {
     fun MateriauDocument.toMateriau() : Materiau=
         Materiau(
             id = id,
-            nomMateriau = name
+            nom = nom,
+            images = images,
+            typeMateriau = typeMateriau
         )
 }
