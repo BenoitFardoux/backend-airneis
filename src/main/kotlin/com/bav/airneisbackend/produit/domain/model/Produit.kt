@@ -13,3 +13,8 @@ data class Produit (
     val materiaux: List<Materiau>
 )
 
+data class Dimension(
+    val hauteur: Double,
+    val largeur: Double,
+    val profondeur: Double
+)
