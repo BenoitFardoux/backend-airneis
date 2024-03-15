@@ -20,7 +20,6 @@ class ReferentielDeMateriauController : ReferentielDeMateriauxControllerDocument
         pageSize: Int?,
         critereDeRecherche: String?
     ): ResponseEntity<CollectionModel<MateriauRestRessource>> {
-
         TODO("Implementer recuperation des objets")
     }
 }

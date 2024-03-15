@@ -36,7 +36,7 @@ class RecupererMateriauxRepositoryTest {
     }
 
     @Test
-    fun `le test est là pour voir si ça compile`() {
+    fun `Lorsque j'essaye de récuperer les materiaux de la base de donnée je récupère tous les materiaux paginés    `() {
         // GIVEN
         val materiau = MateriauFixture.materiau
         val materiauARecuperer = PageImpl(listOf(materiau))
@@ -45,6 +45,6 @@ class RecupererMateriauxRepositoryTest {
         val materiauRecupere = recupererMateriauxRepository.recupererMateriaux(pageable)
         // THEN
 
-        assertThat(materiauRecupere).usingRecursiveComparison().isEqualTo(materiauARecuperer)
+        assertThat(materiauRecupere).usingRecursiveComparison().ignoringFields("id").isEqualTo(materiauARecuperer)
     }
 }

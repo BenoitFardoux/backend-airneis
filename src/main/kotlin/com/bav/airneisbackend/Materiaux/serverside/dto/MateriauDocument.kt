@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.MongoId
 data class MateriauDocument(
     @MongoId
     val id: ObjectId = ObjectId.get(),
-    val materiauId : String,
-    val name : String
+    val nom : String,
+    val type : String,
+    val image : String
 )   
