@@ -1,9 +1,8 @@
 package com.bav.airneisbackend.produit.domain.model
 
-import org.bson.types.ObjectId
 
 data class Produit (
-    val id: ObjectId,
+    val id: String?,
     val prix: Double,
     val nom: String,
     val description: String,

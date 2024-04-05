@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository
 
 
 @Repository
-interface MongoDbMateriauxRepository : MongoRepository<MateriauDocument, String>{
-}
+interface MongoDbMateriauxRepository : MongoRepository<MateriauDocument, String>
