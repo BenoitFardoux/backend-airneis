@@ -16,11 +16,13 @@ class ProduitFixture {
         )
         val categorie = Categorie(
             id = "",
+
             nom = "chaise"
         )
 
         val materiau = Materiau(
             id = "",
+
             nom = "bois"
         )
 
@@ -39,6 +41,7 @@ class ProduitFixture {
 
         val produit = Produit(
             id = "",
+
             nom = "Chaise",
             description = "une chaise en bois",
             prix = 10.0,
