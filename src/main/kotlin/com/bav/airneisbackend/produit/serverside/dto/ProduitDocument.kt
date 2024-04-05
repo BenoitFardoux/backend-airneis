@@ -5,11 +5,13 @@ import com.bav.airneisbackend.produit.domain.model.Dimension
 import com.bav.airneisbackend.produit.domain.model.Materiau
 import org.bson.types.ObjectId
 import org.springframework.data.mongodb.core.mapping.Document
+import org.springframework.data.mongodb.core.mapping.MongoId
 
 
 @Document("produit")
 data class ProduitDocument(
-    val id : ObjectId,
+    @MongoId
+    val id : String?,
     val nom : String,
     val description : String,
     val prix : Double,

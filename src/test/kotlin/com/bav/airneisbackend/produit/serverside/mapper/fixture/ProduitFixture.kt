@@ -15,19 +15,19 @@ class ProduitFixture {
             profondeur = 10.0
         )
         val categorie = Categorie(
-            id = ObjectId.get(),
+            id = "",
             nom = "chaise"
         )
 
         val materiau = Materiau(
-            id = ObjectId.get(),
+            id = "",
             nom = "bois"
         )
 
         val materiaux = listOf(materiau)
 
         val produitDocument = ProduitDocument(
-            id = ObjectId.get(),
+            id = "",
             nom = "Chaise",
             description = "une chaise en bois",
             prix = 10.0,
@@ -38,7 +38,7 @@ class ProduitFixture {
         )
 
         val produit = Produit(
-            id = ObjectId.get(),
+            id = "",
             nom = "Chaise",
             description = "une chaise en bois",
             prix = 10.0,
