@@ -15,7 +15,7 @@ class SecurityConfiguration {
         http.csrf { csrf -> csrf.disable() }
             .authorizeHttpRequests { authorize ->
                 authorize.requestMatchers(
-                    "/actuator/**", "/swagger-ui/**", "/v3/api-docs/**", "/referentiel/**"
+                    "/actuator/**", "/swagger-ui/**", "/v3/api-docs/**", "/**"
                 )
                     .permitAll()
             }
