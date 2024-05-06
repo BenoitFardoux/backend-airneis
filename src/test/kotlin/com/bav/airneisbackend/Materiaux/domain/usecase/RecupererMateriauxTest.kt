@@ -1,7 +1,7 @@
 package com.bav.airneisbackend.Materiaux.domain.usecase
 
-import com.bav.airneisbackend.Materiaux.domain.port.serverside.PourRechercherMateriauParMotCleServerSidePort
-import com.bav.airneisbackend.Materiaux.domain.port.serverside.PourRecupererMateriauxServersidePort
+import com.bav.airneisbackend.Materiaux.domain.port.serverside.PourRechercherMateriau
+import com.bav.airneisbackend.Materiaux.domain.port.serverside.PourRecupererMateriaux
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.extension.ExtendWith
@@ -13,15 +13,15 @@ import org.springframework.data.domain.PageRequest
 @ExtendWith(MockitoExtension::class)
 class RecupererMateriauxTest{
     @Mock
-    lateinit var pourRecupererMateriauxServersidePort: PourRecupererMateriauxServersidePort
+    lateinit var pourRecupererMateriaux: PourRecupererMateriaux
 
     @Mock
-    lateinit var pourRecupererMateriauParMotCleServerSidePort: PourRechercherMateriauParMotCleServerSidePort
+    lateinit var pourRecupererMateriauParMotCleServerSidePort: PourRechercherMateriau
 
     @Test
     fun `Lorsque j'apelle ma fonction pourrecuperermateriaux je ne rencontre pas d'erreur`() {
         //GIVEN
-        val recupererMateriaux = RecupererMateriaux(pourRecupererMateriauxServersidePort,pourRecupererMateriauParMotCleServerSidePort)
+        val recupererMateriaux = RecupererMateriaux(pourRecupererMateriaux,pourRecupererMateriauParMotCleServerSidePort)
         val critereDeRecherche = ""
         val pageable = PageRequest.of(1,1)
         // WHEN THEN
@@ -31,7 +31,7 @@ class RecupererMateriauxTest{
     @Test
     fun `Lorsque j'apelle ma fonction pourrecuperermateriauxParMotCle je ne rencontre pas d'erreur`() {
         //GIVEN
-        val recupererMateriaux = RecupererMateriaux(pourRecupererMateriauxServersidePort,pourRecupererMateriauParMotCleServerSidePort)
+        val recupererMateriaux = RecupererMateriaux(pourRecupererMateriaux,pourRecupererMateriauParMotCleServerSidePort)
         val critereDeRecherche = "bois"
         val pageable = PageRequest.of(1,1)
         // WHEN THEN

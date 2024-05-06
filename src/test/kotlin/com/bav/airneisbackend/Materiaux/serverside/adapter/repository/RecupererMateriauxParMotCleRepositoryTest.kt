@@ -46,7 +46,7 @@ class RecupererMateriauxParMotCleRepositoryTest{
         val critereDeRecherche = "bo"
 
         // WHEN
-        val materiauTrouve = recupererMateriauxParMotCleRepository.recupererMateriauxParMotCle(pageable,critereDeRecherche)
+        val materiauTrouve = recupererMateriauxParMotCleRepository(pageable,critereDeRecherche)
         // THEN
         assertThat(materiauTrouve).usingRecursiveComparison().isEqualTo(Page.empty<Materiau>())
     }
