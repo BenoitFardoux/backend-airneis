@@ -1,4 +1,4 @@
-package com.bav.airneisbackend.Produit.fixture
+package com.bav.airneisbackend.produit.fixture
 
 import com.bav.airneisbackend.Produit.domain.model.Materiau
 

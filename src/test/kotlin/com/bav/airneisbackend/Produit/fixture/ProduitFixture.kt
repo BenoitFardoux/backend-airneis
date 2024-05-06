@@ -3,6 +3,7 @@ package com.bav.airneisbackend.Produit.fixture
 import com.bav.airneisbackend.Produit.domain.model.Categorie
 import com.bav.airneisbackend.Produit.domain.model.Produit
 import com.bav.airneisbackend.Produit.serverside.dto.ProduitDocument
+import com.bav.airneisbackend.produit.fixture.MateriauFixture
 
 class ProduitFixture {
     companion object{
