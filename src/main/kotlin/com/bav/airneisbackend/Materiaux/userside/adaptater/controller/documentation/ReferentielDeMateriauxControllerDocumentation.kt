@@ -29,4 +29,22 @@ interface ReferentielDeMateriauxControllerDocumentation {
         pageSize: Int,
         critereDeRecherche: String?
     ): ResponseEntity<CollectionModel<MateriauRestRessource>>
+
+    @Operation(
+        summary = "Récuperer un materiau par son id",
+        description = "Recuperer un materiau par son id"
+    )
+    @ApiResponses(
+        value = [
+            ApiResponse(
+                responseCode = "200",
+                description = "Le materiau"
+            ),
+            ApiResponse(
+                responseCode = "404",
+                description = "Aucun materiau n'a été trouvé"
+            )
+        ]
+    )
+    fun recupererMateriauParId(id: String): ResponseEntity<MateriauRestRessource>
 }

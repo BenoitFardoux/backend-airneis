@@ -6,7 +6,18 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
 
 object MateriauMapper {
-    private fun materiauToMateriauRestRessource(materiaux: List<Materiau>): List<MateriauRestRessource> {
+
+    fun materiauToMateriauRestRessource(materiau: Materiau): MateriauRestRessource {
+        with(materiau) {
+            return MateriauRestRessource(
+                id = id,
+                nom = nom,
+                type = type,
+                image = image
+            )
+        }
+    }
+    fun materiauToMateriauRestRessource(materiaux: List<Materiau>): List<MateriauRestRessource> {
         return materiaux.map { materiau: Materiau ->
             with(materiau) {
                 MateriauRestRessource(
