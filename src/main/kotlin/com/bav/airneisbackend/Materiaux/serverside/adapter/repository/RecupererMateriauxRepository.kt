@@ -1,5 +1,6 @@
 package com.bav.airneisbackend.Materiaux.serverside.adapter.repository
 
+import com.bav.airneisbackend.Materiaux.domain.exception.AucunMateriauTrouveException
 import com.bav.airneisbackend.Materiaux.domain.model.Materiau
 import com.bav.airneisbackend.Materiaux.domain.port.serverside.PourRecupererMateriaux
 import com.bav.airneisbackend.Materiaux.serverside.adapter.mongodb.repository.MongoDbMateriauxRepository
@@ -14,7 +15,10 @@ class RecupererMateriauxRepository (
     private val mongoDbMateriauxRepository: MongoDbMateriauxRepository
 ) : PourRecupererMateriaux{
     override fun invoke(pageRequest: PageRequest): Page<Materiau> {
-        return mongoDbMateriauxRepository.findAll(pageRequest).map {it.toMateriau()}
+        val materiaux = mongoDbMateriauxRepository.findAll(pageRequest)
+        if (materiaux.isEmpty) {throw AucunMateriauTrouveException("Aucun materiau trouvé")
+        }
+        return materiaux.map {it.toMateriau()}
     }
 
 }

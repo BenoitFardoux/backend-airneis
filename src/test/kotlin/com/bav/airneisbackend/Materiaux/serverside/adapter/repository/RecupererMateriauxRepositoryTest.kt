@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.mongodb.core.MongoTemplate
+
 import org.springframework.data.mongodb.core.query.Query
 import org.springframework.data.mongodb.core.remove
 import org.springframework.test.context.TestPropertySource
@@ -44,9 +45,8 @@ class RecupererMateriauxRepositoryTest {
         mongoTemplate.remove(Query(), MateriauDocument::class.java)
         // WHEN
         // THEN
-        assertThrows<AucunMateriauTrouveException::class.java> {
-            recupererMateriauxRepository(PageRequest.of(0, 1))
-        }
+        assertThrows<AucunMateriauTrouveException> { recupererMateriauxRepository(PageRequest.of(0, 1)) }
+
     }
 
     @Test

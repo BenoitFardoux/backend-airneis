@@ -17,12 +17,16 @@ interface ReferentielDeMateriauxControllerDocumentation {
             ApiResponse(
                 responseCode = "200",
                 description = "L'ensemble des materiau"
+            ),
+            ApiResponse(
+                responseCode = "404",
+                description = "Aucun materiau n'a été trouvé"
             )
         ]
     )
     fun recupererMateriaux(
-        pageNumber: Int?,
-        pageSize: Int?,
-        critereDeRecherche : String?
-        ) : ResponseEntity<CollectionModel<MateriauRestRessource>>
+        pageNumber: Int,
+        pageSize: Int,
+        critereDeRecherche: String?
+    ): ResponseEntity<CollectionModel<MateriauRestRessource>>
 }
