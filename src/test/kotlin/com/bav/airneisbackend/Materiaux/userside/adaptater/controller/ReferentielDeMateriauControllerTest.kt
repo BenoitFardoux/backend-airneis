@@ -1,9 +1,10 @@
 package com.bav.airneisbackend.Materiaux.userside.adaptater.controller
 
+import com.bav.airneisbackend.Materiaux.domain.exception.MateriauNonTrouveException
 import com.bav.airneisbackend.Materiaux.domain.model.Materiau
 import com.bav.airneisbackend.Materiaux.domain.usecase.RecupererMateriaux
+import com.bav.airneisbackend.Materiaux.domain.usecase.RecupererUnMateriau
 import com.bav.airneisbackend.Materiaux.fixture.MateriauFixture
-import com.bav.airneisbackend.Produit.userside.adaptater.controller.ProduitController
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mockito.`when`
@@ -29,6 +30,43 @@ class ReferentielDeMateriauControllerTest {
     @MockBean
     private lateinit var recupererMateriaux: RecupererMateriaux
 
+    @MockBean
+    private lateinit var recupererMateriauxParId: RecupererUnMateriau
+
+    @Test
+    fun `lorsque j'utilise recupererMateriauParId avec un id valide, alors je dois avoir un status 200`() {
+        // Given
+        val materiau = MateriauFixture.materiau
+        `when`(recupererMateriauxParId(materiau.id)).thenReturn(materiau)
+
+        // When
+        // Then
+        mockMvc.get("/airneis/materiau/${materiau.id}") {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isOk() }
+            content { contentType(MediaType.APPLICATION_JSON) }
+        }
+    }
+
+    @Test
+    fun `lorsque j'utilise recupererMateriauParId avec un id invalide, alors je dois avoir un status 404`() {
+        // Given
+        val id = "123456"
+        `when`(recupererMateriauxParId(id)).thenThrow(MateriauNonTrouveException::class.java)
+
+        // When
+        // Then
+        mockMvc.get("/airneis/materiau/$id") {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isNotFound() }
+        }
+    }
+
+
     @Test
     fun `recupererMateriaux should return all products`() {
         // Given
@@ -53,7 +91,8 @@ class ReferentielDeMateriauControllerTest {
         // Given
         val mockPageDeMateriaux = Page.empty<Materiau>()
         val pageable = PageRequest.of(0, 10)
-        `when`(recupererMateriaux(pageable,null)).thenReturn(mockPageDeMateriaux)
+        `when`(recupererMateriaux(pageable,null)).thenThrow(MateriauNonTrouveException::class.java
+        )
 
         // When
         // Then

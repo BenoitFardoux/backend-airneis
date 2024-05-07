@@ -5,7 +5,7 @@ import com.bav.airneisbackend.Materiaux.serverside.dto.MateriauDocument
 
 class MateriauFixture {
     companion object {
-        val materiauDocument = MateriauDocument(id = "", nom = "chene", type = "bois", image = "chene.jpg")
-        val materiau = Materiau(id = "", nom = "chene", type = "bois", image = "chene.jpg")
+        val materiauDocument = MateriauDocument(id = "1223455", nom = "chene", type = "bois", image = "chene.jpg")
+        val materiau = Materiau(id = "1223455", nom = "chene", type = "bois", image = "chene.jpg")
     }
 }
