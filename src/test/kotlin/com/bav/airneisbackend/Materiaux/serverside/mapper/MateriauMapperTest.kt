@@ -38,4 +38,14 @@ class MateriauMapperTest{
         // THEN
         assertThat(materiauDocument.id).isNotEmpty()
     }
+
+    @Test
+    fun `lorsque je mappe un objet Materiau avec un id null, le materiauDocument mappé contient un id`(){
+        // GIVEN
+        val materiau = MateriauFixture.materiauSansId
+        // WHEN
+        val materiauDocument = materiau.toMateriauDocument()
+        // THEN
+        assertThat(materiauDocument.id).isNotEmpty()
+    }
 }
