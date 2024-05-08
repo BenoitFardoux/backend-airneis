@@ -127,4 +127,21 @@ class ReferentielDeMateriauControllerTest {
             content { contentType(MediaType.APPLICATION_JSON) }
         }
     }
+
+
+    @Test
+    fun `Lorque je fait une requete post mais qu'il manque des éléments dans le body, alors je dois avoir un status 400`() {
+        // Given
+        val materiauPourRequetePost = MateriauFixture.materiauPourRequetePost.copy(nom = null)
+
+        // When
+        // Then
+        mockMvc.post("/airneis/materiau") {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+            content = jacksonObjectMapper().writeValueAsString(materiauPourRequetePost)
+        }.andExpect {
+            status { isBadRequest() }
+        }
+    }
 }

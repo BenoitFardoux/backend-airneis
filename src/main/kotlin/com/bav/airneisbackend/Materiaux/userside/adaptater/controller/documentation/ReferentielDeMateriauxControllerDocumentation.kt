@@ -61,10 +61,11 @@ interface ReferentielDeMateriauxControllerDocumentation {
                 description = "Le materiau a été persisté"
             ),
             ApiResponse(
-                responseCode = "404",
-                description = "Le materiau n'a pas été persisté"
+                responseCode = "400",
+                description = "Des informations sont manquante" ,
+                useReturnTypeSchema = false
             )
         ]
     )
-    fun persisteMateriau(materiau: PourCreerMateriauRestRessource): ResponseEntity<MateriauRestRessource>
+    fun persisteMateriau(materiau: PourCreerMateriauRestRessource): ResponseEntity<Any>
 }

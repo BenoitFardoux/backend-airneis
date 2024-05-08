@@ -8,6 +8,7 @@ import com.bav.airneisbackend.Materiaux.domain.usecase.RecupererUnMateriau
 import com.bav.airneisbackend.Materiaux.userside.adaptater.controller.documentation.ReferentielDeMateriauxControllerDocumentation
 import com.bav.airneisbackend.Materiaux.userside.mapper.MateriauMapper
 import com.bav.airneisbackend.Materiaux.userside.restressources.MateriauRestRessource
+import com.bav.airneisbackend.Materiaux.userside.restressources.PersitanceBadRequest
 import com.bav.airneisbackend.Materiaux.userside.restressources.PourCreerMateriauRestRessource
 import org.springframework.data.domain.PageRequest
 import org.springframework.hateoas.CollectionModel
@@ -74,8 +75,27 @@ class ReferentielDeMateriauController(
     }
 
     @PostMapping
-    override fun persisteMateriau(@RequestBody materiau: PourCreerMateriauRestRessource): ResponseEntity<MateriauRestRessource> {
+    override fun persisteMateriau(@RequestBody materiau: PourCreerMateriauRestRessource): (ResponseEntity<Any>){
+        val champsManquants = ArrayList<String>()
+
+        if (materiau.nom.isNullOrBlank()) {
+            champsManquants.add("nom")
+        }
+        if (materiau.type.isNullOrBlank()) {
+            champsManquants.add("type")
+        }
+        if (materiau.image.isNullOrBlank()) {
+            champsManquants.add("image")
+        }
+
+
+        if (champsManquants.isNotEmpty()) {
+            val message = "Des informations sont manquantes : " + champsManquants.joinToString(", ")
+            return ResponseEntity.badRequest().body(PersitanceBadRequest(message))
+        }
+
         val materiauRecuperer = MateriauMapper.pourCreerMateriauRestRessourceToMateriau(materiau)
+
         val persisterMateriau = persisterUnMateriau(materiauRecuperer)
 
         val uriMateriau = URI("/airneis/materiau/${persisterMateriau.id}")
