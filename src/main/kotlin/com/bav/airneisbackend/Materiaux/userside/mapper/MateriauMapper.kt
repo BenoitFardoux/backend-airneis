@@ -2,6 +2,7 @@ package com.bav.airneisbackend.Materiaux.userside.mapper
 
 import com.bav.airneisbackend.Materiaux.domain.model.Materiau
 import com.bav.airneisbackend.Materiaux.userside.restressources.MateriauRestRessource
+import com.bav.airneisbackend.Materiaux.userside.restressources.PourCreerMateriauRestRessource
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
 
@@ -33,5 +34,15 @@ object MateriauMapper {
     fun mapMateriauPageToMateriauRestRessource(pageMateriau: Page<Materiau>): Page<MateriauRestRessource> {
         val mappedMateriau = materiauToMateriauRestRessource(pageMateriau.content)
         return PageImpl(mappedMateriau, pageMateriau.pageable, pageMateriau.totalElements)
+    }
+
+    fun pourCreerMateriauRestRessourceToMateriau(pourCreerMateriauRestRessource: PourCreerMateriauRestRessource): Materiau {
+        with(pourCreerMateriauRestRessource) {
+            return Materiau(
+                nom = nom!!,
+                type = type!!,
+                image = image!!
+            )
+        }
     }
 }

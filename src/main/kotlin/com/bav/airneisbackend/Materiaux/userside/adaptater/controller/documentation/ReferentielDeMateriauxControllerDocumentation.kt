@@ -1,6 +1,7 @@
 package com.bav.airneisbackend.Materiaux.userside.adaptater.controller.documentation
 
 import com.bav.airneisbackend.Materiaux.userside.restressources.MateriauRestRessource
+import com.bav.airneisbackend.Materiaux.userside.restressources.PourCreerMateriauRestRessource
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
@@ -47,4 +48,23 @@ interface ReferentielDeMateriauxControllerDocumentation {
         ]
     )
     fun recupererMateriauParId(id: String): ResponseEntity<MateriauRestRessource>
+
+
+    @Operation(
+        summary = "Persiste un materiau",
+        description = "Persiste un materiau persite un materiau en base de donnée"
+    )
+    @ApiResponses(
+        value = [
+            ApiResponse(
+                responseCode = "201",
+                description = "Le materiau a été persisté"
+            ),
+            ApiResponse(
+                responseCode = "404",
+                description = "Le materiau n'a pas été persisté"
+            )
+        ]
+    )
+    fun persisteMateriau(materiau: PourCreerMateriauRestRessource): ResponseEntity<MateriauRestRessource>
 }

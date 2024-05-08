@@ -1,10 +1,12 @@
 package com.bav.airneisbackend.Materiaux.userside.adaptater.controller
 
 import com.bav.airneisbackend.Materiaux.domain.exception.MateriauNonTrouveException
-import com.bav.airneisbackend.Materiaux.domain.model.Materiau
+import com.bav.airneisbackend.Materiaux.domain.usecase.PersisterUnMateriau
 import com.bav.airneisbackend.Materiaux.domain.usecase.RecupererMateriaux
 import com.bav.airneisbackend.Materiaux.domain.usecase.RecupererUnMateriau
 import com.bav.airneisbackend.Materiaux.fixture.MateriauFixture
+import com.bav.airneisbackend.Materiaux.userside.mapper.MateriauMapper
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mockito.`when`
@@ -13,12 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
-import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
+import org.springframework.test.web.servlet.post
 
 
 @WebMvcTest(ReferentielDeMateriauController::class, excludeAutoConfiguration = [SecurityAutoConfiguration::class])
@@ -29,6 +31,9 @@ class ReferentielDeMateriauControllerTest {
 
     @MockBean
     private lateinit var recupererMateriaux: RecupererMateriaux
+
+    @MockBean
+    private lateinit var persisterMateriau: PersisterUnMateriau
 
     @MockBean
     private lateinit var recupererMateriauxParId: RecupererUnMateriau
@@ -89,7 +94,6 @@ class ReferentielDeMateriauControllerTest {
     @Test
     fun `quand je fait une requete get et qu'il n'y a aucun materiau, alors je dois avoir un status 404`() {
         // Given
-        val mockPageDeMateriaux = Page.empty<Materiau>()
         val pageable = PageRequest.of(0, 10)
         `when`(recupererMateriaux(pageable,null)).thenThrow(MateriauNonTrouveException::class.java
         )
@@ -101,6 +105,26 @@ class ReferentielDeMateriauControllerTest {
             accept = MediaType.APPLICATION_JSON
         }.andExpect {
             status { isNotFound() }
+        }
+    }
+
+
+    @Test
+    fun `Lorsque je fait une requete post pour persister un materiau, alors je dois avoir un status 201`() {
+        // Given
+        val materiauPourRequetePost = MateriauFixture.materiauPourRequetePost
+        val materiau = MateriauMapper.pourCreerMateriauRestRessourceToMateriau(materiauPourRequetePost)
+        `when`(persisterMateriau(materiau)).thenReturn(materiau)
+
+        // When
+        // Then
+        mockMvc.post("/airneis/materiau") {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+            content = jacksonObjectMapper().writeValueAsString(materiauPourRequetePost)
+        }.andExpect {
+            status { isCreated() }
+            content { contentType(MediaType.APPLICATION_JSON) }
         }
     }
 }
