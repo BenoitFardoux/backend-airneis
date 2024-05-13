@@ -5,6 +5,7 @@ import com.bav.airneisbackend.Materiaux.fixture.MateriauFixture
 import com.bav.airneisbackend.Materiaux.serverside.adapter.mongodb.repository.MongoDbMateriauxRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -27,6 +28,8 @@ class RecupererMateriauxParMotCleRepositoryTest{
     @Autowired
     private lateinit var recupererMateriauxParMotCleRepository: RecupererMateriauxParMotCleRepository
 
+
+    @BeforeEach
     fun setUp() {
         mongoTemplate.insert(MateriauFixture.materiauDocument)
     }
@@ -41,13 +44,13 @@ class RecupererMateriauxParMotCleRepositoryTest{
     fun `quand j'appelle ma fonction de rechreche de materiau je récupére le bon matériaux`(){
         // GIVEN
         val materiau = MateriauFixture.materiau
-        val materiauARecuperer = PageImpl(listOf(materiau))
+        val materiauARecuperer : Page<Materiau> = PageImpl(listOf(materiau))
         val pageable = PageRequest.of(0, 1)
-        val critereDeRecherche = "bo"
+        val critereDeRecherche = "ch"
 
         // WHEN
-        val materiauTrouve = recupererMateriauxParMotCleRepository(pageable,critereDeRecherche)
+        val materiauTrouve = recupererMateriauxParMotCleRepository(pageable,critereDeRecherche).content
         // THEN
-        assertThat(materiauTrouve).usingRecursiveComparison().isEqualTo(Page.empty<Materiau>())
+        assertThat(materiauTrouve).isEqualTo(materiauARecuperer)
     }
 }

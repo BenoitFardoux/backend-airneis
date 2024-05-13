@@ -27,5 +27,6 @@ interface ProduitControllerDocumentation {
     fun recupererTousLesProduits(
         pageNumber: Int,
         pageSize: Int,
+        critere : String?
         ) : ResponseEntity<CollectionModel<ProduitRestRessource>>
 }

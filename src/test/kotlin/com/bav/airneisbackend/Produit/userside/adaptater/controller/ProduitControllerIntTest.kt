@@ -31,7 +31,7 @@ class ProduitControllerIntTest {
         // Given
         val mockPageDeProduits = PageImpl(listOf(ProduitFixture.produit))
         val pageable = PageRequest.of(0, 10)
-        `when`(recupererProduits(pageable)).thenReturn(mockPageDeProduits)
+        `when`(recupererProduits(pageable,null)).thenReturn(mockPageDeProduits)
         // When
         // Then
         mockMvc.get("/airneis/produits") {
