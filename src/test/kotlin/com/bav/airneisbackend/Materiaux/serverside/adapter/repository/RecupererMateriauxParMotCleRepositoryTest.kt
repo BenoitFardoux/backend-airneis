@@ -49,7 +49,7 @@ class RecupererMateriauxParMotCleRepositoryTest{
         val critereDeRecherche = "ch"
 
         // WHEN
-        val materiauTrouve = recupererMateriauxParMotCleRepository(pageable,critereDeRecherche).content
+        val materiauTrouve = recupererMateriauxParMotCleRepository(pageable,critereDeRecherche)
         // THEN
         assertThat(materiauTrouve).isEqualTo(materiauARecuperer)
     }

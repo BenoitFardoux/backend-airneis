@@ -4,6 +4,7 @@ import com.bav.airneisbackend.Materiaux.domain.exception.MateriauNonTrouveExcept
 import com.bav.airneisbackend.Materiaux.domain.model.Materiau
 import com.bav.airneisbackend.Materiaux.domain.port.serverside.PourRecupererUnMateriau
 import com.bav.airneisbackend.Materiaux.serverside.adapter.mongodb.repository.MongoDbMateriauxRepository
+import com.bav.airneisbackend.Materiaux.serverside.dto.MateriauDocument
 import com.bav.airneisbackend.Materiaux.serverside.mapper.MateriauMapper.toMateriau
 import org.springframework.stereotype.Repository
 import kotlin.jvm.optionals.getOrNull
@@ -14,6 +15,5 @@ class RecupererUnMateriauRepository(private val mongoDbMateriauxRepository: Mong
 
 
     override fun invoke(id: String): Materiau =
-        mongoDbMateriauxRepository.findById(id).getOrNull().takeIf { it != null }?.toMateriau()
-            ?: throw MateriauNonTrouveException("Materiau non trouvé")
+        mongoDbMateriauxRepository.findById(id).getOrNull()?.toMateriau() ?: throw MateriauNonTrouveException("Le materiau n'a pas été trouvé")
 }
