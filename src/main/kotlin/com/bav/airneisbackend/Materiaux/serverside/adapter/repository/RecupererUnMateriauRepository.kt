@@ -4,7 +4,6 @@ import com.bav.airneisbackend.Materiaux.domain.exception.MateriauNonTrouveExcept
 import com.bav.airneisbackend.Materiaux.domain.model.Materiau
 import com.bav.airneisbackend.Materiaux.domain.port.serverside.PourRecupererUnMateriau
 import com.bav.airneisbackend.Materiaux.serverside.adapter.mongodb.repository.MongoDbMateriauxRepository
-import com.bav.airneisbackend.Materiaux.serverside.dto.MateriauDocument
 import com.bav.airneisbackend.Materiaux.serverside.mapper.MateriauMapper.toMateriau
 import org.springframework.stereotype.Repository
 import kotlin.jvm.optionals.getOrNull
