@@ -14,11 +14,13 @@ import org.springframework.stereotype.Repository
 
 
 @Repository
-class RecupererMateriauxParMotCleRepository(val mongoTemplate: MongoTemplate) : PourRechercherMateriau{
+class RecupererMateriauxParMotCleRepository(val mongoTemplate: MongoTemplate) : PourRechercherMateriau {
     override fun invoke(pageRequest: PageRequest, critereDeRecherche: String): Page<Materiau> {
-        val regex = Regex(".*$critereDeRecherche.*")
+        val regex = Regex(".*$critereDeRecherche.*", RegexOption.IGNORE_CASE)
         val query = Query()
-        query.addCriteria(Criteria.where("name").regex(regex.toPattern()))
-        return PageImpl(mongoTemplate.find(query,MateriauDocument::class.java).map { it.toMateriau() })
+        query.addCriteria(Criteria.where("nom").regex(regex.toPattern()))
+        val materiauxRecupere: List<MateriauDocument> = mongoTemplate.find(query, MateriauDocument::class.java)
+        val materiaux = materiauxRecupere.map { it.toMateriau() }
+        return PageImpl(materiaux)
     }
 }

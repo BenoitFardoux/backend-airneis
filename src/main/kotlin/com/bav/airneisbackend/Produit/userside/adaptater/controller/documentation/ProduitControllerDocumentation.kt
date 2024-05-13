@@ -17,15 +17,50 @@ interface ProduitControllerDocumentation {
             ApiResponse(
                 responseCode = "200",
                 description = "L'ensemble des produits"
-            ),
-            ApiResponse(
-                responseCode = "404",
-                description = "Aucun produit trouvé"
             )
         ]
     )
     fun recupererTousLesProduits(
         pageNumber: Int,
         pageSize: Int,
+        critere : String?
         ) : ResponseEntity<CollectionModel<ProduitRestRessource>>
+
+    @Operation(
+        summary = "Récuperer un produit par son identifiant",
+        description = "Recuperer un produit par son identifiant"
+    )
+    @ApiResponses(
+        value = [
+            ApiResponse(
+                responseCode = "200",
+                description = "Le produit"
+            ),
+            ApiResponse(
+                responseCode = "404",
+                description = "Le produit n'a pas été trouvé"
+            )
+        ]
+    )
+    fun recupererProduitParId(
+        id: String
+    ) : ResponseEntity<ProduitRestRessource>
+
+    @Operation(
+        summary = "Créer un produit",
+        description = "Créer un produit"
+    )
+    @ApiResponses(
+        value = [
+            ApiResponse(
+                responseCode = "201",
+                description = "Le produit a été créé"
+            ),
+            ApiResponse(
+                responseCode = "400",
+                description = "Les données du produit ne sont pas valides"
+            )
+        ]
+    )
+    fun creerUnProduit() : ResponseEntity<ProduitRestRessource>
 }

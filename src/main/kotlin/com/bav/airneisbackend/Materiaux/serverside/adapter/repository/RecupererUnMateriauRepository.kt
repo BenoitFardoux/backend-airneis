@@ -14,6 +14,5 @@ class RecupererUnMateriauRepository(private val mongoDbMateriauxRepository: Mong
 
 
     override fun invoke(id: String): Materiau =
-        mongoDbMateriauxRepository.findById(id).getOrNull().takeIf { it != null }?.toMateriau()
-            ?: throw MateriauNonTrouveException("Materiau non trouvé")
+        mongoDbMateriauxRepository.findById(id).getOrNull()?.toMateriau() ?: throw MateriauNonTrouveException("Le materiau n'a pas été trouvé")
 }

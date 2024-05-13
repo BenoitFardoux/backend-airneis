@@ -15,7 +15,8 @@ import org.junit.jupiter.api.AfterEach
 
 
 @SpringBootTest
-class PourRecupererProduitsRepositoryTest {
+class
+PourRecupererProduitsRepositoryTest {
 
     @Autowired
     private lateinit var pourRecupererProduitsRepository: PourRecupererProduitsRepository

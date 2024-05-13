@@ -27,4 +27,19 @@ object ProduitMapper {
         val mappedProduct = produitToProduitRestRessource(pageProduit.content)
         return PageImpl(mappedProduct, pageProduit.pageable, pageProduit.totalElements)
     }
+
+    fun mapProduitToProduitRestRessource(produit: Produit): ProduitRestRessource {
+        with(produit) {
+            return ProduitRestRessource(
+                id = id,
+                prix = prix,
+                nom = nom,
+                description = description,
+                dimension = dimension,
+                categorie = categorie,
+                images = images,
+                materiaux = materiaux
+            )
+        }
+    }
 }

@@ -5,6 +5,7 @@ import com.bav.airneisbackend.Produit.domain.model.Produit
 import com.bav.airneisbackend.Produit.serverside.dto.ProduitDocument
 import com.bav.airneisbackend.produit.fixture.MateriauFixture
 
+
 class ProduitFixture {
     companion object{
         val dimension = Produit.Dimension(
@@ -12,11 +13,11 @@ class ProduitFixture {
         )
 
         val categorie = Categorie(
-            id = "",
+            id = "12333",
             nom = "meuble",
         )
         val produitDocument = ProduitDocument(
-            id = "",
+            id = "123456",
             nom = "table",
             description = "table en chene",
             prix = 100.0,
@@ -26,7 +27,7 @@ class ProduitFixture {
             materiaux = listOf(MateriauFixture.materiau)
         )
         val produit = Produit(
-            id = "",
+            id = "123456",
             nom = "table",
             description = "table en chene",
             prix = 100.0,
