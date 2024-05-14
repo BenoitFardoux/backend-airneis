@@ -1,5 +1,6 @@
 package com.bav.airneisbackend.produit.userside.adaptater.controller.documentation
 
+import com.bav.airneisbackend.produit.userside.restressources.CreerProduitRestRessource
 import com.bav.airneisbackend.produit.userside.restressources.ProduitRestRessource
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
@@ -62,5 +63,5 @@ interface ProduitControllerDocumentation {
             )
         ]
     )
-    fun creerUnProduit() : ResponseEntity<ProduitRestRessource>
+    fun creerUnProduit( creerProduitRestRessource: CreerProduitRestRessource) : ResponseEntity<ProduitRestRessource>
 }

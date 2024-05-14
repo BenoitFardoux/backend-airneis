@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.MongoId
 @Document("produit")
 data class ProduitDocument(
     @MongoId
-    val id : String?,
+    val id : String,
     val nom : String,
     val description : String,
     val prix : Double,

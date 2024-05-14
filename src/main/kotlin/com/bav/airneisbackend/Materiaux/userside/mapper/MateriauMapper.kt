@@ -39,9 +39,9 @@ object MateriauMapper {
     fun pourCreerMateriauRestRessourceToMateriau(pourCreerMateriauRestRessource: PourCreerMateriauRestRessource): Materiau {
         with(pourCreerMateriauRestRessource) {
             return Materiau(
-                nom = nom!!,
-                type = type!!,
-                image = image!!
+                nom = nom,
+                type = type,
+                image = image
             )
         }
     }

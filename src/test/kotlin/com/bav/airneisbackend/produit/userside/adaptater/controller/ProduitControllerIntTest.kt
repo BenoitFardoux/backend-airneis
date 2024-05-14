@@ -1,9 +1,13 @@
 package com.bav.airneisbackend.produit.userside.adaptater.controller
 
 import com.bav.airneisbackend.produit.domain.exception.AucunProduitTrouveException
+import com.bav.airneisbackend.produit.domain.exception.ProduitInvalideException
+import com.bav.airneisbackend.produit.domain.usecase.PersisterProduit
 import com.bav.airneisbackend.produit.domain.usecase.RecupererProduits
 import com.bav.airneisbackend.produit.domain.usecase.RecupererUnProduit
 import com.bav.airneisbackend.produit.fixture.ProduitFixture
+import com.bav.airneisbackend.produit.userside.mapper.ProduitMapper
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mockito.`when`
@@ -12,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.context.annotation.Import
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
 import org.springframework.http.MediaType
@@ -21,6 +26,7 @@ import org.springframework.test.web.servlet.post
 
 @WebMvcTest(ProduitController::class, excludeAutoConfiguration = [SecurityAutoConfiguration::class])
 @ExtendWith(MockitoExtension::class)
+@Import(ProduitControllerAdvice::class)
 class ProduitControllerIntTest {
 
     @Autowired
@@ -28,8 +34,12 @@ class ProduitControllerIntTest {
 
     @MockBean
     private lateinit var recupererProduits: RecupererProduits
+
     @MockBean
     private lateinit var recupererUnProduit: RecupererUnProduit
+
+    @MockBean
+    private lateinit var persisterProduit: PersisterProduit
     @Test
     fun `recupererProduits should return all products`() {
         // Given
@@ -38,6 +48,7 @@ class ProduitControllerIntTest {
         `when`(recupererProduits(pageable,null)).thenReturn(mockPageDeProduits)
         // When
         // Then
+
         mockMvc.get("/airneis/produits") {
             contentType = MediaType.APPLICATION_JSON
             accept = MediaType.APPLICATION_JSON
@@ -84,18 +95,44 @@ class ProduitControllerIntTest {
     }
 
     @Test
-    fun `la route post devrait renvoyer une erreur not implemented lorsqu'on lui donne un id`() {
+    fun `la route post devrait renvoyer une 201 si la requête est correcte `() {
         // Given
+        val produitPourRequetePost = ProduitFixture.produitPourRequetePost
+        val produit = ProduitMapper.creerProduitRestRessourceToProduit(produitPourRequetePost)
+        `when`(persisterProduit(produit)).thenReturn(produit)
+
         // When
         // Then
-        mockMvc.post("/airneis/produits/") {
+        mockMvc.post("/airneis/produits") {
             contentType = MediaType.APPLICATION_JSON
             accept = MediaType.APPLICATION_JSON
+            content = jacksonObjectMapper().writeValueAsString(produitPourRequetePost)
 
         }.andExpect {
-            status { isNotImplemented() }
+            status { isCreated() }
             content { contentType(MediaType.APPLICATION_JSON) }
 
         }
     }
+
+    @Test
+    fun `la route post devrait revoyer une erreur 400 si la requête est incorrecte`() {
+        // Given
+        val produitPourRequetePost = ProduitFixture.produitPourRequetePost.copy(nom = "")
+        val produit = ProduitMapper.creerProduitRestRessourceToProduit(produitPourRequetePost)
+        val champs = listOf("Nom")
+        `when`(persisterProduit(produit)).thenThrow(ProduitInvalideException("Le nom du produit est invalide", champs ))
+        // When
+        // Then
+        mockMvc.post("/airneis/produits") {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+            content = jacksonObjectMapper().writeValueAsString(produitPourRequetePost)
+        }.andExpect {
+            status { isBadRequest() }
+            content { contentType(MediaType.APPLICATION_JSON) }
+
+        }
+    }
+
 }

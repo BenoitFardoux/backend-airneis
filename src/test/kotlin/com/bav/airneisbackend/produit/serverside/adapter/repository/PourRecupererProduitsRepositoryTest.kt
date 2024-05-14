@@ -12,9 +12,12 @@ import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.data.mongodb.core.query.Query
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
+import org.springframework.test.context.TestPropertySource
 
 
 @SpringBootTest
+@TestPropertySource("classpath:application-test.properties")
+
 class
 PourRecupererProduitsRepositoryTest {
 

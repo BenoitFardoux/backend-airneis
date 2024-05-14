@@ -3,6 +3,7 @@ package com.bav.airneisbackend.produit.fixture
 import com.bav.airneisbackend.produit.domain.model.Categorie
 import com.bav.airneisbackend.produit.domain.model.Produit
 import com.bav.airneisbackend.produit.serverside.dto.ProduitDocument
+import com.bav.airneisbackend.produit.userside.restressources.CreerProduitRestRessource
 
 
 class ProduitFixture {
@@ -34,6 +35,27 @@ class ProduitFixture {
             dimension = dimension,
             categorie = categorie,
             materiaux = listOf(MateriauFixture.materiau)
+        )
+
+        val produitSansId = Produit(
+            id = "",
+            nom = "table",
+            description = "table en chene",
+            prix = 100.0,
+            images = listOf("table.jpg"),
+            dimension = dimension,
+            categorie = categorie,
+            materiaux = listOf(MateriauFixture.materiau)
+        )
+
+        val produitPourRequetePost : CreerProduitRestRessource = CreerProduitRestRessource(
+            nom = "table",
+            description = "table en chene",
+            prix = 100.0,
+            images = listOf("table.jpg"),
+            dimension = dimension,
+            categorie = categorie,
+            materiaux = listOf(MateriauFixture.materiauPourCreerProduitRestRessource)
         )
     }
 }
