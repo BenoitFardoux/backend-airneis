@@ -78,15 +78,19 @@ class ReferentielDeMateriauController(
     override fun persisteMateriau(@RequestBody materiau: PourCreerMateriauRestRessource): (ResponseEntity<Any>){
         val champsManquants = ArrayList<String>()
 
-        if (materiau.nom.isNullOrBlank()) {
+        if (materiau.nom.isBlank()) {
             champsManquants.add("nom")
         }
-        if (materiau.type.isNullOrBlank()) {
+        if (materiau.type.isBlank()) {
             champsManquants.add("type")
         }
-        if (materiau.image.isNullOrBlank()) {
-            champsManquants.add("image")
-        }
+           if (materiau.image.url.isBlank()) {
+                champsManquants.add("image.url")
+            }
+            if (materiau.image.description.isBlank()) {
+                champsManquants.add("image.description")
+            }
+
 
 
         if (champsManquants.isNotEmpty()) {

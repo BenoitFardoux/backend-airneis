@@ -5,5 +5,5 @@ data class Materiau(
     val id : String = "",
     val nom : String,
     val type :String,
-    val image : String
+    val image : Image
 )

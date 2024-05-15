@@ -16,8 +16,7 @@ class RecupererMateriauxRepository (
 ) : PourRecupererMateriaux{
     override fun invoke(pageRequest: PageRequest): Page<Materiau> {
         val materiaux = mongoDbMateriauxRepository.findAll(pageRequest)
-        if (materiaux.isEmpty) {throw AucunMateriauTrouveException("Aucun materiau trouvé")
-        }
+
         return materiaux.map {it.toMateriau()}
     }
 

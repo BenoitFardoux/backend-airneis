@@ -13,6 +13,10 @@ class MateriauFixture {
             id = "1223455",
             nom = "chene",
             type = "bois",
-            image = "chene.jpg")
+            image = com.bav.airneisbackend.Materiaux.domain.model.Materiau.Image(
+                url = "chene.jpg",
+                description = "chene"
+            )
+        )
     }
 }
