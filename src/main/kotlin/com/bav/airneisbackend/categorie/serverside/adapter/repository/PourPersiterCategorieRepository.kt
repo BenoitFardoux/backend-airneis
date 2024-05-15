@@ -12,15 +12,15 @@ import org.springframework.stereotype.Repository
 @Repository
 class PourPersiterCategorieRepository(val mongoTemplate: MongoTemplate) : PourPersisterCategorie {
     override fun invoke(categorie: Categorie): Categorie {
-        val champsManquant = mutableListOf<String>()
+        val champsInvalides = mutableListOf<String>()
         if (categorie.nom.isBlank()){
-            champsManquant.add("nom")
+            champsInvalides.add("nom")
         }
-        if (categorie.image.url.isBlank()){
-            champsManquant.add("image")
+        if (categorie.image.url.isBlank() ||categorie.image.description.isBlank()){
+            champsInvalides.add("image")
         }
-        if (champsManquant.isNotEmpty()){
-            throw CategorieInvalideException(description = "des champs sont invalides", champs = champsManquant)
+        if (champsInvalides.isNotEmpty()){
+            throw CategorieInvalideException(description = "des champs sont invalides", champs = champsInvalides)
         }
         val categorieDocument = categorie.toCategorieDocument()
         return mongoTemplate.save(categorieDocument).toCategorie()
