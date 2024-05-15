@@ -8,7 +8,7 @@ data class Produit(
     val description: String,
     val dimension: Dimension,
     val categorie: Categorie,
-    val images: List<String>,
+    val images: List<Image>,
     val materiaux: List<Materiau>
 
 ) {

@@ -1,6 +1,7 @@
 package com.bav.airneisbackend.produit.fixture
 
 import com.bav.airneisbackend.produit.domain.model.Categorie
+import com.bav.airneisbackend.produit.domain.model.Image
 import com.bav.airneisbackend.produit.domain.model.Produit
 import com.bav.airneisbackend.produit.serverside.dto.ProduitDocument
 import com.bav.airneisbackend.produit.userside.restressources.CreerProduitRestRessource
@@ -11,6 +12,10 @@ class ProduitFixture {
         val dimension = Produit.Dimension(
             100.0, 100.0, 100.0
         )
+        val images = listOf(Image(
+            url = "table.jpg",
+            description = "table"
+        ))
 
         val categorie = Categorie(
             id = "12333",
@@ -21,7 +26,7 @@ class ProduitFixture {
             nom = "table",
             description = "table en chene",
             prix = 100.0,
-            images = listOf("table.jpg"),
+            images = images,
             dimension = dimension,
             categorie = categorie,
             materiaux = listOf(MateriauFixture.materiau)
@@ -31,7 +36,7 @@ class ProduitFixture {
             nom = "table",
             description = "table en chene",
             prix = 100.0,
-            images = listOf("table.jpg"),
+            images = images,
             dimension = dimension,
             categorie = categorie,
             materiaux = listOf(MateriauFixture.materiau)
@@ -42,7 +47,7 @@ class ProduitFixture {
             nom = "table",
             description = "table en chene",
             prix = 100.0,
-            images = listOf("table.jpg"),
+            images = images,
             dimension = dimension,
             categorie = categorie,
             materiaux = listOf(MateriauFixture.materiau)
@@ -52,7 +57,7 @@ class ProduitFixture {
             nom = "table",
             description = "table en chene",
             prix = 100.0,
-            images = listOf("table.jpg"),
+            images = images,
             dimension = dimension,
             categorie = categorie,
             materiaux = listOf(MateriauFixture.materiauPourCreerProduitRestRessource)

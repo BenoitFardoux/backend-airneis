@@ -1,6 +1,7 @@
 package com.bav.airneisbackend.produit.serverside.dto
 
 import com.bav.airneisbackend.produit.domain.model.Categorie
+import com.bav.airneisbackend.produit.domain.model.Image
 import com.bav.airneisbackend.produit.domain.model.Materiau
 import com.bav.airneisbackend.produit.domain.model.Produit
 import org.springframework.data.mongodb.core.mapping.Document
@@ -14,7 +15,7 @@ data class ProduitDocument(
     val nom : String,
     val description : String,
     val prix : Double,
-    val images : List<String>,
+    val images : List<Image>,
     val dimension : Produit.Dimension,
     val categorie : Categorie,
     val materiaux : List<Materiau>
