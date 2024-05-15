@@ -1,6 +1,5 @@
 package com.bav.airneisbackend.Materiaux.serverside.adapter.repository
 
-import com.bav.airneisbackend.Materiaux.domain.exception.AucunMateriauTrouveException
 import com.bav.airneisbackend.Materiaux.domain.model.Materiau
 import com.bav.airneisbackend.Materiaux.domain.port.serverside.PourRecupererMateriaux
 import com.bav.airneisbackend.Materiaux.serverside.adapter.mongodb.repository.MongoDbMateriauxRepository
