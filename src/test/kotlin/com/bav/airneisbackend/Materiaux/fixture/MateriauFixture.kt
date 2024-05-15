@@ -6,11 +6,12 @@ import com.bav.airneisbackend.Materiaux.userside.restressources.PourCreerMateria
 
 class MateriauFixture {
     companion object {
-        val materiauSansNom = Materiau(type = "bois", image = "chene.jpg", nom = "")
-        val materiauSansId = Materiau(nom = "chene", type = "bois", image = "chene.jpg")
-        val materiauDocument = MateriauDocument(id = "1223455", nom = "chene", type = "bois", image = "chene.jpg")
-        val materiau = Materiau(id = "1223455", nom = "chene", type = "bois", image = "chene.jpg")
-        val materiauPourRequetePost = PourCreerMateriauRestRessource(nom = "chene", type = "bois", image = "chene.jpg")
+        private val image = Materiau.Image(url = "chene.jpg", description = "chene")
+        val materiauSansNom = Materiau(type = "bois", image=image, nom = "")
+        val materiauSansId = Materiau(nom = "chene", type = "bois", image=image)
+        val materiauDocument = MateriauDocument(id = "1223455", nom = "chene", type = "bois", image=image)
+        val materiau = Materiau(id = "1223455", nom = "chene", type = "bois", image=image)
+        val materiauPourRequetePost = PourCreerMateriauRestRessource(nom = "chene", type = "bois", image=image)
 
     }
 }
