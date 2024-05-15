@@ -5,6 +5,5 @@ import com.bav.airneisbackend.Materiaux.domain.model.Materiau
 
 data class PourCreerMateriauRestRessource(
     val nom: String,
-    val type: String,
     val image: Image
 )
