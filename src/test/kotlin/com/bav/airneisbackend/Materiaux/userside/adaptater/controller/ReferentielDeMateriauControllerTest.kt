@@ -73,7 +73,7 @@ class ReferentielDeMateriauControllerTest {
 
 
     @Test
-    fun `recupererMateriaux should return all products`() {
+    fun `Lorsque je fait un appel a la route get sans critere de recherche je récupère tous les matériaux`() {
         // Given
         val mockPageDeMateriaux = PageImpl(listOf(MateriauFixture.materiau))
         val pageable = PageRequest.of(0, 10)
@@ -132,7 +132,7 @@ class ReferentielDeMateriauControllerTest {
     @Test
     fun `Lorque je fait une requete post mais qu'il manque des éléments dans le body, alors je dois avoir un status 400`() {
         // Given
-        val materiauPourRequetePost = MateriauFixture.materiauPourRequetePost.copy(nom = null)
+        val materiauPourRequetePost = MateriauFixture.materiauPourRequetePost.copy(nom = "")
 
         // When
         // Then

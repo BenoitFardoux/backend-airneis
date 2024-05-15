@@ -1,12 +1,19 @@
 package com.bav.airneisbackend.produit.userside.adaptater.controller
 
+import com.bav.airneisbackend.produit.domain.model.Categorie
+import com.bav.airneisbackend.produit.domain.model.Materiau
+import com.bav.airneisbackend.produit.domain.model.Produit
+import com.bav.airneisbackend.produit.domain.port.serverside.produit.PourPersisterProduit
+import com.bav.airneisbackend.produit.domain.usecase.PersisterProduit
 import com.bav.airneisbackend.produit.domain.usecase.RecupererProduits
 import com.bav.airneisbackend.produit.domain.usecase.RecupererUnProduit
+import com.bav.airneisbackend.produit.serverside.mapper.ProduitMapper.toProduitDocument
 import org.springframework.web.bind.annotation.RequestParam
 
 
 import com.bav.airneisbackend.produit.userside.adaptater.controller.documentation.ProduitControllerDocumentation
 import com.bav.airneisbackend.produit.userside.mapper.ProduitMapper
+import com.bav.airneisbackend.produit.userside.restressources.CreerProduitRestRessource
 import com.bav.airneisbackend.produit.userside.restressources.ProduitRestRessource
 import org.springframework.data.domain.PageRequest
 import org.springframework.hateoas.CollectionModel
@@ -17,25 +24,28 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.net.URI
 
 
 @RestController
 @RequestMapping("/airneis/produits")
 class ProduitController(
     private val recupererProduits: RecupererProduits,
-    private val recupererUnProduit: RecupererUnProduit
+    private val recupererUnProduit: RecupererUnProduit,
+    private val persisterProduit: PersisterProduit
 ) : ProduitControllerDocumentation {
 
     @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
     override fun recupererTousLesProduits(
         @RequestParam("pageNumber", defaultValue = "0")
-        pageNumber: Int ,
+        pageNumber: Int,
         @RequestParam("pageSize", defaultValue = "10")
         pageSize: Int,
         @RequestParam("critereDeRecherche")
-        critere : String?
+        critere: String?
     ): ResponseEntity<CollectionModel<ProduitRestRessource>> {
         val pageable = PageRequest.of(pageNumber, pageSize)
         val produitPage = recupererProduits(pageable, critere)
@@ -46,13 +56,12 @@ class ProduitController(
         pagedModel.add(
             WebMvcLinkBuilder.linkTo(
                 WebMvcLinkBuilder.methodOn(ProduitController::class.java)
-                    .recupererTousLesProduits(pageNumber, pageSize,critere)
+                    .recupererTousLesProduits(pageNumber, pageSize, critere)
             ).withSelfRel()
         )
 
         return ResponseEntity.ok(pagedModel)
     }
-
 
 
     @GetMapping("/{id}", produces = [MediaType.APPLICATION_JSON_VALUE])
@@ -64,8 +73,11 @@ class ProduitController(
     }
 
     @PostMapping
-    override fun creerUnProduit(): ResponseEntity<ProduitRestRessource> {
-        TODO("Not yet implemented")
+    override fun creerUnProduit(@RequestBody creerProduitRestRessource: CreerProduitRestRessource): ResponseEntity<ProduitRestRessource> {
+        val produitACreer = ProduitMapper.creerProduitRestRessourceToProduit(creerProduitRestRessource)
+        val produitSauvegarde = persisterProduit(produitACreer)
+//        val link = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ProduitController::class.java).recupererUnProduit("id")).toUri()
+        val produitRestRessource = ProduitMapper.mapProduitToProduitRestRessource(produitSauvegarde)
+        return  ResponseEntity.created(URI("/airneis/produits/${produitRestRessource.id}")).body(produitRestRessource)
     }
-
 }
