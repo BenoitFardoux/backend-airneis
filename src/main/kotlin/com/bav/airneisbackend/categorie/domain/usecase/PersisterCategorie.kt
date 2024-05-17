@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class PersisterCategorie(val pourPersisterCategorie: PourPersisterCategorie) {
-    operator fun invoke(categorie: Categorie) {
+    operator fun invoke(categorie: Categorie) : Categorie =
         pourPersisterCategorie(categorie)
-    }
+
 }
