@@ -17,6 +17,7 @@ class CategorieControllerAdvice {
     fun notYetImplemented(exception: Exception) = ErrorMessage(exception.message)
 
     @ExceptionHandler(CategorieInvalideException::class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun error400(exception: CategorieInvalideException) =
         ResponseEntity.badRequest().body(ChampsManquantRestRessource(exception.champs,exception.description))
 }
