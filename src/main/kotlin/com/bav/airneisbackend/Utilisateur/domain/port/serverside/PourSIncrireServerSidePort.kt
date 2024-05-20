@@ -1,5 +1,7 @@
 package com.bav.airneisbackend.utilisateur.domain.port.serverside
 
+import com.bav.airneisbackend.utilisateur.domain.model.Utilisateur
+
 fun interface PourSIncrireServerSidePort {
-    operator fun invoke(email: String, motDePasse: String)
+    operator fun invoke(utilisateur: Utilisateur) : Utilisateur
 }

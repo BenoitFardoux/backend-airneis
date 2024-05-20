@@ -21,7 +21,7 @@ class UtilisateurController(
     @PostMapping("/signup")
     override fun inscrire(@RequestBody requeteInscription: RequeteInscription): ResponseEntity<String> {
         val utilisateur = requeteInscription.toUtilisateur()
-        sinscrire(email = utilisateur.email, motDePasse = utilisateur.password)
+        sinscrire(utilisateur)
         return ResponseEntity.status(HttpStatus.CREATED).body("Utilisateur créé avec succès")
     }
 
