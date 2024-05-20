@@ -1,15 +1,16 @@
-package com.bav.airneisbackend.Utilisateur.domain.model
+package com.bav.airneisbackend.utilisateur.domain.model
 
-data class Utilsateur (
-    val id : String,
+data class Utilisateur (
+    val id : String = "",
+    val username: String,
+    val password: String,
+    val verifie : Boolean,
+    val email: String,
     val nom : String,
     val prenom : String,
-    val email : String,
-    val motDePasse : String,
-    val adresse : String,
-    val codePostal : String,
-    val ville : String,
-    val pays : String,
-    val telephone : String,
-    val panier : Panier
+    val paiements : List<Paiments> = emptyList(),
+    val numeroDeTelephone : String,
+    val addresse : List<Adresse> = emptyList(),
+    val panierActuel : Panier,
+    val commandes : List<Panier> = emptyList()
 )
