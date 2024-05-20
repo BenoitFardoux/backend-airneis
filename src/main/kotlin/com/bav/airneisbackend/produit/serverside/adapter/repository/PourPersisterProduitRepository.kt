@@ -1,8 +1,7 @@
 package com.bav.airneisbackend.produit.serverside.adapter.repository
 
-import com.bav.airneisbackend.Materiaux.domain.exception.MateriauNonTrouveException
-import com.bav.airneisbackend.Materiaux.domain.port.serverside.PourRecupererUnMateriau
-import com.bav.airneisbackend.Materiaux.serverside.adapter.repository.RecupererUnMateriauRepository
+import com.bav.airneisbackend.materiaux.domain.exception.MateriauNonTrouveException
+import com.bav.airneisbackend.materiaux.domain.port.serverside.PourRecupererUnMateriau
 import com.bav.airneisbackend.produit.domain.exception.MateriauDuProduitIntrouvable
 import com.bav.airneisbackend.produit.domain.exception.ProduitInvalideException
 import com.bav.airneisbackend.produit.domain.model.Materiau
