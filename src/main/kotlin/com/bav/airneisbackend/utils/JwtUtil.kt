@@ -1,14 +1,16 @@
+package com.bav.airneisbackend.utils
+
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
-import io.jsonwebtoken.security.Keys
 import org.springframework.stereotype.Component
-import java.util.*
+import java.util.Date
 import javax.crypto.SecretKey
+import kotlin.collections.HashMap
 
 @Component
 class JwtUtil {
 
-    private val secretKey: SecretKey =   Jwts.SIG.HS256.key().build();
+    private val secretKey: SecretKey =   Jwts.SIG.HS256.key().build()
 
     fun extractUsername(token: String): String {
         return extractClaim(token) { it.subject }
