@@ -1,8 +1,8 @@
-package com.bav.airneisbackend.Utilisateur.serverside.dto
+package com.bav.airneisbackend.utilisateur.serverside.dto
 
-import com.bav.airneisbackend.Utilisateur.domain.model.Adresse
-import com.bav.airneisbackend.Utilisateur.domain.model.Paiments
-import com.bav.airneisbackend.Utilisateur.domain.model.Panier
+import com.bav.airneisbackend.utilisateur.domain.model.Adresse
+import com.bav.airneisbackend.utilisateur.domain.model.Paiments
+import com.bav.airneisbackend.utilisateur.domain.model.Panier
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.MongoId
 import org.springframework.security.core.GrantedAuthority
@@ -25,31 +25,31 @@ data class UserDocument(
     val commandes : List<Panier> = emptyList()
 ) : UserDetails {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        TODO("Not yet implemented")
+        return mutableListOf()
     }
 
     override fun getPassword(): String {
-        TODO("Not yet implemented")
+        return password
     }
 
     override fun getUsername(): String {
-        TODO("Not yet implemented")
+        return email
     }
 
     override fun isAccountNonExpired(): Boolean {
-        TODO("Not yet implemented")
+        return true
     }
 
     override fun isAccountNonLocked(): Boolean {
-        TODO("Not yet implemented")
+        return true
     }
 
     override fun isCredentialsNonExpired(): Boolean {
-        TODO("Not yet implemented")
+        return true
     }
 
     override fun isEnabled(): Boolean {
-        TODO("Not yet implemented")
+        return true
     }
 }
 
