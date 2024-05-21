@@ -1,4 +1,4 @@
-package com.bav.airneisbackend.Utilisateur.domain.model.produits
+package com.bav.airneisbackend.utilisateur.domain.model.produits
 
 
 data class Produit (
