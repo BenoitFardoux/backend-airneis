@@ -6,5 +6,5 @@ data class Panier (
     val produits: List<Produit>,
     val id  : String,
     val adresse : Adresse? = null,
-    val paiements : Paiments? = null
+    val paiements : Paiements? = null
 )
