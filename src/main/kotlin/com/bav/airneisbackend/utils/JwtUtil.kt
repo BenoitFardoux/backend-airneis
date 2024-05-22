@@ -2,6 +2,10 @@ package com.bav.airneisbackend.utils
 
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
+import io.jsonwebtoken.Jwts.SIG.HS256
+import io.jsonwebtoken.io.Decoders
+import io.jsonwebtoken.security.Keys
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import java.util.Date
 import javax.crypto.SecretKey
@@ -10,7 +14,12 @@ import kotlin.collections.HashMap
 @Component
 class JwtUtil {
 
-    private val secretKey: SecretKey =   Jwts.SIG.HS256.key().build()
+    @Value("\${security.jwt.secret-key}")
+    private lateinit var secretKey: String
+   // val secretKey: SecretKey = Jwts.SIG.HS256.key().build()
+
+    @Value("\${security.jwt.expiration-time}")
+    private var jwtExpiration: Long = 0;
 
     fun extractUsername(token: String): String {
         return extractClaim(token) { it.subject }
@@ -27,7 +36,7 @@ class JwtUtil {
 
     private fun extractAllClaims(token: String): Claims {
         return Jwts.parser()
-            .verifyWith(secretKey)
+            .verifyWith(getSignInKey())
             .build()
             .parseSignedClaims(token)
             .payload
@@ -47,13 +56,19 @@ class JwtUtil {
             .claims(claims)
             .subject(subject)
             .issuedAt(Date(System.currentTimeMillis()))
-            .expiration(Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 hours
-            .signWith(secretKey)
+            .expiration(Date(System.currentTimeMillis() + jwtExpiration))
+            .signWith(getSignInKey(),
+                HS256)
             .compact()
     }
 
     fun validateToken(token: String, username: String): Boolean {
         val tokenUsername = extractUsername(token)
         return (tokenUsername == username && !isTokenExpired(token))
+    }
+
+    private fun getSignInKey(): SecretKey {
+        val keyBytes = Decoders.BASE64.decode(secretKey)
+        return Keys.hmacShaKeyFor(keyBytes)
     }
 }
