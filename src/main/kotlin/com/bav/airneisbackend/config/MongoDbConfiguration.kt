@@ -1,4 +1,4 @@
-package com.bav.airneisbackend.Materiaux.serverside.configuration
+package com.bav.airneisbackend.config
 
 
 import org.springframework.beans.factory.InitializingBean
