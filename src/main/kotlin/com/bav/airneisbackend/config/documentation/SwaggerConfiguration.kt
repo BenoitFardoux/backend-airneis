@@ -1,4 +1,4 @@
-package com.bav.airneisbackend.Materiaux.userside.configuration.documentation
+package com.bav.airneisbackend.config.documentation
 
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition
@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
+// ajout la securité
 @OpenAPIDefinition(
     info = Info(title = "API projet transversal ",
         version = "v1",

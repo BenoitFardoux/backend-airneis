@@ -1,7 +1,5 @@
 package com.bav.airneisbackend.config
-
-import com.bav.airneisbackend.utilisateur.domain.usecase.RecupererUtilisateurParMail
-import com.bav.airneisbackend.utilisateur.serverside.mapper.UtilisateurMapper.toUtilisateurDocument
+import com.bav.airneisbackend.utilisateur.serverside.adapter.mongodb.repository.MongoDbUtilisateurRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
@@ -14,11 +12,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 @Configuration
 
-class ApplicationConfiguration(val recupererUtilisateurParMail: RecupererUtilisateurParMail) {
+class ApplicationConfiguration(val mongoDbUtilisateurRepository: MongoDbUtilisateurRepository) {
     @Bean
     fun userDetailsService(): UserDetailsService {
         return UserDetailsService { email ->
-            recupererUtilisateurParMail(email).toUtilisateurDocument()
+            mongoDbUtilisateurRepository.findByEmail(email)
         }
     }
 
@@ -41,6 +39,7 @@ class ApplicationConfiguration(val recupererUtilisateurParMail: RecupererUtilisa
 
         return authProvider
     }
+
+
 }
 
-// TODO : JwtAuthenticationFilter et la security Configuration

@@ -1,4 +1,4 @@
-package com.bav.airneisbackend.Materiaux.userside.configuration.security
+package com.bav.airneisbackend.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -14,6 +14,7 @@ class CorsConfiguration : WebMvcConfigurer {
             override fun addCorsMappings(registry: CorsRegistry) {
                 registry.addMapping("/**")
                     .allowedOrigins("*")
+                    .allowedHeaders("*")
                     .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
             }
         }

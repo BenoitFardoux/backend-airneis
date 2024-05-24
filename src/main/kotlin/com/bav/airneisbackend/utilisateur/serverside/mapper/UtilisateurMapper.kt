@@ -7,7 +7,7 @@ import org.bson.types.ObjectId
 object UtilisateurMapper {
     fun UtilisateurDocument.toUtilisateur() : Utilisateur {
         return Utilisateur(
-            id = id.ifBlank { ObjectId().toHexString()  },
+            id = id,
             nom = nom,
             prenom = prenom,
             email = email,
@@ -23,7 +23,7 @@ object UtilisateurMapper {
 
     fun Utilisateur.toUtilisateurDocument() : UtilisateurDocument {
         return UtilisateurDocument(
-            id = id,
+            id = id.ifBlank { ObjectId().toHexString()  },
             nom = nom,
             prenom = prenom,
             email = email,

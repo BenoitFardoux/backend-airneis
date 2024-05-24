@@ -16,7 +16,7 @@ import org.springframework.test.context.TestPropertySource
 
 @SpringBootTest
 @TestPropertySource("classpath:application-test.properties")
-class PourRecupererUtilisateurParMailRepositoryTest{
+class connexionUtilisateurRepositoryTest{
     @Autowired
     private lateinit var mongoDbUtilisateurRepository: MongoDbUtilisateurRepository
 
@@ -24,7 +24,7 @@ class PourRecupererUtilisateurParMailRepositoryTest{
     private lateinit var mongoTemplate: MongoTemplate
 
     @Autowired
-    private lateinit var pourRecupererUtilisateurParMailRepository: PourRecupererUtilisateurParMailRepository
+    private lateinit var pourRecupererUtilisateurParMailRepository: ConnexionUtilisateurRepository
 
     @BeforeEach
     fun setUp() {
@@ -44,7 +44,7 @@ class PourRecupererUtilisateurParMailRepositoryTest{
         val email = utilisateur.email
 
         // WHEN
-        val utilisateurTrouve = pourRecupererUtilisateurParMailRepository(email)
+        val utilisateurTrouve = pourRecupererUtilisateurParMailRepository(email, utilisateur.motDePasse)
         // THEN
         assertThat(utilisateurTrouve).isEqualTo(utilisateurARecuperer)
     }
@@ -55,7 +55,7 @@ class PourRecupererUtilisateurParMailRepositoryTest{
         val email = ""
 
         // WHEN
-        assertThrows<UtilisateurNonTrouveException> { pourRecupererUtilisateurParMailRepository(email) }
+        assertThrows<UtilisateurNonTrouveException> { pourRecupererUtilisateurParMailRepository(email, UtilisateurFixture.motDePasse) }
     }
 
 }
