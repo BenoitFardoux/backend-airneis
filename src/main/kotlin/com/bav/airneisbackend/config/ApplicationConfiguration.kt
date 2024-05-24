@@ -42,3 +42,5 @@ class ApplicationConfiguration(val recupererUtilisateurParMail: RecupererUtilisa
         return authProvider
     }
 }
+
+// TODO : JwtAuthenticationFilter et la security Configuration
