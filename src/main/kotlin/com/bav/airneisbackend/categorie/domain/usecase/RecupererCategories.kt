@@ -8,8 +8,9 @@ import org.springframework.stereotype.Component
 
 
 @Component
-class RecupererCategories (val pourRecupererCategories: PourRecupererCategories) {
-  operator fun invoke(pageable: Pageable): Page<Categorie>{
-    return pourRecupererCategories(pageable)
-  }
+class RecupererCategories (
+    val pourRecupererCategories: PourRecupererCategories,
+) {
+  operator fun invoke(pageable: Pageable): Page<Categorie> =
+      pourRecupererCategories(pageable)
 }
