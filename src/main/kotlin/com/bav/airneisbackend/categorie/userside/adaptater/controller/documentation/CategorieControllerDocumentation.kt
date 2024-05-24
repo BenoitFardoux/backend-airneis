@@ -21,7 +21,10 @@ interface CategorieControllerDocumentation {
             )
         ]
     )
-    fun recupererCategories(): ResponseEntity<CollectionModel<CategorieRestRessource>>
+    fun recupererCategories(
+        pageNumber: Int,
+        pageSize: Int
+    ): ResponseEntity<CollectionModel<CategorieRestRessource>>
 
     @Operation(
         summary = "Récuperer une categorie par son id",
