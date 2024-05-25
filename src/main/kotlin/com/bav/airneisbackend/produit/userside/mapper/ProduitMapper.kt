@@ -1,5 +1,6 @@
 package com.bav.airneisbackend.produit.userside.mapper
 
+import com.bav.airneisbackend.produit.domain.model.Categorie
 import com.bav.airneisbackend.produit.domain.model.Materiau
 import com.bav.airneisbackend.produit.domain.model.Produit
 import com.bav.airneisbackend.produit.userside.restressources.CreerProduitRestRessource
@@ -63,7 +64,7 @@ object ProduitMapper {
                 prix = prix,
                 images = images,
                 dimension = dimension,
-                categorie = categorie,
+                categorie = Categorie(categorieId, ""),
                 materiaux = materiaux.map { materiauProduitRestRessourceToMateriau(it) }
             )
         }

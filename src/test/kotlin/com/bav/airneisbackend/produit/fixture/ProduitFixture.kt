@@ -18,8 +18,8 @@ class ProduitFixture {
         ))
 
         val categorie = Categorie(
-            id = "12333",
-            nom = "meuble",
+            id = "1",
+            nom = "Categorie 1",
         )
         val produitDocument = ProduitDocument(
             id = "123456",
@@ -59,7 +59,7 @@ class ProduitFixture {
             prix = 100.0,
             images = images,
             dimension = dimension,
-            categorie = categorie,
+            categorieId = categorie.id,
             materiaux = listOf(MateriauFixture.materiauPourCreerProduitRestRessource)
         )
     }
