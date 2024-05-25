@@ -1,6 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-
 plugins {
     id("org.springframework.boot") version "3.1.5"
     id("io.spring.dependency-management") version "1.1.3"
@@ -18,6 +17,7 @@ java {
 repositories {
     mavenCentral()
 }
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
@@ -27,13 +27,12 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
-    implementation("io.jsonwebtoken:jjwt-api:0.12.3")
-
+    implementation("io.jsonwebtoken:jjwt-api:0.12.5")  // Spécifiez la version ici
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.5")    // Spécifiez la version ici
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.5") // Spécifiez la version ici
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
-// https://mvnrepository.com/artifact/de.flapdoodle.embed/de.flapdoodle.embed.mongo.spring30x
-//    testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring30x:4.11.0")
-
+    // testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring30x:4.11.0")
 }
 
 tasks.withType<KotlinCompile> {
