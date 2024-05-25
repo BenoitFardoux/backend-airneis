@@ -23,7 +23,7 @@ import java.net.URI
 
 
 @RestController
-@RequestMapping("/airneis/categorie")
+@RequestMapping("/airneis/categories")
 class CategorieController(
     private val persisterCategorie: PersisterCategorie,
     private val recupererCategories: RecupererCategories,

@@ -1,5 +1,7 @@
 package com.bav.airneisbackend.categorie.userside.adaptater.controller
 
+import com.bav.airneisbackend.categorie.domain.exception.CategorieException
+import com.bav.airneisbackend.categorie.domain.exception.CategorieInconnueException
 import com.bav.airneisbackend.categorie.domain.exception.CategorieInvalideException
 import com.bav.airneisbackend.categorie.userside.dto.ChampsManquantRestRessource
 import org.springdoc.api.ErrorMessage
@@ -16,8 +18,13 @@ class CategorieControllerAdvice {
     @ResponseStatus(HttpStatus.NOT_IMPLEMENTED)
     fun notYetImplemented(exception: Exception) = ErrorMessage(exception.message)
 
-    @ExceptionHandler(CategorieInvalideException::class)
+    @ExceptionHandler(CategorieInvalideException::class )
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun error400(exception: CategorieInvalideException) =
         ResponseEntity.badRequest().body(ChampsManquantRestRessource(exception.champs,exception.description))
+
+    @ExceptionHandler(CategorieInconnueException::class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    fun error404(exception: CategorieException) =
+        ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.message)
 }
