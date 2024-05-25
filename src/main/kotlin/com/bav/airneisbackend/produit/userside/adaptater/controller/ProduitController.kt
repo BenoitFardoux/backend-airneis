@@ -1,13 +1,8 @@
 package com.bav.airneisbackend.produit.userside.adaptater.controller
 
-import com.bav.airneisbackend.produit.domain.model.Categorie
-import com.bav.airneisbackend.produit.domain.model.Materiau
-import com.bav.airneisbackend.produit.domain.model.Produit
-import com.bav.airneisbackend.produit.domain.port.serverside.produit.PourPersisterProduit
 import com.bav.airneisbackend.produit.domain.usecase.PersisterProduit
 import com.bav.airneisbackend.produit.domain.usecase.RecupererProduits
 import com.bav.airneisbackend.produit.domain.usecase.RecupererUnProduit
-import com.bav.airneisbackend.produit.serverside.mapper.ProduitMapper.toProduitDocument
 import org.springframework.web.bind.annotation.RequestParam
 
 
@@ -76,7 +71,6 @@ class ProduitController(
     override fun creerUnProduit(@RequestBody creerProduitRestRessource: CreerProduitRestRessource): ResponseEntity<ProduitRestRessource> {
         val produitACreer = ProduitMapper.creerProduitRestRessourceToProduit(creerProduitRestRessource)
         val produitSauvegarde = persisterProduit(produitACreer)
-//        val link = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ProduitController::class.java).recupererUnProduit("id")).toUri()
         val produitRestRessource = ProduitMapper.mapProduitToProduitRestRessource(produitSauvegarde)
         return  ResponseEntity.created(URI("/airneis/produits/${produitRestRessource.id}")).body(produitRestRessource)
     }
