@@ -2,9 +2,10 @@ package com.bav.airneisbackend.produit.serverside.adapter.repository
 
 import com.bav.airneisbackend.Materiaux.domain.exception.MateriauNonTrouveException
 import com.bav.airneisbackend.Materiaux.domain.port.serverside.PourRecupererUnMateriau
-import com.bav.airneisbackend.Materiaux.serverside.adapter.repository.RecupererUnMateriauRepository
+import com.bav.airneisbackend.categorie.serverside.adapter.repository.PourRecupererUneCategorieRepository
 import com.bav.airneisbackend.produit.domain.exception.MateriauDuProduitIntrouvable
 import com.bav.airneisbackend.produit.domain.exception.ProduitInvalideException
+import com.bav.airneisbackend.produit.domain.model.Categorie
 import com.bav.airneisbackend.produit.domain.model.Materiau
 import com.bav.airneisbackend.produit.domain.model.Produit
 import com.bav.airneisbackend.produit.domain.port.serverside.produit.PourPersisterProduit
@@ -16,7 +17,9 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class PourPersisterProduitRepository(
-    val mongoTemplate: MongoTemplate, val pourRecupererUnMateriau: PourRecupererUnMateriau
+    val mongoTemplate: MongoTemplate,
+    val pourRecupererUnMateriau: PourRecupererUnMateriau,
+    val pourRecupererUneCategorieRepository: PourRecupererUneCategorieRepository
 ) : PourPersisterProduit {
     override fun invoke(produit: Produit): Produit {
         val champsManquants = mutableListOf<String>()
@@ -35,24 +38,30 @@ class PourPersisterProduitRepository(
                 champsManquants.add("materiaux")
             }
 
-            // TODO : AJOUTER LA VERIFICATION DE LA CATEGORIE
+            if(produit.categorie.id.isEmpty()){
+                champsManquants.add("categorieId")
+            }
 
             if (champsManquants.isNotEmpty()) throw ProduitInvalideException("Les champs suivants sont manquants : $champsManquants",champsManquants)
 
+            val categorie = pourRecupererUneCategorieRepository(produit.categorie.id)
+
             val produitValide =
+                with(produit){
                 Produit(
-                    id = produit.id,
-                    prix = produit.prix,
-                    nom = produit.nom,
-                    description = produit.description,
-                    dimension = produit.dimension,
-                    categorie = produit.categorie,
-                    images = produit.images,
+                    id = id,
+                    prix = prix,
+                    nom = nom,
+                    description = description,
+                    dimension = dimension,
+                    categorie = Categorie(
+                        categorie.id,
+                        categorie.nom
+                    ),
+                    images = images,
                     materiaux = materiauxValides
-
-
                 )
-
+            }
             val produitDocument = produitValide.toProduitDocument()
             val produitEnregistre = mongoTemplate.save(produitDocument)
             return produitEnregistre.toProduit()
