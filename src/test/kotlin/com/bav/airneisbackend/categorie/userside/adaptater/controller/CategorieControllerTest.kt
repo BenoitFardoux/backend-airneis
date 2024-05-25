@@ -3,6 +3,8 @@ package com.bav.airneisbackend.categorie.userside.adaptater.controller
 import com.bav.airneisbackend.categorie.CategorieFixture
 import com.bav.airneisbackend.categorie.domain.exception.CategorieInvalideException
 import com.bav.airneisbackend.categorie.domain.usecase.PersisterCategorie
+import com.bav.airneisbackend.categorie.domain.usecase.RecupererCategorie
+import com.bav.airneisbackend.categorie.domain.usecase.RecupererCategories
 import com.bav.airneisbackend.categorie.userside.mapper.CategorieMapper.toCategorie
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.junit.jupiter.api.Test
@@ -14,8 +16,11 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.context.annotation.Import
+import org.springframework.data.domain.PageImpl
+import org.springframework.data.domain.PageRequest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.post
 
 
@@ -29,6 +34,12 @@ class CategorieControllerTest {
     @MockBean
     private lateinit var persisterCategorie: PersisterCategorie
 
+    @MockBean
+    private lateinit var recupererCategories: RecupererCategories
+
+    @MockBean
+    private lateinit var recupererCategorie: RecupererCategorie
+
     @Test
     fun `lorsque je fait une requete post pour persister une categorie, alors je dois avoir un status 201`() {
         // GIVEN
@@ -37,7 +48,7 @@ class CategorieControllerTest {
         `when`(persisterCategorie(categorie)).thenReturn(categorie)
         // WHEN
         // THEN
-        mockMvc.post("/airneis/categorie") {
+        mockMvc.post("/airneis/categories") {
             contentType = MediaType.APPLICATION_JSON
             accept = MediaType.APPLICATION_JSON
             content = jacksonObjectMapper().writeValueAsString(pourCreerCategorieRestRessource)
@@ -55,12 +66,49 @@ class CategorieControllerTest {
         `when`(persisterCategorie(categorie)).thenThrow(CategorieInvalideException("Le nom de la categorie est invalide", listOf("nom")))
         // WHEN
         // THEN
-        mockMvc.post("/airneis/categorie") {
+        mockMvc.post("/airneis/categories") {
             contentType = MediaType.APPLICATION_JSON
             accept = MediaType.APPLICATION_JSON
             content = jacksonObjectMapper().writeValueAsString(pourCreerCategorieRestRessource)
         }.andExpect {
             status { isBadRequest() }
+            content { contentType(MediaType.APPLICATION_JSON) }
+        }
+    }
+
+    @Test
+    fun `lorsque je fait une requete get pour recuperer les categories, alors je dois avoir un status 200 et les categories`() {
+        // GIVEN
+        val pageable = PageRequest.of(0, 10)
+        val categories = PageImpl(listOf(CategorieFixture.uneCategorie))
+
+        `when`(recupererCategories(pageable)).thenReturn(categories)
+
+        // WHEN
+        // THEN
+        mockMvc.get("/airneis/categories") {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isOk() }
+            content { contentType(MediaType.APPLICATION_JSON) }
+        }
+    }
+
+    @Test
+    fun `lorsque je fait une requete get pour recuperer une categorie par id, alors je dois avoir un status 200 et la categorie`() {
+        // GIVEN
+        val categorie = CategorieFixture.uneCategorie
+
+        `when`(recupererCategorie(categorie.id)).thenReturn(categorie)
+
+        // WHEN
+        // THEN
+        mockMvc.get("/airneis/categories/${categorie.id}") {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isOk() }
             content { contentType(MediaType.APPLICATION_JSON) }
         }
     }
