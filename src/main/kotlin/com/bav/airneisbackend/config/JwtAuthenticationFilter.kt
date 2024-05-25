@@ -3,7 +3,6 @@ package com.bav.airneisbackend.config
 import com.bav.airneisbackend.utils.JwtService
 import com.mongodb.lang.NonNull
 import jakarta.servlet.FilterChain
-import jakarta.servlet.ServletException
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -14,7 +13,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 import org.springframework.web.servlet.HandlerExceptionResolver
-import java.io.IOException
 
 
 @Component
@@ -24,7 +22,7 @@ import java.io.IOException
         private val handlerExceptionResolver: HandlerExceptionResolver
     ) : OncePerRequestFilter() {
 
-        @Throws(ServletException::class, IOException::class)
+        //@Throws(ServletException::class, IOException::class)
         override fun doFilterInternal(
             @NonNull request: HttpServletRequest,
             @NonNull response: HttpServletResponse,
