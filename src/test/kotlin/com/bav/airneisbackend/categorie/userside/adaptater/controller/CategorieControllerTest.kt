@@ -4,6 +4,7 @@ import com.bav.airneisbackend.categorie.CategorieFixture
 import com.bav.airneisbackend.categorie.domain.exception.CategorieInvalideException
 import com.bav.airneisbackend.categorie.domain.usecase.PersisterCategorie
 import com.bav.airneisbackend.categorie.userside.mapper.CategorieMapper.toCategorie
+import com.bav.airneisbackend.utils.JwtService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -15,6 +16,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.context.annotation.Import
 import org.springframework.http.MediaType
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.post
 
@@ -25,6 +27,11 @@ import org.springframework.test.web.servlet.post
 class CategorieControllerTest {
     @Autowired
     private lateinit var mockMvc: MockMvc
+    @MockBean
+    private lateinit var JwtService : JwtService
+
+    @MockBean
+    private lateinit var UserDetailsService : UserDetailsService
 
     @MockBean
     private lateinit var persisterCategorie: PersisterCategorie

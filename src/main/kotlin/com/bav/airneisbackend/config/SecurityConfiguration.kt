@@ -22,11 +22,13 @@ class SecurityConfiguration(
         http.csrf { it.disable() }
             .authorizeHttpRequests {
                 it.requestMatchers(
-                    HttpMethod.POST, "/auth/register",
+                    HttpMethod.POST,
+                    "/auth/register",
                     "/auth/login",
 
                     ).permitAll().requestMatchers(
-                    HttpMethod.GET, "/airneis/materiau/**",
+                    HttpMethod.GET,
+                    "/airneis/materiau/**",
                     "/airneis/produits/**",
                     "/airneis/categorie/**",
                     "/actuator/**",

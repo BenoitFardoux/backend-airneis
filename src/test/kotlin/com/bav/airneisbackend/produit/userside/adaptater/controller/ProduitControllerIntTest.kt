@@ -7,6 +7,7 @@ import com.bav.airneisbackend.produit.domain.usecase.RecupererProduits
 import com.bav.airneisbackend.produit.domain.usecase.RecupererUnProduit
 import com.bav.airneisbackend.produit.fixture.ProduitFixture
 import com.bav.airneisbackend.produit.userside.mapper.ProduitMapper
+import com.bav.airneisbackend.utils.JwtService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -20,6 +21,7 @@ import org.springframework.context.annotation.Import
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
 import org.springframework.http.MediaType
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.post
@@ -28,6 +30,11 @@ import org.springframework.test.web.servlet.post
 @ExtendWith(MockitoExtension::class)
 @Import(ProduitControllerAdvice::class)
 class ProduitControllerIntTest {
+    @MockBean
+    private lateinit var JwtService : JwtService
+
+    @MockBean
+    private lateinit var UserDetailsService : UserDetailsService
 
     @Autowired
     private lateinit var mockMvc: MockMvc

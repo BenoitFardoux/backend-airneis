@@ -6,6 +6,7 @@ import com.bav.airneisbackend.Materiaux.domain.usecase.RecupererMateriaux
 import com.bav.airneisbackend.Materiaux.domain.usecase.RecupererUnMateriau
 import com.bav.airneisbackend.Materiaux.fixture.MateriauFixture
 import com.bav.airneisbackend.Materiaux.userside.mapper.MateriauMapper
+import com.bav.airneisbackend.utils.JwtService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -18,6 +19,7 @@ import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
 import org.springframework.http.MediaType
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.post
@@ -28,6 +30,11 @@ import org.springframework.test.web.servlet.post
 class ReferentielDeMateriauControllerTest {
     @Autowired
     private lateinit var mockMvc: MockMvc
+    @MockBean
+    private lateinit var JwtService : JwtService
+
+    @MockBean
+    private lateinit var UserDetailsService : UserDetailsService
 
     @MockBean
     private lateinit var recupererMateriaux: RecupererMateriaux
