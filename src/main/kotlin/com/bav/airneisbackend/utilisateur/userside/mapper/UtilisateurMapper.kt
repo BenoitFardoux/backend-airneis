@@ -4,6 +4,7 @@ import com.bav.airneisbackend.utilisateur.domain.model.Panier
 import com.bav.airneisbackend.utilisateur.domain.model.Utilisateur
 import com.bav.airneisbackend.utilisateur.userside.restressource.InscriptionUtilisateurRestRessource
 import com.bav.airneisbackend.utilisateur.userside.restressource.UtilisateurRestRessource
+import org.bson.types.ObjectId
 
 object UtilisateurMapper {
     fun Utilisateur.toUtilisateurRestRessource() : UtilisateurRestRessource {
@@ -32,7 +33,7 @@ object UtilisateurMapper {
             paiements = emptyList(),
             panierActuel = Panier(
                 produits = emptyList(),
-                id = ""
+                id = ObjectId().toHexString()
             ),
             commandes = emptyList(),
             verifie = false,
