@@ -32,7 +32,6 @@ dependencies {
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.5") // Spécifiez la version ici
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
-    // testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo.spring30x:4.11.0")
 }
 
 tasks.withType<KotlinCompile> {
