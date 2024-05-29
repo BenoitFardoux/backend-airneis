@@ -40,8 +40,23 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
+    - name: Wait for MongoDB to be ready
+      run: |
+        echo "Waiting for MongoDB to start..."
+        for i in {1..60}; do
+          if nc -z localhost 27017; then
+            echo "MongoDB is up!"
+            break
+          fi
+          echo "Waiting for MongoDB... ($i/60)"
+          sleep 1
+        done
+        mongo --eval 'db.runCommand({ ping: 1 })'
+
     - name: Clean and test with Gradle Wrapper
       run: ./gradlew clean test
+      env:
+        MONGO_URI: mongodb://localhost:27017/testdb
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
     # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
