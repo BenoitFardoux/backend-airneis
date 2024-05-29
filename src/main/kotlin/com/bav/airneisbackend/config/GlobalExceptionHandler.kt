@@ -16,35 +16,36 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 class GlobalExceptionHandler {
     @ExceptionHandler(BadCredentialsException::class)
     fun handleBadCredentialsException(exception: BadCredentialsException) : ProblemDetail {
-         return ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, exception.message!!);
+         return ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, exception.message!!)
     }
 
     @ExceptionHandler(AccountStatusException::class)
     fun handleAccountStatusException(exception: AccountStatusException) : ProblemDetail {
-        return ProblemDetail.forStatusAndDetail(HttpStatus.FORBIDDEN, exception.message!!);
+        return ProblemDetail.forStatusAndDetail(HttpStatus.FORBIDDEN, exception.message!!)
     }
 
     @ExceptionHandler(AccessDeniedException::class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     fun handleAccessDeniedException(exception: AccessDeniedException) : ProblemDetail {
-        return ProblemDetail.forStatusAndDetail(HttpStatus.FORBIDDEN, exception.message!!);
+        return ProblemDetail.forStatusAndDetail(HttpStatus.FORBIDDEN, exception.message!!)
+
     }
 
     @ExceptionHandler(SignatureException::class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     fun handleSignatureException(exception: SignatureException) : ProblemDetail {
-        return ProblemDetail.forStatusAndDetail(HttpStatus.FORBIDDEN, exception.message!!);
+        return ProblemDetail.forStatusAndDetail(HttpStatus.FORBIDDEN, exception.message!!)
     }
 
     @ExceptionHandler(ExpiredJwtException::class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     fun handleExpiredJwtException(exception: ExpiredJwtException) : ProblemDetail {
-        return ProblemDetail.forStatusAndDetail(HttpStatus.FORBIDDEN, exception.message!!);
+        return ProblemDetail.forStatusAndDetail(HttpStatus.FORBIDDEN, exception.message!!)
     }
 
     @ExceptionHandler(Exception::class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     fun handleException(exception: Exception) : ProblemDetail {
-        return ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, exception.message!!);
+        return ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, exception.message!!)
     }
 }

@@ -2,6 +2,7 @@ package com.bav.airneisbackend.utilisateur.fixture
 
 import com.bav.airneisbackend.utilisateur.domain.model.Panier
 import com.bav.airneisbackend.utilisateur.domain.model.Utilisateur
+import com.bav.airneisbackend.utilisateur.domain.model.produits.Produit
 import com.bav.airneisbackend.utilisateur.serverside.dto.UtilisateurDocument
 
 class UtilisateurFixture {
@@ -9,6 +10,10 @@ class UtilisateurFixture {
         val adresseMail = "baptistevannesson@gmail.com"
         val adresseMailInvalide = "baptistevannesson"
         val motDePasse = "@MotDePasse1234"
+        val produit = Produit(
+            id = "123456",
+            quantite = 1
+        )
         val panier = Panier(
             id = "123456",
             produits = emptyList()

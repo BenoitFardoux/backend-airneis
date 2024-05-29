@@ -58,6 +58,7 @@ import org.springframework.web.servlet.HandlerExceptionResolver
 
                 filterChain.doFilter(request, response)
             } catch (exception: Exception) {
+                response.status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR
                 handlerExceptionResolver.resolveException(request, response, null, exception)
             }
         }
