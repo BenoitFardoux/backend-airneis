@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
 
-@RestControllerAdvice(assignableTypes = [UtilisateurController::class])
-class UtilisateurControllerAdvice {
+@RestControllerAdvice(assignableTypes = [AuthenticationController::class])
+class AuthenticationControllerAdvice {
     @ExceptionHandler(UtilisateurDejaExistantException::class)
     @ResponseStatus(HttpStatus.CONFLICT)
     fun error409(exception: UtilisateurDejaExistantException) : String{
