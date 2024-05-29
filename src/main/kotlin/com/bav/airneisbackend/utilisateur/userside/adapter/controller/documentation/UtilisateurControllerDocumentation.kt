@@ -12,7 +12,7 @@ interface UtilisateurControllerDocumentation {
         value = [
             ApiResponse(
                 responseCode = "200",
-                description = "La clé api permettant de se connecter"
+                description = "L'utilisateur actuel a été récupéré avec succès"
             )
         ]
     )
