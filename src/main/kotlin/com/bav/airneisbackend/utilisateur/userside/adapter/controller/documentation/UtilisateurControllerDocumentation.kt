@@ -21,4 +21,19 @@ interface UtilisateurControllerDocumentation {
         description = "Renvoie l'utilisateur actuel"
     )
     fun utilisateurActuel() : ResponseEntity<UtilisateurRestRessource>
+
+
+    @ApiResponses(
+        value = [
+            ApiResponse(
+                responseCode = "200",
+                description = "L'article a été ajouté dans le panier avec succès"
+            )
+        ]
+    )
+    @Operation(
+        summary = "Ajouter un article dans le panier",
+        description = "Ajoute un article dans le panier de l'utilisateur actuel"
+    )
+    fun ajouterArticleDansPanier(idArticle: String, quantite : Int) : ResponseEntity<UtilisateurRestRessource>
 }
