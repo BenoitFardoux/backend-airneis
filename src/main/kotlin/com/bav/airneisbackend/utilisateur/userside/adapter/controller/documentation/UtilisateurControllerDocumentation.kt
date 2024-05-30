@@ -1,5 +1,6 @@
 package com.bav.airneisbackend.utilisateur.userside.adapter.controller.documentation
 
+import com.bav.airneisbackend.utilisateur.userside.restressource.PanierRestRessource
 import com.bav.airneisbackend.utilisateur.userside.restressource.SuppressionArticleDansPanierRestRessource
 import com.bav.airneisbackend.utilisateur.userside.restressource.UtilisateurRestRessource
 import io.swagger.v3.oas.annotations.Operation
@@ -52,4 +53,20 @@ interface UtilisateurControllerDocumentation {
         description = "Supprime un article du panier de l'utilisateur actuel"
     )
     fun supprimerArticleDansPanier(idArticle: String) : ResponseEntity<SuppressionArticleDansPanierRestRessource>
+
+
+
+    @ApiResponses(
+        value = [
+            ApiResponse(
+                responseCode = "200",
+                description = "Le panier a été modifié avec succès"
+            )
+        ]
+    )
+    @Operation(
+        summary = "Modifier le panier",
+        description = "Modifie le panier de l'utilisateur actuel"
+    )
+    fun modifierPanier(panier : PanierRestRessource) : ResponseEntity<UtilisateurRestRessource>
 }
