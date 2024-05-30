@@ -50,4 +50,9 @@ class GlobalExceptionHandler {
         return ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, exception.message!!)
     }
 
+    @ExceptionHandler(NotImplementedError::class)
+    fun handleNotImplementedError(exception: NotImplementedError) : ProblemDetail {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_IMPLEMENTED, exception.message!!)
+    }
+
 }
