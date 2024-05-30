@@ -2,6 +2,7 @@ package com.bav.airneisbackend.utilisateur.userside.mapper
 
 import com.bav.airneisbackend.utilisateur.domain.model.Panier
 import com.bav.airneisbackend.utilisateur.domain.model.Utilisateur
+import com.bav.airneisbackend.utilisateur.domain.model.produits.Produit
 import com.bav.airneisbackend.utilisateur.userside.restressource.InscriptionUtilisateurRestRessource
 import com.bav.airneisbackend.utilisateur.userside.restressource.UtilisateurRestRessource
 import org.bson.types.ObjectId
@@ -24,6 +25,7 @@ object UtilisateurMapper {
         )
     }
     fun InscriptionUtilisateurRestRessource.toUtilisateur() : Utilisateur {
+        val emptyMutableList = mutableListOf<Produit>()
         return Utilisateur(
             email = email,
             motDePasse = motDePasse,
@@ -32,7 +34,7 @@ object UtilisateurMapper {
             numeroDeTelephone = telephone,
             paiements = emptyList(),
             panierActuel = Panier(
-                produits = emptyList(),
+                produits = emptyMutableList,
                 id = ObjectId().toHexString()
             ),
             commandes = emptyList(),
