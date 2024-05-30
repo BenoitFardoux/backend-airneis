@@ -2,6 +2,7 @@ package com.bav.airneisbackend.config
 
 import com.bav.airneisbackend.utils.JwtService
 import com.mongodb.lang.NonNull
+import io.jsonwebtoken.security.SignatureException
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -57,8 +58,7 @@ import org.springframework.web.servlet.HandlerExceptionResolver
                 }
 
                 filterChain.doFilter(request, response)
-            } catch (exception: Exception) {
-                response.status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR
+            } catch (exception: SignatureException) {
                 handlerExceptionResolver.resolveException(request, response, null, exception)
             }
         }

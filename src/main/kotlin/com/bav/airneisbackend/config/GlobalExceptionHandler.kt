@@ -7,6 +7,7 @@ import org.springframework.http.ProblemDetail
 import org.springframework.security.access.AccessDeniedException
 import org.springframework.security.authentication.AccountStatusException
 import org.springframework.security.authentication.BadCredentialsException
+import org.springframework.security.core.AuthenticationException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -41,6 +42,12 @@ class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     fun handleExpiredJwtException(exception: ExpiredJwtException) : ProblemDetail {
         return ProblemDetail.forStatusAndDetail(HttpStatus.FORBIDDEN, exception.message!!)
+    }
+
+    @ExceptionHandler(AuthenticationException::class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    fun handleAuthenticationException(exception: AuthenticationException) : ProblemDetail {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, exception.message!!)
     }
 
 }

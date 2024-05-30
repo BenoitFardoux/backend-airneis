@@ -13,9 +13,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 class UtilisateurControllerAdvice {
     @ExceptionHandler(ProduitInnexistantException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    fun produitInnexistant(exception: ProduitInnexistantException) : ProblemDetail{
+    fun error400(exception: ProduitInnexistantException) : ProblemDetail{
         return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, exception.message)
     }
 
-
+    @ExceptionHandler(IllegalArgumentException::class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    fun error400(exception: IllegalArgumentException) : ProblemDetail{
+        return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, exception.message?:"")
+    }
 }

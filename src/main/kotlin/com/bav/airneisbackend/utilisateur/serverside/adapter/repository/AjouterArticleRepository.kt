@@ -17,18 +17,19 @@ class AjouterArticleRepository(
     val mongoDbProduitRepository: MongoDbProduitRepository,
     val mongoDbUtilisateurRepository: MongoDbUtilisateurRepository
 ) : AjouterArticleDansPanierUtilisateurServerSidePort {
-    override fun invoke(idArticle: String): Utilisateur {
+    override fun invoke(idArticle: String, quantite : Int): Utilisateur {
         mongoDbProduitRepository.existsById(idArticle).takeIf { !it }?.let {
             throw ProduitInnexistantException(idArticle)
         }
+
         val authentication = SecurityContextHolder.getContext().authentication
 
         val currentUser: UtilisateurDocument = authentication.principal as UtilisateurDocument
         currentUser.panierActuel.produits.filter { it.id == idArticle }.takeIf { it.isNotEmpty() }?.let {
-            it.first().quantite++
+            it.first().quantite += quantite
 
         } ?: run {
-            val produit = Produit(idArticle, 1)
+            val produit = Produit(idArticle, quantite)
             currentUser.panierActuel.produits.addLast(produit)
 
         }

@@ -55,7 +55,7 @@ class AjouterArticleRepositoryTest {
         `when`(utilisateurRepository.save(utilisateur)).thenReturn(utilisateur)
 
         // WHEN
-        ajouterArticleRepository.invoke(idArticle)
+        ajouterArticleRepository.invoke(idArticle,1)
 
         // THEN
         val argumentCaptor = ArgumentCaptor.forClass(UtilisateurDocument::class.java)
@@ -75,7 +75,7 @@ class AjouterArticleRepositoryTest {
 
         // WHEN & THEN
         assertThrows(ProduitInnexistantException::class.java) {
-            ajouterArticleRepository.invoke(idArticle)
+            ajouterArticleRepository.invoke(idArticle,1)
         }
     }
 
@@ -92,7 +92,7 @@ class AjouterArticleRepositoryTest {
         `when`(utilisateurRepository.save(utilisateur)).thenReturn(utilisateur)
 
         // WHEN
-        ajouterArticleRepository.invoke(idArticle)
+        ajouterArticleRepository.invoke(idArticle,1)
 
         // THEN
         val argumentCaptor = ArgumentCaptor.forClass(UtilisateurDocument::class.java)
@@ -103,4 +103,5 @@ class AjouterArticleRepositoryTest {
         assertEquals(idArticle, savedUtilisateur.panierActuel.produits.first().id)
         assertEquals(2, savedUtilisateur.panierActuel.produits.first().quantite)
     }
+
 }

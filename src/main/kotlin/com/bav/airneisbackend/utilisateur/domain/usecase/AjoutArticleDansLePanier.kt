@@ -7,7 +7,15 @@ import org.springframework.stereotype.Component
 
 @Component
 class AjoutArticleDansLePanier(val ajouterArticleDansPanierUtilisateurServerSidePort: AjouterArticleDansPanierUtilisateurServerSidePort) {
-    operator fun invoke(idArticle: String) : Utilisateur =
-        ajouterArticleDansPanierUtilisateurServerSidePort( idArticle)
+    operator fun invoke(idArticle: String, quantite :Int) : Utilisateur
+    {
+        when {
+            quantite <= 0 -> {
+                throw IllegalArgumentException("La quantité doit être positive")
+            }
+            else -> return ajouterArticleDansPanierUtilisateurServerSidePort(idArticle, quantite)
+        }
+    }
+
 
 }

@@ -35,5 +35,5 @@ interface UtilisateurControllerDocumentation {
         summary = "Ajouter un article dans le panier",
         description = "Ajoute un article dans le panier de l'utilisateur actuel"
     )
-    fun ajouterArticleDansPanier(idArticle: String) : ResponseEntity<UtilisateurRestRessource>
+    fun ajouterArticleDansPanier(idArticle: String, quantite : Int) : ResponseEntity<UtilisateurRestRessource>
 }

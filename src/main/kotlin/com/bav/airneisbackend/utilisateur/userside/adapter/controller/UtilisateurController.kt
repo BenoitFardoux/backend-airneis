@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 
@@ -30,8 +31,8 @@ class UtilisateurController(
     }
 
     @PutMapping("/panier")
-    override fun ajouterArticleDansPanier(idArticle: String): ResponseEntity<UtilisateurRestRessource> {
-        val ajouterArticleDansPanierUtilisateurServerSidePort = ajoutArticleDansLePanier(idArticle)
+    override fun ajouterArticleDansPanier(@RequestParam("idArticle")idArticle: String,@RequestParam("quantite", defaultValue = "1") quantite:  Int): ResponseEntity<UtilisateurRestRessource> {
+        val ajouterArticleDansPanierUtilisateurServerSidePort = ajoutArticleDansLePanier(idArticle, quantite)
         return ResponseEntity.ok(ajouterArticleDansPanierUtilisateurServerSidePort.toUtilisateurRestRessource())
     }
 }
