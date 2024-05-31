@@ -16,6 +16,7 @@ class ModifierPanierRepository(
     val mongoDbUtilisateurRepository: MongoDbUtilisateurRepository,
     val mongoDbProduitRepository: MongoDbProduitRepository
 ) : ModifierPanierServerSidePort {
+
     override fun invoke(panier: Panier): Utilisateur {
         val authentication = SecurityContextHolder.getContext().authentication
         val currentUser = authentication.principal as UtilisateurDocument
@@ -29,6 +30,7 @@ class ModifierPanierRepository(
             if (it.quantite < 1) throw IllegalArgumentException("La quantité pour ${it.id} doit être supérieure à 0")
         }
         if (produitInvalide.isNotEmpty()) throw ProduitsIntrouvableException(produitInvalide)
+
 
         val newPanier = panierActuel.copy(
             produits = panier.produits.ifEmpty { panierActuel.produits },
