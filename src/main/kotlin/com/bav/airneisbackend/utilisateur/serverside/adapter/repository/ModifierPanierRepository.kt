@@ -12,19 +12,24 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Repository
 
 @Repository
-class ModifierPanierRepository(val mongoDbUtilisateurRepository: MongoDbUtilisateurRepository, val mongoDbProduitRepository: MongoDbProduitRepository) : ModifierPanierServerSidePort {
+class ModifierPanierRepository(
+    val mongoDbUtilisateurRepository: MongoDbUtilisateurRepository,
+    val mongoDbProduitRepository: MongoDbProduitRepository
+) : ModifierPanierServerSidePort {
+
     override fun invoke(panier: Panier): Utilisateur {
         val authentication = SecurityContextHolder.getContext().authentication
         val currentUser = authentication.principal as UtilisateurDocument
         val panierActuel = currentUser.panierActuel
         // verifie que chaque produit existe
-        val produits = mutableListOf<String>()
+        val produitInvalide = mutableListOf<String>()
         panier.produits.forEach {
-            if (mongoDbProduitRepository.findById(it.id).isEmpty) {
-                produits.add(it.id)
+            if (mongoDbProduitRepository.existsById(it.id)) {
+                produitInvalide.add(it.id)
             }
+            if (it.quantite < 1) throw IllegalArgumentException("La quantité pour ${it.id} doit être supérieure à 0")
         }
-        if (produits.isNotEmpty()) throw ProduitsIntrouvableException(produits)
+        if (produitInvalide.isNotEmpty()) throw ProduitsIntrouvableException(produitInvalide)
 
 
         val newPanier = panierActuel.copy(
