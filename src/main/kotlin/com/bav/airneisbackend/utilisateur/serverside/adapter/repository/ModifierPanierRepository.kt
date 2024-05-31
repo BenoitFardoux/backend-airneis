@@ -23,10 +23,10 @@ class ModifierPanierRepository(
         // verifie que chaque produit existe
         val produitInvalide = mutableListOf<String>()
         panier.produits.forEach {
-            if (it.quantite < 1) throw IllegalArgumentException("La quantité doit être supérieure à 0")
             if (mongoDbProduitRepository.existsById(it.id)) {
                 produitInvalide.add(it.id)
             }
+            if (it.quantite < 1) throw IllegalArgumentException("La quantité pour ${it.id} doit être supérieure à 0")
         }
         if (produitInvalide.isNotEmpty()) throw ProduitsIntrouvableException(produitInvalide)
 
