@@ -16,7 +16,7 @@ class UtilisateurFixture {
         )
         val panier = Panier(
             id = "123456",
-            produits = emptyList()
+            produits = mutableListOf()
         )
         val utilisateur = Utilisateur(
             id = "123456",
