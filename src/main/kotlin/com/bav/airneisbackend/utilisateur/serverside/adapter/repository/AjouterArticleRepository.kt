@@ -30,7 +30,7 @@ class AjouterArticleRepository(
 
         } ?: run {
             val produit = Produit(idArticle, quantite)
-            currentUser.panierActuel.produits.addLast(produit)
+            currentUser.panierActuel.produits.add(produit)
 
         }
         return mongoDbUtilisateurRepository.save(currentUser).toUtilisateur()
