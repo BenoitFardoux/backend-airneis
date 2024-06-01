@@ -3,6 +3,7 @@ package com.bav.airneisbackend.produit.userside.adaptater.controller
 import com.bav.airneisbackend.produit.domain.usecase.PersisterProduit
 import com.bav.airneisbackend.produit.domain.usecase.RecupererProduits
 import com.bav.airneisbackend.produit.domain.usecase.RecupererUnProduit
+import com.bav.airneisbackend.produit.domain.usecase.SupprimerProduit
 import org.springframework.web.bind.annotation.RequestParam
 
 
@@ -16,6 +17,7 @@ import org.springframework.hateoas.PagedModel
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -30,7 +32,8 @@ import java.net.URI
 class ProduitController(
     private val recupererProduits: RecupererProduits,
     private val recupererUnProduit: RecupererUnProduit,
-    private val persisterProduit: PersisterProduit
+    private val persisterProduit: PersisterProduit,
+    private val supprimerProduit: SupprimerProduit
 ) : ProduitControllerDocumentation {
 
     @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
@@ -74,4 +77,14 @@ class ProduitController(
         val produitRestRessource = ProduitMapper.mapProduitToProduitRestRessource(produitSauvegarde)
         return  ResponseEntity.created(URI("/airneis/produits/${produitRestRessource.id}")).body(produitRestRessource)
     }
+
+
+    @DeleteMapping("/{id}", produces = [MediaType.APPLICATION_JSON_VALUE])
+    override fun supprimerProduitParId(@PathVariable id: String): ResponseEntity<ProduitRestRessource> {
+        val produit = supprimerProduit(id)
+        val produitRestRessource = ProduitMapper.mapProduitToProduitRestRessource(produit)
+        return ResponseEntity.ok(produitRestRessource)
+    }
+
+
 }
