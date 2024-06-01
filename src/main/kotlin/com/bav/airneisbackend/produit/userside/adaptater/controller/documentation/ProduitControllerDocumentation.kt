@@ -64,4 +64,25 @@ interface ProduitControllerDocumentation {
         ]
     )
     fun creerUnProduit( creerProduitRestRessource: CreerProduitRestRessource) : ResponseEntity<ProduitRestRessource>
+
+    @Operation(
+        summary = "Supprimer un produit par son identifiant",
+        description = "Supprimer un produit par son identifiant"
+    )
+    @ApiResponses(
+        value = [
+            ApiResponse(
+                responseCode = "200",
+                description = "Le produit a été supprimé"
+            ),
+            ApiResponse(
+                responseCode = "404",
+                description = "Le produit n'a pas été trouvé"
+            )
+        ]
+    )
+    fun supprimerProduitParId(
+        id: String
+    ) : ResponseEntity<ProduitRestRessource>
+
 }

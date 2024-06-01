@@ -5,6 +5,7 @@ import com.bav.airneisbackend.produit.domain.exception.ProduitInvalideException
 import com.bav.airneisbackend.produit.domain.usecase.PersisterProduit
 import com.bav.airneisbackend.produit.domain.usecase.RecupererProduits
 import com.bav.airneisbackend.produit.domain.usecase.RecupererUnProduit
+import com.bav.airneisbackend.produit.domain.usecase.SupprimerProduit
 import com.bav.airneisbackend.produit.fixture.ProduitFixture
 import com.bav.airneisbackend.produit.userside.mapper.ProduitMapper
 import com.bav.airneisbackend.utils.JwtService
@@ -23,6 +24,7 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.http.MediaType
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.delete
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.post
 
@@ -47,6 +49,10 @@ class ProduitControllerIntTest {
 
     @MockBean
     private lateinit var persisterProduit: PersisterProduit
+
+    @MockBean
+    private lateinit var supprimerProduit: SupprimerProduit
+
     @Test
     fun `recupererProduits should return all products`() {
         // Given
@@ -139,6 +145,23 @@ class ProduitControllerIntTest {
             status { isBadRequest() }
             content { contentType(MediaType.APPLICATION_JSON) }
 
+        }
+    }
+
+    @Test
+    fun `la route delete devrait renvoyer un statut 200 lorsqu'on lui donne un id correct et existant`() {
+        // Given
+        val id = "123456"
+        `when`(supprimerProduit(id)).thenReturn(ProduitFixture.produit)
+        // When
+        // Then
+        mockMvc.delete("/airneis/produits/$id") {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+
+        }.andExpect {
+            status { isOk() }
+            content { contentType(MediaType.APPLICATION_JSON) }
         }
     }
 

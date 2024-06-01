@@ -6,6 +6,7 @@ import com.bav.airneisbackend.utilisateur.domain.model.Panier
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.MongoId
 import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
 
@@ -21,10 +22,11 @@ data class UtilisateurDocument(
     val numeroDeTelephone : String,
     val adresse : List<Adresse> = emptyList(),
     val panierActuel : Panier,
+    val roles: Set<String> = setOf(), // Ajouter les rôles ici
     val commandes : List<Panier> = emptyList()
 ) : UserDetails {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        return mutableListOf()
+        return roles.map { SimpleGrantedAuthority("ROLE_$it") }.toMutableList()
     }
 
     override fun getPassword(): String {
