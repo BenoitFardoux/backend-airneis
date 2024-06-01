@@ -2,9 +2,8 @@ package com.bav.airneisbackend.utilisateur.userside.adapter.controller
 
 import com.bav.airneisbackend.utilisateur.domain.usecase.AjoutArticleDansLePanier
 import com.bav.airneisbackend.utilisateur.domain.usecase.ModifierPanier
+import com.bav.airneisbackend.utilisateur.domain.usecase.RecuperUtilisateur
 import com.bav.airneisbackend.utilisateur.domain.usecase.SupprimerArticleDansPanier
-import com.bav.airneisbackend.utilisateur.serverside.dto.UtilisateurDocument
-import com.bav.airneisbackend.utilisateur.serverside.mapper.UtilisateurMapper.toUtilisateur
 import com.bav.airneisbackend.utilisateur.userside.adapter.controller.documentation.UtilisateurControllerDocumentation
 import com.bav.airneisbackend.utilisateur.userside.mapper.UtilisateurMapper.toPanier
 import com.bav.airneisbackend.utilisateur.userside.mapper.UtilisateurMapper.toUtilisateurRestRessource
@@ -12,7 +11,6 @@ import com.bav.airneisbackend.utilisateur.userside.restressource.PanierRestResso
 import com.bav.airneisbackend.utilisateur.userside.restressource.SuppressionArticleDansPanierRestRessource
 import com.bav.airneisbackend.utilisateur.userside.restressource.UtilisateurRestRessource
 import org.springframework.http.ResponseEntity
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -29,15 +27,14 @@ import org.springframework.web.bind.annotation.RestController
 class UtilisateurController(
     val ajoutArticleDansLePanier: AjoutArticleDansLePanier,
     val supprimerUnArticleDansPanier: SupprimerArticleDansPanier,
+    val recuperUtilisateur: RecuperUtilisateur,
     val modifierPanier: ModifierPanier
 ) : UtilisateurControllerDocumentation {
 
     @GetMapping("/me")
     override fun utilisateurActuel(): ResponseEntity<UtilisateurRestRessource> {
-        val authentication = SecurityContextHolder.getContext().authentication
-
-        val currentUser = authentication.principal as UtilisateurDocument
-        return ResponseEntity.ok().body(currentUser.toUtilisateur().toUtilisateurRestRessource())
+        val user = recuperUtilisateur()
+        return ResponseEntity.ok().body(user.toUtilisateurRestRessource())
 
     }
 
