@@ -1,5 +1,6 @@
 package com.bav.airneisbackend.utilisateur.userside.adapter.controller
 
+import com.bav.airneisbackend.utilisateur.serverside.exception.MoyenDePaiementsInvalideException
 import com.bav.airneisbackend.utilisateur.serverside.exception.ProduitInnexistantException
 import com.bav.airneisbackend.utilisateur.serverside.exception.ProduitIntrouvableDansPanierException
 import com.bav.airneisbackend.utilisateur.serverside.exception.ProduitsIntrouvableException
@@ -31,5 +32,10 @@ class UtilisateurControllerAdvice {
     @ExceptionHandler(IllegalArgumentException::class)
     fun error400(exception: IllegalArgumentException) : ProblemDetail{
         return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, exception.message?:"")
+    }
+
+    @ExceptionHandler(MoyenDePaiementsInvalideException::class)
+    fun error400(exception: MoyenDePaiementsInvalideException) : ProblemDetail{
+        return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, exception.message)
     }
 }

@@ -1,5 +1,6 @@
 package com.bav.airneisbackend.utilisateur.userside.adapter.controller.documentation
 
+import com.bav.airneisbackend.utilisateur.userside.restressource.MoyensDePaiementUtilisateursRestRessource
 import com.bav.airneisbackend.utilisateur.userside.restressource.PanierRestRessource
 import com.bav.airneisbackend.utilisateur.userside.restressource.SuppressionArticleDansPanierRestRessource
 import com.bav.airneisbackend.utilisateur.userside.restressource.UtilisateurRestRessource
@@ -69,4 +70,19 @@ interface UtilisateurControllerDocumentation {
         description = "Modifie le panier de l'utilisateur actuel"
     )
     fun modifierPanier(panier : PanierRestRessource) : ResponseEntity<UtilisateurRestRessource>
+
+
+    @ApiResponses(
+        value = [
+            ApiResponse(
+                responseCode = "200",
+                description = "Les moyens de paiements on été modifiés avec succès"
+            )
+        ]
+    )
+    @Operation(
+        summary = "Modifier les moyens de paiements",
+        description = "Modifie les moyens de paiements de l'utilisateur actuel"
+    )
+    fun modifierMoyensDePaiements(moyensDePaiementUtilisateursRestRessource: MoyensDePaiementUtilisateursRestRessource) : ResponseEntity<UtilisateurRestRessource>
 }

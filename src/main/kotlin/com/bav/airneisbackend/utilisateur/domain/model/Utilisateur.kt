@@ -7,7 +7,7 @@ data class Utilisateur (
     val email: String,
     val nom : String,
     val prenom : String,
-    val paiements : List<Paiements>,
+    val paiements : List<MoyenDePaiement>,
     val numeroDeTelephone : String,
     val adresse : List<Adresse>,
     val panierActuel : Panier,
