@@ -7,7 +7,7 @@ data class Panier(
     val produits: MutableList<Produit>,
     val id: String,
     val adresse: Adresse? = null,
-    val paiements: Paiements? = null,
+    val paiements: MoyenDePaiement? = null,
     val dateDeCommande: Date? = null,
     val dateDeLivraison: Date? = null
 )

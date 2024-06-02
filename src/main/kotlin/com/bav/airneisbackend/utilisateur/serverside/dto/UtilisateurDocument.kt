@@ -1,7 +1,7 @@
 package com.bav.airneisbackend.utilisateur.serverside.dto
 
 import com.bav.airneisbackend.utilisateur.domain.model.Adresse
-import com.bav.airneisbackend.utilisateur.domain.model.Paiements
+import com.bav.airneisbackend.utilisateur.domain.model.MoyenDePaiement
 import com.bav.airneisbackend.utilisateur.domain.model.Panier
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.MongoId
@@ -18,7 +18,7 @@ data class UtilisateurDocument(
     val email: String,
     val nom : String,
     val prenom : String,
-    val paiements : List<Paiements> = emptyList(),
+    val paiements : List<MoyenDePaiement> = emptyList(),
     val numeroDeTelephone : String,
     val adresse : List<Adresse> = emptyList(),
     val panierActuel : Panier,
