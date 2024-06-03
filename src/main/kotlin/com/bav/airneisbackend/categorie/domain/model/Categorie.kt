@@ -4,5 +4,5 @@ data class Categorie (
     val id: String = "" ,
     val nom: String,
     val image : Image,
-    val produit: List<Produit> = emptyList()
+    val produits: List<Produit> = emptyList()
 )

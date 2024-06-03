@@ -2,40 +2,55 @@ package com.bav.airneisbackend.categorie.serverside.adapter.repository
 
 import com.bav.airneisbackend.categorie.domain.exception.CategorieInvalideException
 import com.bav.airneisbackend.categorie.domain.model.Categorie
+import com.bav.airneisbackend.categorie.domain.model.Image
 import com.bav.airneisbackend.categorie.domain.model.Produit
 import com.bav.airneisbackend.categorie.domain.port.serverside.categorie.PourPersisterCategorie
+import com.bav.airneisbackend.categorie.serverside.adapter.mongodb.repository.MongoDbCategorieRepository
+import com.bav.airneisbackend.categorie.domain.exception.ProduitIntrouvableException
 import com.bav.airneisbackend.categorie.serverside.mapper.CategorieMapper.toCategorie
 import com.bav.airneisbackend.categorie.serverside.mapper.CategorieMapper.toCategorieDocument
-import com.bav.airneisbackend.produit.domain.port.serverside.produit.PourRecupererProduitParId
-import org.springframework.data.mongodb.core.MongoTemplate
+import com.bav.airneisbackend.produit.serverside.adapter.mongodb.repository.MongoDbProduitRepository
 import org.springframework.stereotype.Repository
+import kotlin.jvm.optionals.getOrElse
 
 
 @Repository
-class PourPersiterCategorieRepository(val mongoTemplate: MongoTemplate, val pourRecupererProduitParId: PourRecupererProduitParId) : PourPersisterCategorie {
+class PourPersiterCategorieRepository(
+    val mongoDbCategorieRepository: MongoDbCategorieRepository,
+    val mongoDbProduitRepository: MongoDbProduitRepository
+) : PourPersisterCategorie {
     override fun invoke(categorie: Categorie): Categorie {
         val champsInvalides = mutableListOf<String>()
-        if (categorie.nom.isBlank()){
+        if (categorie.nom.isBlank()) {
             champsInvalides.add("nom")
         }
-        if (categorie.image.url.isBlank() ||categorie.image.description.isBlank()){
+        if (categorie.image.url.isBlank() || categorie.image.description.isBlank()) {
             champsInvalides.add("image")
         }
-        if (champsInvalides.isNotEmpty()){
+        if (champsInvalides.isNotEmpty()) {
             throw CategorieInvalideException(description = "des champs sont invalides", champs = champsInvalides)
         }
 
-        val produits  = categorie.produit.map {
-            try {
-                val produit = pourRecupererProduitParId(it.id)
-                Produit(produit.id, produit.nom)
-            } catch (e: Exception){
-                throw CategorieInvalideException(description = "un produit n'existe pas", champs = listOf("produit"))
-            }
+        categorie.produits.map {
+                val produit = mongoDbProduitRepository.findById(it.id).getOrElse {
+                    throw ProduitIntrouvableException(it.id)
+                }
+                Produit(
+                    id = produit.id,
+                    nom = produit.nom,
+                    description = produit.description,
+                    image = Image(
+                        url = produit.images[0].url,
+                        description = produit.images[0].description
+
+                    ),
+                    prix = produit.prix
+                )
+
         }
 
         val categorieDocument = categorie.toCategorieDocument()
-        return mongoTemplate.save(categorieDocument).toCategorie(produits)
+        return mongoDbCategorieRepository.save(categorieDocument).toCategorie()
     }
 
 }
