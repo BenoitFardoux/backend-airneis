@@ -29,7 +29,7 @@ class ModifierPanierRepository(
             }
             if (it.quantite < 1) throw IllegalArgumentException("La quantité pour ${it.id} doit être supérieure à 0")
         }
-        if (produitInvalide.isNotEmpty()) throw ProduitsIntrouvableException(produitInvalide)
+        if (produitInvalide.isEmpty()) throw ProduitsIntrouvableException(produitInvalide)
 
 
         val newPanier = panierActuel.copy(

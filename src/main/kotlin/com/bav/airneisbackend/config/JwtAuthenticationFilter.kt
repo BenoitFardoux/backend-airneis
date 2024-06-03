@@ -36,7 +36,7 @@ import org.springframework.web.servlet.HandlerExceptionResolver
             }
 
             try {
-                    val jwt = authHeader.substring(7)
+                val jwt = authHeader.substring(7)
                 val userEmail: String = jwtService.extractUsername(jwt)
 
                 val authentication: Authentication? = SecurityContextHolder.getContext().authentication
