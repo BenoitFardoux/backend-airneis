@@ -1,5 +1,6 @@
 package com.bav.airneisbackend.utilisateur.userside.adapter.controller.documentation
 
+import com.bav.airneisbackend.utilisateur.userside.restressource.FacturationRestRessource
 import com.bav.airneisbackend.utilisateur.userside.restressource.MoyensDePaiementUtilisateursRestRessource
 import com.bav.airneisbackend.utilisateur.userside.restressource.PanierRestRessource
 import com.bav.airneisbackend.utilisateur.userside.restressource.SuppressionArticleDansPanierRestRessource
@@ -11,6 +12,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses
 import org.springframework.http.ResponseEntity
 
 interface UtilisateurControllerDocumentation {
+
+
+
     @ApiResponses(
         value = [
             ApiResponse(
@@ -85,4 +89,19 @@ interface UtilisateurControllerDocumentation {
         description = "Modifie les moyens de paiements de l'utilisateur actuel"
     )
     fun modifierMoyensDePaiements(moyensDePaiementUtilisateursRestRessource: MoyensDePaiementUtilisateursRestRessource) : ResponseEntity<UtilisateurRestRessource>
+
+
+    @ApiResponses(
+        value = [
+            ApiResponse(
+                responseCode = "200",
+                description = "Le panier a été commandé avec succès"
+            )
+        ]
+    )
+    @Operation(
+        summary = "Commander le panier",
+        description = "Commande le panier de l'utilisateur actuel"
+    )
+    fun commanderPanier(facturationRestRessource: FacturationRestRessource) : ResponseEntity<UtilisateurRestRessource>
 }

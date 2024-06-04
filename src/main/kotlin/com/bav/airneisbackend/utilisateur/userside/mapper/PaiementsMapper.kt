@@ -3,6 +3,7 @@ package com.bav.airneisbackend.utilisateur.userside.mapper
 import com.bav.airneisbackend.utilisateur.domain.model.MoyenDePaiement
 import com.bav.airneisbackend.utilisateur.userside.restressource.MoyenDePaiementUtilisateursRestRessource
 import com.bav.airneisbackend.utilisateur.userside.restressource.MoyensDePaiementUtilisateursRestRessource
+import org.bson.types.ObjectId
 
 object PaiementsMapper {
     fun MoyenDePaiementUtilisateursRestRessource.toPaiement() = MoyenDePaiement(

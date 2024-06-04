@@ -1,6 +1,8 @@
 package com.bav.airneisbackend.utilisateur.userside.adapter.controller
 
+import com.bav.airneisbackend.utilisateur.domain.model.Utilisateur
 import com.bav.airneisbackend.utilisateur.domain.usecase.AjoutArticleDansLePanier
+import com.bav.airneisbackend.utilisateur.domain.usecase.CommanderPanier
 import com.bav.airneisbackend.utilisateur.domain.usecase.ModifierMoyensMoyensDePaiement
 import com.bav.airneisbackend.utilisateur.domain.usecase.ModifierPanier
 import com.bav.airneisbackend.utilisateur.domain.usecase.RecuperUtilisateur
@@ -9,6 +11,7 @@ import com.bav.airneisbackend.utilisateur.userside.adapter.controller.documentat
 import com.bav.airneisbackend.utilisateur.userside.mapper.PaiementsMapper.toPaiements
 import com.bav.airneisbackend.utilisateur.userside.mapper.UtilisateurMapper.toPanier
 import com.bav.airneisbackend.utilisateur.userside.mapper.UtilisateurMapper.toUtilisateurRestRessource
+import com.bav.airneisbackend.utilisateur.userside.restressource.FacturationRestRessource
 import com.bav.airneisbackend.utilisateur.userside.restressource.MoyensDePaiementUtilisateursRestRessource
 import com.bav.airneisbackend.utilisateur.userside.restressource.PanierRestRessource
 import com.bav.airneisbackend.utilisateur.userside.restressource.SuppressionArticleDansPanierRestRessource
@@ -32,7 +35,8 @@ class UtilisateurController(
     val supprimerUnArticleDansPanier: SupprimerArticleDansPanier,
     val recuperUtilisateur: RecuperUtilisateur,
     val modifierPanier: ModifierPanier,
-    val modifierMoyensMoyensDePaiement: ModifierMoyensMoyensDePaiement
+    val modifierMoyensMoyensDePaiement: ModifierMoyensMoyensDePaiement,
+    val commanderPanierUtilisateur: CommanderPanier
 ) : UtilisateurControllerDocumentation {
 
     @GetMapping("/me")
@@ -75,5 +79,11 @@ class UtilisateurController(
         return ResponseEntity.ok(utilisateur.toUtilisateurRestRessource())
     }
 
+
+    @PatchMapping("/panier/commander/")
+    override fun commanderPanier(@RequestBody facturationRestRessource: FacturationRestRessource): ResponseEntity<UtilisateurRestRessource> {
+        val utilisateur : Utilisateur = commanderPanierUtilisateur(facturationRestRessource.adresse, facturationRestRessource.moyenDePaiement)
+        return ResponseEntity.ok(utilisateur.toUtilisateurRestRessource())
+    }
 
 }
