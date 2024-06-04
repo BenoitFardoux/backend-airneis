@@ -1,7 +1,7 @@
 package com.bav.airneisbackend.produit.serverside.adapter.repository
 
-import com.bav.airneisbackend.Materiaux.domain.exception.MateriauNonTrouveException
-import com.bav.airneisbackend.Materiaux.domain.port.serverside.PourRecupererUnMateriau
+import com.bav.airneisbackend.materiaux.domain.exception.MateriauNonTrouveException
+import com.bav.airneisbackend.materiaux.domain.port.serverside.PourRecupererUnMateriau
 import com.bav.airneisbackend.categorie.serverside.adapter.mongodb.repository.MongoDbCategorieRepository
 import com.bav.airneisbackend.categorie.serverside.adapter.repository.AjouterProduitACategorieRepository
 import com.bav.airneisbackend.produit.domain.exception.MateriauDuProduitIntrouvable

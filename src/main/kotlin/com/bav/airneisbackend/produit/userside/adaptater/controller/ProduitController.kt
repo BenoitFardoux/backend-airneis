@@ -11,6 +11,7 @@ import com.bav.airneisbackend.produit.userside.adaptater.controller.documentatio
 import com.bav.airneisbackend.produit.userside.mapper.ProduitMapper
 import com.bav.airneisbackend.produit.userside.restressources.CreerProduitRestRessource
 import com.bav.airneisbackend.produit.userside.restressources.ProduitRestRessource
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.data.domain.PageRequest
 import org.springframework.hateoas.CollectionModel
 import org.springframework.hateoas.PagedModel
@@ -71,6 +72,8 @@ class ProduitController(
     }
 
     @PostMapping
+    @SecurityRequirement(name = "Bearer Authentication")
+
     override fun creerUnProduit(@RequestBody creerProduitRestRessource: CreerProduitRestRessource): ResponseEntity<ProduitRestRessource> {
         val produitACreer = ProduitMapper.creerProduitRestRessourceToProduit(creerProduitRestRessource)
         val produitSauvegarde = persisterProduit(produitACreer)
@@ -80,6 +83,8 @@ class ProduitController(
 
 
     @DeleteMapping("/{id}", produces = [MediaType.APPLICATION_JSON_VALUE])
+    @SecurityRequirement(name = "Bearer Authentication")
+
     override fun supprimerProduitParId(@PathVariable id: String): ResponseEntity<ProduitRestRessource> {
         val produit = supprimerProduit(id)
         val produitRestRessource = ProduitMapper.mapProduitToProduitRestRessource(produit)

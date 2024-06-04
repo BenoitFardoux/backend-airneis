@@ -1,7 +1,7 @@
 package com.bav.airneisbackend.produit.fixture
 
-import com.bav.airneisbackend.Materiaux.domain.model.Image
-import com.bav.airneisbackend.Materiaux.serverside.dto.MateriauDocument
+import com.bav.airneisbackend.materiaux.domain.model.Image
+import com.bav.airneisbackend.materiaux.serverside.dto.MateriauDocument
 import com.bav.airneisbackend.produit.domain.model.Materiau
 import com.bav.airneisbackend.produit.userside.restressources.materiau.MateriauPourCreerProduitRestRessource
 

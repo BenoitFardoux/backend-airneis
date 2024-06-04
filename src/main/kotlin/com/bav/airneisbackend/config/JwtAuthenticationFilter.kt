@@ -14,59 +14,68 @@ import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 import org.springframework.web.servlet.HandlerExceptionResolver
 
-
 @Component
-    class JwtAuthenticationFilter(
-        private val jwtService: JwtService,
-        private val userDetailsService: UserDetailsService,
-        private val handlerExceptionResolver: HandlerExceptionResolver
-    ) : OncePerRequestFilter() {
+class JwtAuthenticationFilter(
+    private val jwtService: JwtService,
+    private val userDetailsService: UserDetailsService,
+    private val handlerExceptionResolver: HandlerExceptionResolver
+) : OncePerRequestFilter() {
 
-        //@Throws(ServletException::class, IOException::class)
-        override fun doFilterInternal(
-            @NonNull request: HttpServletRequest,
-            @NonNull response: HttpServletResponse,
-            @NonNull filterChain: FilterChain
-        ) {
-            val authHeader = request.getHeader("Authorization")
+    override fun doFilterInternal(
+        @NonNull request: HttpServletRequest,
+        @NonNull response: HttpServletResponse,
+        @NonNull filterChain: FilterChain
+    ) {
+        val authHeader = request.getHeader("Authorization")
 
-            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-                filterChain.doFilter(request, response)
-                return
-            }
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            filterChain.doFilter(request, response)
+            return
+        }
 
-            try {
-                val jwt = authHeader.substring(7)
-                val userEmail: String = jwtService.extractUsername(jwt)
+        try {
+            val jwt = authHeader.substring(7)
+            val userEmail: String = jwtService.extractUsername(jwt)
 
-                val authentication: Authentication? = SecurityContextHolder.getContext().authentication
+            val authentication: Authentication? = SecurityContextHolder.getContext().authentication
 
-                if (authentication == null) {
-                    val userDetails = userDetailsService.loadUserByUsername(userEmail)
+            if (authentication == null) {
+                val userDetails = userDetailsService.loadUserByUsername(userEmail)
 
-                    if (jwtService.isTokenValid(jwt, userDetails)) {
-                        val authToken = UsernamePasswordAuthenticationToken(
-                            userDetails,
-                            null,
-                            userDetails.authorities
-                        )
+                if (jwtService.isTokenValid(jwt, userDetails)) {
+                    val authToken = UsernamePasswordAuthenticationToken(
+                        userDetails,
+                        null,
+                        userDetails.authorities
+                    )
 
-                        authToken.details = WebAuthenticationDetailsSource().buildDetails(request)
-                        SecurityContextHolder.getContext().authentication = authToken
-                    }
+                    authToken.details = WebAuthenticationDetailsSource().buildDetails(request)
+                    SecurityContextHolder.getContext().authentication = authToken
                 }
-
-                filterChain.doFilter(request, response)
-            } catch (exception: Exception) {
-                response.status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR
-
-                response.contentType = "application/json"
-                response.characterEncoding = "UTF-8"
-                val jsonResponse = """{"error": "${exception.message}"}"""
-                response.writer.write(jsonResponse)
-                response.writer.flush()
-                handlerExceptionResolver.resolveException(request, response, null, exception)
-
             }
+
+            filterChain.doFilter(request, response)
+        } catch (exception: Exception) {
+            System.err.println(exception.toString())
+            response.status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR
+            response.contentType = "application/json"
+            response.characterEncoding = "UTF-8"
+            val jsonResponse = """{"error": "${exception.message}"}"""
+            response.writer.apply {
+                write(jsonResponse)
+                flush()
+            }
+            handlerExceptionResolver.resolveException(request, response, null, exception)
         }
     }
+
+    override fun shouldNotFilter(request: HttpServletRequest): Boolean {
+        val path = request.requestURI
+        val allowedPaths: Array<String> = SecurityConfiguration.PUBLIC_REQUEST_MATCHERS
+
+        return allowedPaths.any { allowedPath ->
+            val sanitizedPath = allowedPath.replace("/*", "").replace("/**", "")
+            path.contains(sanitizedPath)
+        }
+    }
+}
