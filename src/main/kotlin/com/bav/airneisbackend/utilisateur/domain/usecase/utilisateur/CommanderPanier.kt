@@ -1,4 +1,4 @@
-package com.bav.airneisbackend.utilisateur.domain.usecase
+package com.bav.airneisbackend.utilisateur.domain.usecase.utilisateur
 
 import com.bav.airneisbackend.utilisateur.domain.model.Adresse
 import com.bav.airneisbackend.utilisateur.domain.model.MoyenDePaiement
@@ -31,7 +31,6 @@ class CommanderPanier(private val commanderPanierServerSidePort: CommanderPanier
             telephone.checkAndAddError("telephone")
             prenom.checkAndAddError("prénom")
             nom.checkAndAddError("nom")
-            departement.checkAndAddError("département")
         }
 
         if (erreurs.isNotEmpty()) {

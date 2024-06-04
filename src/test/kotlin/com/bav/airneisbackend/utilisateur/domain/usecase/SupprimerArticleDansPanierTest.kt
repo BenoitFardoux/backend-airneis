@@ -1,6 +1,7 @@
 package com.bav.airneisbackend.utilisateur.domain.usecase
 
 import com.bav.airneisbackend.utilisateur.domain.port.serverside.PourSupprimerArticleDansPanierServerSidePort
+import com.bav.airneisbackend.utilisateur.domain.usecase.panier.SupprimerArticleDansPanier
 import com.bav.airneisbackend.utilisateur.fixture.UtilisateurFixture
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow

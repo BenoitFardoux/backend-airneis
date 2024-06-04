@@ -1,9 +1,9 @@
 package com.bav.airneisbackend.utilisateur.userside.adapter.controller.utilisateur
 
 import com.bav.airneisbackend.utilisateur.domain.model.Utilisateur
-import com.bav.airneisbackend.utilisateur.domain.usecase.CommanderPanier
-import com.bav.airneisbackend.utilisateur.domain.usecase.ModifierMoyensMoyensDePaiement
-import com.bav.airneisbackend.utilisateur.domain.usecase.RecuperUtilisateur
+import com.bav.airneisbackend.utilisateur.domain.usecase.utilisateur.CommanderPanier
+import com.bav.airneisbackend.utilisateur.domain.usecase.utilisateur.ModifierMoyensMoyensDePaiement
+import com.bav.airneisbackend.utilisateur.domain.usecase.utilisateur.RecuperUtilisateur
 import com.bav.airneisbackend.utilisateur.userside.adapter.controller.utilisateur.documentation.UtilisateurControllerDocumentation
 import com.bav.airneisbackend.utilisateur.userside.mapper.PaiementsMapper.toPaiements
 import com.bav.airneisbackend.utilisateur.userside.mapper.UtilisateurMapper.toUtilisateurRestRessource

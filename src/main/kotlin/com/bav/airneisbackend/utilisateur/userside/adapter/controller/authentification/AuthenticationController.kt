@@ -1,8 +1,8 @@
 package com.bav.airneisbackend.utilisateur.userside.adapter.controller.authentification
 
 import com.bav.airneisbackend.utilisateur.domain.model.Utilisateur
-import com.bav.airneisbackend.utilisateur.domain.usecase.ConnexionUtilisateur
-import com.bav.airneisbackend.utilisateur.domain.usecase.InscriptionUtilisateur
+import com.bav.airneisbackend.utilisateur.domain.usecase.utilisateur.ConnexionUtilisateur
+import com.bav.airneisbackend.utilisateur.domain.usecase.utilisateur.InscriptionUtilisateur
 import com.bav.airneisbackend.utilisateur.serverside.exception.MotDePasseInvalideException
 import com.bav.airneisbackend.utilisateur.serverside.mapper.UtilisateurMapper.toUtilisateurDocument
 import com.bav.airneisbackend.utilisateur.userside.adapter.controller.authentification.documentation.AuthControllerDocumentation

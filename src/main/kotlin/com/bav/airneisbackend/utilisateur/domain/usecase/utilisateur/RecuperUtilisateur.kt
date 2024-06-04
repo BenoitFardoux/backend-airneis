@@ -1,4 +1,4 @@
-package com.bav.airneisbackend.utilisateur.domain.usecase
+package com.bav.airneisbackend.utilisateur.domain.usecase.utilisateur
 
 import com.bav.airneisbackend.utilisateur.domain.port.serverside.PourRecupererUtilisateurServerSidePort
 import org.springframework.stereotype.Component

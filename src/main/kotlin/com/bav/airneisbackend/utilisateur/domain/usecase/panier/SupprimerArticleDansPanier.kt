@@ -1,4 +1,4 @@
-package com.bav.airneisbackend.utilisateur.domain.usecase
+package com.bav.airneisbackend.utilisateur.domain.usecase.panier
 
 import com.bav.airneisbackend.utilisateur.domain.model.produits.Produit
 import com.bav.airneisbackend.utilisateur.domain.port.serverside.PourSupprimerArticleDansPanierServerSidePort
