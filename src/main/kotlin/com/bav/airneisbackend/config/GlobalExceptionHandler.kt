@@ -4,6 +4,7 @@ import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.security.SignatureException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ProblemDetail
+import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.security.access.AccessDeniedException
 import org.springframework.security.authentication.AccountStatusException
 import org.springframework.security.authentication.BadCredentialsException
@@ -18,6 +19,10 @@ class GlobalExceptionHandler {
     @ExceptionHandler(BadCredentialsException::class)
     fun handleBadCredentialsException(exception: BadCredentialsException) : ProblemDetail {
          return ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, exception.message!!)
+    }
+    @ExceptionHandler(HttpMessageNotReadableException::class)
+    fun handleHttpMessageNotReadableException(exception: HttpMessageNotReadableException) : ProblemDetail {
+        return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, exception.message!!)
     }
 
     @ExceptionHandler(AccountStatusException::class)
@@ -54,5 +59,6 @@ class GlobalExceptionHandler {
     fun handleNotImplementedError(exception: NotImplementedError) : ProblemDetail {
         return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_IMPLEMENTED, exception.message!!)
     }
+
 
 }

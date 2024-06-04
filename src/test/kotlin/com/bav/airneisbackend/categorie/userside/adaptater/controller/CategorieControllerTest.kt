@@ -3,6 +3,7 @@ package com.bav.airneisbackend.categorie.userside.adaptater.controller
 import com.bav.airneisbackend.categorie.CategorieFixture
 import com.bav.airneisbackend.categorie.domain.exception.CategorieInvalideException
 import com.bav.airneisbackend.categorie.domain.usecase.PersisterCategorie
+import com.bav.airneisbackend.categorie.domain.usecase.RecupererCategorie
 import com.bav.airneisbackend.categorie.userside.mapper.CategorieMapper.toCategorie
 import com.bav.airneisbackend.produit.domain.usecase.RecupererUnProduit
 import com.bav.airneisbackend.utils.JwtService
@@ -19,6 +20,7 @@ import org.springframework.context.annotation.Import
 import org.springframework.http.MediaType
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.post
 
 
@@ -39,6 +41,9 @@ class CategorieControllerTest {
 
     @MockBean
     private lateinit var persisterCategorie: PersisterCategorie
+
+    @MockBean
+    private lateinit var recupererCategorie: RecupererCategorie
 
     @Test
     fun `lorsque je fait une requete post pour persister une categorie, alors je dois avoir un status 201`() {
@@ -72,6 +77,22 @@ class CategorieControllerTest {
             content = jacksonObjectMapper().writeValueAsString(pourCreerCategorieRestRessource)
         }.andExpect {
             status { isBadRequest() }
+            content { contentType(MediaType.APPLICATION_JSON) }
+        }
+    }
+
+    @Test
+    fun `Lorque je fait une requete get pour recuperer une categorie, alors je dois avoir un status 200`() {
+        // GIVEN
+        val categorieRestRessource = CategorieFixture.categorieRestRessource
+        `when`(recupererCategorie(categorieRestRessource.id)).thenReturn(CategorieFixture.uneCategorie)
+        // WHEN
+        // THEN
+        mockMvc.get("/airneis/categorie/${categorieRestRessource.id}") {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isOk() }
             content { contentType(MediaType.APPLICATION_JSON) }
         }
     }

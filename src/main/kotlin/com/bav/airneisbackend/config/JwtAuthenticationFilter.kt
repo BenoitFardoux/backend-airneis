@@ -59,9 +59,14 @@ import org.springframework.web.servlet.HandlerExceptionResolver
                 filterChain.doFilter(request, response)
             } catch (exception: Exception) {
                 response.status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR
-                println("Error: ${exception.message}")
 
+                response.contentType = "application/json"
+                response.characterEncoding = "UTF-8"
+                val jsonResponse = """{"error": "${exception.message}"}"""
+                response.writer.write(jsonResponse)
+                response.writer.flush()
                 handlerExceptionResolver.resolveException(request, response, null, exception)
+
             }
         }
     }

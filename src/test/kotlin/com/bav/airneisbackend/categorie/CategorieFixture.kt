@@ -4,6 +4,7 @@ import com.bav.airneisbackend.categorie.domain.model.Categorie
 import com.bav.airneisbackend.categorie.domain.model.Image
 import com.bav.airneisbackend.categorie.domain.model.Produit
 import com.bav.airneisbackend.categorie.serverside.dto.CategorieDocument
+import com.bav.airneisbackend.categorie.userside.dto.CategorieRestRessource
 import com.bav.airneisbackend.categorie.userside.dto.PourCreerCategorieRestRessource
 
 class CategorieFixture {
@@ -27,7 +28,12 @@ class CategorieFixture {
             image = image,
             produits = produit
         )
-
+        val categorieRestRessource = CategorieRestRessource(
+            id = id,
+            nom = nom,
+            image = image,
+            produits = emptyList()
+        )
         val pourCreerCategorieRestRessource = PourCreerCategorieRestRessource(
             nom = nom,
             image = image,
