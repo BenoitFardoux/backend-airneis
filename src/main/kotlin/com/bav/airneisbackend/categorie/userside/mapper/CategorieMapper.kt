@@ -10,7 +10,7 @@ object CategorieMapper {
     fun PourCreerCategorieRestRessource.toCategorie() =Categorie(
         nom = nom,
         image = image,
-        produits = produit.map { Produit(id = it.id)  }
+        produits = produit.map { Produit(id = it.id)  }.toMutableList()
     )
 
     fun Categorie.toCategorieRestRessource(produits: List<ProduitPourCategorieRestRessource>) = CategorieRestRessource(

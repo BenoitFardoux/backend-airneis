@@ -51,7 +51,7 @@ object UtilisateurMapper {
                 produits = emptyMutableList,
                 id = ObjectId().toHexString()
             ),
-            commandes = emptyList(),
+            commandes = mutableListOf(),
             verifie = false,
             prenom = prenom,
             id = ""

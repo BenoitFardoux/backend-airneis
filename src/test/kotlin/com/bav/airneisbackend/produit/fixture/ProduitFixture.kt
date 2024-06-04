@@ -18,8 +18,7 @@ class ProduitFixture {
         ))
 
         val categorie = Categorie(
-            id = "12333",
-            nom = "meuble",
+            id = "12333"
         )
         val produitDocument = ProduitDocument(
             id = "123456",

@@ -23,7 +23,7 @@ data class UtilisateurDocument(
     val adresse : List<Adresse> = emptyList(),
     val panierActuel : Panier,
     val roles: Set<String> = setOf(), // Ajouter les rôles ici
-    val commandes : List<Panier> = emptyList()
+    val commandes : MutableList<Panier> = mutableListOf()
 ) : UserDetails {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return roles.map { SimpleGrantedAuthority("ROLE_$it") }.toMutableList()

@@ -12,6 +12,6 @@ import kotlin.jvm.optionals.getOrNull
 @Repository
 class PourRecupererUnProduitRepository(private val mongoDbProduitRepository: MongoDbProduitRepository) : PourRecupererProduitParId {
     override fun invoke(id: String): Produit {
-        return mongoDbProduitRepository.findById(id).getOrNull()?.toProduit() ?: throw AucunProduitTrouveException("Le materiau n'a pas été trouvé")
+        return mongoDbProduitRepository.findById(id).get().toProduit()
     }
 }

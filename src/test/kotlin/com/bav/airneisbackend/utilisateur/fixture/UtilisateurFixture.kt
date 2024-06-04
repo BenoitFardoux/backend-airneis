@@ -54,7 +54,7 @@ class UtilisateurFixture {
             numeroDeTelephone = "",
             paiements = emptyList(),
             panierActuel = panier,
-            commandes = emptyList(),
+            commandes = mutableListOf(),
             verifie = false
         )
         val utilisateurDocument = UtilisateurDocument(
@@ -67,7 +67,7 @@ class UtilisateurFixture {
             numeroDeTelephone = "",
             paiements = emptyList(),
             panierActuel = panier,
-            commandes = emptyList(),
+            commandes = mutableListOf(),
             verifie = false
         )
     }

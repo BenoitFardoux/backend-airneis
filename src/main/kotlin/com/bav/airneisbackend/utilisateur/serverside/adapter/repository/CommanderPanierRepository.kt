@@ -35,7 +35,7 @@ class CommanderPanierRepository(val mongoDbUtilisateurRepository: MongoDbUtilisa
             dateDeCommande = Date(),
         )
 
-        currentUser.commandes.addLast(panierActuel)
+        currentUser.commandes.add(panierActuel)
 
 
         val newUser = currentUser.copy(panierActuel = panierVide)

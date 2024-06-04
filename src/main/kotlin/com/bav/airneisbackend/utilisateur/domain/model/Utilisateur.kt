@@ -11,5 +11,5 @@ data class Utilisateur (
     val numeroDeTelephone : String,
     val adresse : List<Adresse>,
     val panierActuel : Panier,
-    val commandes : List<Panier>
+    val commandes : MutableList<Panier>
 )
