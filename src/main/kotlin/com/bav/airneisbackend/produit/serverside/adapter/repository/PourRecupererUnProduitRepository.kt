@@ -6,12 +6,13 @@ import com.bav.airneisbackend.produit.domain.port.serverside.produit.PourRecuper
 import com.bav.airneisbackend.produit.serverside.adapter.mongodb.repository.MongoDbProduitRepository
 import com.bav.airneisbackend.produit.serverside.mapper.ProduitMapper.toProduit
 import org.springframework.stereotype.Repository
-import kotlin.jvm.optionals.getOrNull
+import kotlin.jvm.optionals.getOrElse
 
 
 @Repository
 class PourRecupererUnProduitRepository(private val mongoDbProduitRepository: MongoDbProduitRepository) : PourRecupererProduitParId {
-    override fun invoke(id: String): Produit {
-        return mongoDbProduitRepository.findById(id).get().toProduit()
+    override operator fun invoke(id: String): Produit {
+        return mongoDbProduitRepository.findById(id).getOrElse { throw AucunProduitTrouveException("Produit $id non trouvé") }
+            .toProduit()
     }
 }
