@@ -1,9 +1,11 @@
 package com.bav.airneisbackend.categorie.userside.adaptater.controller
 
 import com.bav.airneisbackend.categorie.domain.exception.CategorieInvalideException
+import com.bav.airneisbackend.categorie.domain.exception.CategorieNonTrouveeException
 import com.bav.airneisbackend.categorie.userside.dto.ChampsManquantRestRessource
 import org.springdoc.api.ErrorMessage
 import org.springframework.http.HttpStatus
+import org.springframework.http.ProblemDetail
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
@@ -15,6 +17,10 @@ class CategorieControllerAdvice {
     @ExceptionHandler(NotImplementedError::class)
     @ResponseStatus(HttpStatus.NOT_IMPLEMENTED)
     fun notYetImplemented(exception: Exception) = ErrorMessage(exception.message)
+
+    @ExceptionHandler(CategorieNonTrouveeException::class)
+    fun error404(exception: CategorieNonTrouveeException) : ProblemDetail =
+        ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, exception.message)
 
     @ExceptionHandler(CategorieInvalideException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

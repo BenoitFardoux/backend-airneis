@@ -2,6 +2,7 @@ package com.bav.airneisbackend.categorie.userside.adaptater.controller
 
 import com.bav.airneisbackend.categorie.domain.model.Image
 import com.bav.airneisbackend.categorie.domain.usecase.PersisterCategorie
+import com.bav.airneisbackend.categorie.domain.usecase.RecupererCategorie
 import com.bav.airneisbackend.categorie.userside.adaptater.controller.documentation.CategorieControllerDocumentation
 import com.bav.airneisbackend.categorie.userside.dto.CategorieRestRessource
 import com.bav.airneisbackend.categorie.userside.dto.PourCreerCategorieRestRessource
@@ -9,8 +10,9 @@ import com.bav.airneisbackend.categorie.userside.dto.ProduitPourCategorieRestRes
 import com.bav.airneisbackend.categorie.userside.mapper.CategorieMapper.toCategorie
 import com.bav.airneisbackend.categorie.userside.mapper.CategorieMapper.toCategorieRestRessource
 import com.bav.airneisbackend.produit.domain.usecase.RecupererUnProduit
-import org.springframework.hateoas.CollectionModel
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -22,22 +24,31 @@ import java.net.URI
 @RequestMapping("/airneis/categorie")
 class CategorieController(
     private val persisterCategorie: PersisterCategorie,
-    private val recupererProduit: RecupererUnProduit
+    private val recupererProduit: RecupererUnProduit,
+    private val recupererCategorie: RecupererCategorie
 ) : CategorieControllerDocumentation {
-    // TODO : implementer route post
-    override fun recupererCategories(): ResponseEntity<CollectionModel<CategorieRestRessource>> {
-        TODO("Not yet implemented")
-    }
 
-    override fun recupererCategorieParId(id: String): ResponseEntity<CategorieRestRessource> {
-        TODO("Not yet implemented")
+    @GetMapping("/{id}")
+    override fun recupererCategorieParId(@PathVariable id: String): ResponseEntity<CategorieRestRessource> {
+        val categorie = recupererCategorie(id)
+
+        val produits = categorie.produits.map { recupererProduit(it.id) }.map {
+            ProduitPourCategorieRestRessource(
+                it.id,
+                it.nom,
+                it.description,
+                it.prix,
+                Image(it.images[0].url, it.images[0].description)
+            )
+        }
+
+        return ResponseEntity.ok(categorie.toCategorieRestRessource(produits))
     }
 
 
     @PostMapping
     override fun creerCategorie(@RequestBody categorieRestRessource: PourCreerCategorieRestRessource): ResponseEntity<CategorieRestRessource> {
         val categorieRecuperer = categorieRestRessource.toCategorie()
-
 
 
         val categoriePersiste = persisterCategorie(categorieRecuperer)
