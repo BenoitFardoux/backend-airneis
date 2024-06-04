@@ -7,4 +7,5 @@ data class PourCreerCategorieRestRessource(
     val nom : String,
     val image : Image,
     val produit: List<Produit>
+    = emptyList()
 )

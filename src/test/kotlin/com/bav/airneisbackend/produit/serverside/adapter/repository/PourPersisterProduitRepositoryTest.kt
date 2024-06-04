@@ -1,6 +1,8 @@
 package com.bav.airneisbackend.produit.serverside.adapter.repository
 
 import com.bav.airneisbackend.Materiaux.serverside.dto.MateriauDocument
+import com.bav.airneisbackend.categorie.CategorieFixture
+import com.bav.airneisbackend.categorie.serverside.adapter.mongodb.repository.MongoDbCategorieRepository
 import com.bav.airneisbackend.produit.fixture.MateriauFixture
 import com.bav.airneisbackend.produit.fixture.ProduitFixture
 import com.bav.airneisbackend.produit.serverside.adapter.mongodb.repository.MongoDbProduitRepository
@@ -27,18 +29,22 @@ class PourPersisterProduitRepositoryTest {
 
     @Autowired
     private lateinit var mongoDbProduitsRepository: MongoDbProduitRepository
+    @Autowired
+    private lateinit var mongoDbCategoriesRepository: MongoDbCategorieRepository
 
     @Autowired
     private lateinit var mongoTemplate: MongoTemplate
 
     @BeforeEach
     fun setUp() {
+        mongoDbCategoriesRepository.insert(CategorieFixture.categorieDocument)
         mongoTemplate.insert(MateriauFixture.materiauDocument)
         mongoTemplate.insert(ProduitFixture.produitDocument)
     }
 
     @AfterEach
     fun tearDown() {
+        mongoDbCategoriesRepository.deleteAll()
         mongoTemplate.remove(Query(), MateriauDocument::class.java)
         mongoTemplate.remove(Query(), ProduitDocument::class.java)
     }
@@ -46,7 +52,7 @@ class PourPersisterProduitRepositoryTest {
     @Test
     fun `lorsque j'essaye de persiter un produit dans la base de donnée je récupère le produit`() {
         // GIVEN
-        val produit = ProduitFixture.produitSansId
+        val produit = ProduitFixture.produit
         // WHEN
         val produitPersister = persisterProduitRepository(produit)
         // THEN
@@ -56,5 +62,9 @@ class PourPersisterProduitRepositoryTest {
         mongoDbProduitsRepository.findById(produitPersister.id).get().let {
             assertThat(it).usingRecursiveComparison().isEqualTo(produitPersister)
         }
+        val categorie = mongoDbCategoriesRepository.findById(CategorieFixture.categorieDocument.id).get()
+        assertThat(categorie.produits.find { it.id == produitPersister.id })
     }
 }
+
+

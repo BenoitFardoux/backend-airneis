@@ -13,5 +13,5 @@ data class CategorieDocument(
     val id: String = "",
     val nom: String,
     val image : Image,
-    val produits: List<Produit>
+    val produits: MutableList<Produit>
 )

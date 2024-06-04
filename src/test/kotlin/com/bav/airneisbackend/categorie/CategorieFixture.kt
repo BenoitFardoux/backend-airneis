@@ -6,13 +6,14 @@ import com.bav.airneisbackend.categorie.domain.model.Produit
 import com.bav.airneisbackend.categorie.serverside.dto.CategorieDocument
 import com.bav.airneisbackend.categorie.userside.dto.CategorieRestRessource
 import com.bav.airneisbackend.categorie.userside.dto.PourCreerCategorieRestRessource
+import com.bav.airneisbackend.utilisateur.domain.model.Panier
 
 class CategorieFixture {
     companion object {
-        private  val id = "1"
+        private  val id = "12333"
         private val nom = "Categorie 1"
         private val image = Image("url de liamge", "description de l'image")
-        private val produit = emptyList<Produit>()
+        private val produit = mutableListOf<Produit>()
 
         val categorieDocument = CategorieDocument(id, nom, image, produit)
         val uneCategorie =

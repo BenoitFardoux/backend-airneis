@@ -15,7 +15,6 @@ class ProduitFixture {
         )
         val categorie = Categorie(
             id = "",
-            nom = "chaise"
         )
 
         val materiau = Materiau(

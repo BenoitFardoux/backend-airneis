@@ -4,5 +4,5 @@ data class Categorie (
     val id: String = "" ,
     val nom: String,
     val image : Image,
-    val produits: List<Produit> = emptyList()
+    val produits: MutableList<Produit> = mutableListOf()
 )

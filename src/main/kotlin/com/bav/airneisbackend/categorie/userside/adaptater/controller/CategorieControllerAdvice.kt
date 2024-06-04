@@ -26,4 +26,13 @@ class CategorieControllerAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun error400(exception: CategorieInvalideException) =
         ResponseEntity.badRequest().body(ChampsManquantRestRessource(exception.champs,exception.description))
+
+    @ExceptionHandler(IllegalArgumentException::class)
+    fun error400(exception: IllegalArgumentException) : ProblemDetail =
+        ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, exception.message?:"")
+
+  /*  @ExceptionHandler(Exception::class)
+    fun error500(exception: Exception) : ProblemDetail =
+        ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR, exception.toString()?:"")
+*/
 }
