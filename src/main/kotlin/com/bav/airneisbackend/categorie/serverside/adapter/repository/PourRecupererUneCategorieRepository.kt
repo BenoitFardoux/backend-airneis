@@ -3,6 +3,7 @@ package com.bav.airneisbackend.categorie.serverside.adapter.repository
 import com.bav.airneisbackend.categorie.domain.model.Categorie
 import com.bav.airneisbackend.categorie.domain.port.serverside.categorie.PourRecupererUneCategorie
 import com.bav.airneisbackend.categorie.serverside.adapter.mongodb.repository.MongoDbCategorieRepository
+import com.bav.airneisbackend.categorie.serverside.mapper.CategorieMapper.toCategorie
 import org.springframework.stereotype.Repository
 
 
@@ -12,8 +13,7 @@ class PourRecupererUneCategorieRepository(val mongoDbCategorieRepository: MongoD
         if (mongoDbCategorieRepository.existsById(id).not()) {
             throw Exception("Categorie not found")
         }
-        val categorie = mongoDbCategorieRepository.findById(id).get()
+        return mongoDbCategorieRepository.findById(id).get().toCategorie()
 
-        TODO("Not yet implemented")
     }
 }

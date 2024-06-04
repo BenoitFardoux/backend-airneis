@@ -4,6 +4,7 @@ import com.bav.airneisbackend.categorie.CategorieFixture
 import com.bav.airneisbackend.categorie.domain.exception.CategorieInvalideException
 import com.bav.airneisbackend.categorie.domain.usecase.PersisterCategorie
 import com.bav.airneisbackend.categorie.userside.mapper.CategorieMapper.toCategorie
+import com.bav.airneisbackend.produit.domain.usecase.RecupererUnProduit
 import com.bav.airneisbackend.utils.JwtService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.junit.jupiter.api.Test
@@ -29,6 +30,9 @@ class CategorieControllerTest {
     private lateinit var mockMvc: MockMvc
     @MockBean
     private lateinit var JwtService : JwtService
+
+    @MockBean
+    private lateinit var RecupererUnProduit : RecupererUnProduit
 
     @MockBean
     private lateinit var UserDetailsService : UserDetailsService

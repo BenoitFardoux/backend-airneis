@@ -2,7 +2,6 @@ package com.bav.airneisbackend.categorie.serverside.adapter.repository
 
 import com.bav.airneisbackend.categorie.domain.exception.CategorieInvalideException
 import com.bav.airneisbackend.categorie.domain.model.Categorie
-import com.bav.airneisbackend.categorie.domain.model.Image
 import com.bav.airneisbackend.categorie.domain.model.Produit
 import com.bav.airneisbackend.categorie.domain.port.serverside.categorie.PourPersisterCategorie
 import com.bav.airneisbackend.categorie.serverside.adapter.mongodb.repository.MongoDbCategorieRepository
@@ -37,14 +36,6 @@ class PourPersiterCategorieRepository(
                 }
                 Produit(
                     id = produit.id,
-                    nom = produit.nom,
-                    description = produit.description,
-                    image = Image(
-                        url = produit.images[0].url,
-                        description = produit.images[0].description
-
-                    ),
-                    prix = produit.prix
                 )
 
         }
