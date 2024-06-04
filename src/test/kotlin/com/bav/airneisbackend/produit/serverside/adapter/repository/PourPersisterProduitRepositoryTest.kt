@@ -1,6 +1,6 @@
 package com.bav.airneisbackend.produit.serverside.adapter.repository
 
-import com.bav.airneisbackend.Materiaux.serverside.dto.MateriauDocument
+import com.bav.airneisbackend.materiaux.serverside.dto.MateriauDocument
 import com.bav.airneisbackend.categorie.CategorieFixture
 import com.bav.airneisbackend.categorie.serverside.adapter.mongodb.repository.MongoDbCategorieRepository
 import com.bav.airneisbackend.produit.fixture.MateriauFixture
@@ -15,9 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.data.mongodb.core.query.Query
-import org.springframework.data.mongodb.core.remove
 import org.springframework.test.context.TestPropertySource
-import kotlin.jvm.optionals.getOrNull
 
 
 @SpringBootTest

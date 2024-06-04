@@ -5,13 +5,16 @@ import com.bav.airneisbackend.produit.userside.restressources.ProduitRestRessour
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.hateoas.CollectionModel
 import org.springframework.http.ResponseEntity
 
 interface ProduitControllerDocumentation {
     @Operation(
         summary = "Récuperer l'ensemble des produits",
-        description = "Recuperer l'ensemble des produits"
+        description = "Recuperer l'ensemble des produits",
+        security = [SecurityRequirement(name = "")]  // Indique qu'il n'y a pas de sécurité requise
+
     )
     @ApiResponses(
         value = [
@@ -29,7 +32,8 @@ interface ProduitControllerDocumentation {
 
     @Operation(
         summary = "Récuperer un produit par son identifiant",
-        description = "Recuperer un produit par son identifiant"
+        description = "Recuperer un produit par son identifiant",
+        security = [SecurityRequirement(name = "")]  // Indique qu'il n'y a pas de sécurité requise
     )
     @ApiResponses(
         value = [

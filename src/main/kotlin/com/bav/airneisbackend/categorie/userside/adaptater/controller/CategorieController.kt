@@ -10,6 +10,7 @@ import com.bav.airneisbackend.categorie.userside.dto.ProduitPourCategorieRestRes
 import com.bav.airneisbackend.categorie.userside.mapper.CategorieMapper.toCategorie
 import com.bav.airneisbackend.categorie.userside.mapper.CategorieMapper.toCategorieRestRessource
 import com.bav.airneisbackend.produit.domain.usecase.RecupererUnProduit
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -47,6 +48,7 @@ class CategorieController(
 
 
     @PostMapping
+@SecurityRequirement(name = "Bearer Authentication")
     override fun creerCategorie(@RequestBody categorieRestRessource: PourCreerCategorieRestRessource): ResponseEntity<CategorieRestRessource> {
         val categorieRecuperer = categorieRestRessource.toCategorie()
 
