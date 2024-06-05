@@ -1,4 +1,4 @@
-package com.bav.airneisbackend.utilisateur.domain.usecase
+package com.bav.airneisbackend.utilisateur.domain.usecase.utilisateur
 
 import com.bav.airneisbackend.utilisateur.domain.model.MoyenDePaiement
 import com.bav.airneisbackend.utilisateur.domain.model.Utilisateur

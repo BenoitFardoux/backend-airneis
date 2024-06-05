@@ -2,6 +2,7 @@ package com.bav.airneisbackend.utilisateur.domain.usecase
 
 import com.bav.airneisbackend.utilisateur.domain.model.MoyenDePaiement
 import com.bav.airneisbackend.utilisateur.domain.port.serverside.PourModifierMoyensDePaiementServerSidePort
+import com.bav.airneisbackend.utilisateur.domain.usecase.utilisateur.ModifierMoyensMoyensDePaiement
 import com.bav.airneisbackend.utilisateur.fixture.UtilisateurFixture
 import com.bav.airneisbackend.utilisateur.serverside.exception.MoyenDePaiementsInvalideException
 import org.assertj.core.api.Assertions.assertThat

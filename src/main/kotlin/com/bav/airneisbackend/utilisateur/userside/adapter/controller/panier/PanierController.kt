@@ -1,8 +1,8 @@
 package com.bav.airneisbackend.utilisateur.userside.adapter.controller.panier
 
-import com.bav.airneisbackend.utilisateur.domain.usecase.AjoutArticleDansLePanier
-import com.bav.airneisbackend.utilisateur.domain.usecase.ModifierPanier
-import com.bav.airneisbackend.utilisateur.domain.usecase.SupprimerArticleDansPanier
+import com.bav.airneisbackend.utilisateur.domain.usecase.panier.AjoutArticleDansLePanier
+import com.bav.airneisbackend.utilisateur.domain.usecase.panier.ModifierPanier
+import com.bav.airneisbackend.utilisateur.domain.usecase.panier.SupprimerArticleDansPanier
 import com.bav.airneisbackend.utilisateur.userside.adapter.controller.panier.documentation.PanierControllerDocumentation
 import com.bav.airneisbackend.utilisateur.userside.mapper.UtilisateurMapper.toPanier
 import com.bav.airneisbackend.utilisateur.userside.mapper.UtilisateurMapper.toUtilisateurRestRessource
