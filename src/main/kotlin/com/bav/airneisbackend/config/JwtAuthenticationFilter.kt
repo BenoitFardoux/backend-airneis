@@ -71,11 +71,26 @@ class JwtAuthenticationFilter(
 
     override fun shouldNotFilter(request: HttpServletRequest): Boolean {
         val path = request.requestURI
-        val allowedPaths: Array<String> = SecurityConfiguration.PUBLIC_REQUEST_MATCHERS
+        val method = request.method
+        val allowedGetPaths: Array<String> = SecurityConfiguration.PUBLIC_GET_REQUEST_MATCHERS
+        val allowedPostPaths: Array<String> = SecurityConfiguration.PUBLIC_POST_REQUEST_MATCHERS
 
-        return allowedPaths.any { allowedPath ->
-            val sanitizedPath = allowedPath.replace("/*", "").replace("/**", "")
-            path.contains(sanitizedPath)
+        // Check if the request is a GET request and matches the allowed GET paths
+        if (method == "GET" && allowedGetPaths.any { allowedPath ->
+                val sanitizedPath = allowedPath.replace("/*", "").replace("/**", "")
+                path.contains(sanitizedPath)
+            }) {
+            return true
         }
+
+        // Check if the request is a POST request and matches the allowed POST paths
+        if (method == "POST" && allowedPostPaths.any { allowedPath ->
+                val sanitizedPath = allowedPath.replace("/*", "").replace("/**", "")
+                path.contains(sanitizedPath)
+            }) {
+            return true
+        }
+
+        return false
     }
 }
