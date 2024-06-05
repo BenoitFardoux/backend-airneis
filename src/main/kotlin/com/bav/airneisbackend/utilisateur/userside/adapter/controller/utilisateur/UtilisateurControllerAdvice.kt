@@ -1,5 +1,6 @@
 package com.bav.airneisbackend.utilisateur.userside.adapter.controller.utilisateur
 
+import com.bav.airneisbackend.utilisateur.serverside.exception.AdresseIntrouvableException
 import com.bav.airneisbackend.utilisateur.serverside.exception.AdresseInvalideException
 import com.bav.airneisbackend.utilisateur.serverside.exception.MoyenDePaiementsInvalideException
 import com.bav.airneisbackend.utilisateur.serverside.exception.ProduitInnexistantException
@@ -40,5 +41,10 @@ class UtilisateurControllerAdvice {
     @ExceptionHandler(MoyenDePaiementsInvalideException::class)
     fun error400(exception: MoyenDePaiementsInvalideException) : ProblemDetail{
         return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, exception.message)
+    }
+
+    @ExceptionHandler(AdresseIntrouvableException::class)
+    fun error404(exception: AdresseIntrouvableException) : ProblemDetail{
+        return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, exception.message)
     }
 }

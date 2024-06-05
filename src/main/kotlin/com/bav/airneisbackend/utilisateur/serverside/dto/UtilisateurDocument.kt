@@ -20,7 +20,7 @@ data class UtilisateurDocument(
     val prenom : String,
     val paiements : List<MoyenDePaiement> = emptyList(),
     val numeroDeTelephone : String,
-    val adresse : List<Adresse> = emptyList(),
+    val adresse : MutableList<Adresse> = mutableListOf(),
     val panierActuel : Panier,
     val roles: Set<String> = setOf(), // Ajouter les rôles ici
     val commandes : MutableList<Panier> = mutableListOf()

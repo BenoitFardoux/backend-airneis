@@ -1,5 +1,6 @@
 package com.bav.airneisbackend.utilisateur.userside.mapper
 
+import com.bav.airneisbackend.utilisateur.domain.model.Adresse
 import com.bav.airneisbackend.utilisateur.domain.model.Panier
 import com.bav.airneisbackend.utilisateur.domain.model.Utilisateur
 import com.bav.airneisbackend.utilisateur.domain.model.produits.Produit
@@ -44,7 +45,7 @@ object UtilisateurMapper {
             email = email,
             motDePasse = motDePasse,
             nom = nom,
-            adresse = emptyList(),
+            adresse = mutableListOf<Adresse>(),
             numeroDeTelephone = telephone,
             paiements = emptyList(),
             panierActuel = Panier(

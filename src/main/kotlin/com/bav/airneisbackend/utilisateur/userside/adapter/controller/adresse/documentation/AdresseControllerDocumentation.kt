@@ -35,4 +35,19 @@ interface AdresseControllerDocumentation {
         ]
     )
     fun ajouterAdresse(adresse : Adresse) : ResponseEntity<UtilisateurRestRessource>
+
+
+    @Operation(
+        summary = "Supprime une adresse de l'utilisateur actuel",
+        description = "Supprime une adresse de l'utilisateur actuel"
+    )
+    @ApiResponses(
+        value = [
+            ApiResponse(
+                responseCode = "200",
+                description = "L'adresse a été supprimée de l'utilisateur"
+            )
+        ]
+    )
+     fun supprimerAdresse( adresse: Adresse): ResponseEntity<UtilisateurRestRessource>
 }
