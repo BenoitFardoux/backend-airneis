@@ -6,6 +6,7 @@ import com.bav.airneisbackend.materiaux.domain.usecase.RecupererMateriaux
 import com.bav.airneisbackend.materiaux.domain.usecase.RecupererUnMateriau
 import com.bav.airneisbackend.materiaux.fixture.MateriauFixture
 import com.bav.airneisbackend.materiaux.userside.mapper.MateriauMapper
+import com.bav.airneisbackend.produit.userside.adaptater.controller.ProduitControllerAdvice
 import com.bav.airneisbackend.utils.JwtService
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.junit.jupiter.api.Test
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.context.annotation.Import
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
 import org.springframework.http.MediaType
@@ -27,6 +29,8 @@ import org.springframework.test.web.servlet.post
 
 @WebMvcTest(ReferentielDeMateriauController::class, excludeAutoConfiguration = [SecurityAutoConfiguration::class])
 @ExtendWith(MockitoExtension::class)
+@Import(MateriauControllerAdvice::class)
+
 class ReferentielDeMateriauControllerTest {
     @Autowired
     private lateinit var mockMvc: MockMvc

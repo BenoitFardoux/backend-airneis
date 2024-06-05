@@ -9,7 +9,7 @@ data class Utilisateur (
     val prenom : String,
     val paiements : List<MoyenDePaiement>,
     val numeroDeTelephone : String,
-    val adresse : List<Adresse>,
+    val adresse : MutableList<Adresse>,
     val panierActuel : Panier,
     val commandes : MutableList<Panier>
 )

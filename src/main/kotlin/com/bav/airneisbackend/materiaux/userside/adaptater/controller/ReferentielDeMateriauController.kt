@@ -1,6 +1,5 @@
 package com.bav.airneisbackend.materiaux.userside.adaptater.controller
 
-import com.bav.airneisbackend.materiaux.domain.exception.MateriauNonTrouveException
 import com.bav.airneisbackend.materiaux.domain.model.Materiau
 import com.bav.airneisbackend.materiaux.domain.usecase.PersisterUnMateriau
 import com.bav.airneisbackend.materiaux.domain.usecase.RecupererMateriaux
@@ -17,6 +16,7 @@ import org.springframework.hateoas.PagedModel
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -32,7 +32,7 @@ import java.net.URI
 class ReferentielDeMateriauController(
     private val recupererMateriaux: RecupererMateriaux,
     private val recupererMateriauxParId: RecupererUnMateriau,
-    private val persisterUnMateriau: PersisterUnMateriau
+    private val persisterUnMateriau: PersisterUnMateriau,
 ) : ReferentielDeMateriauxControllerDocumentation {
 
     @GetMapping(produces = [APPLICATION_JSON_VALUE])
@@ -41,7 +41,6 @@ class ReferentielDeMateriauController(
         @RequestParam("pageSize", defaultValue = "10") pageSize: Int,
         critereDeRecherche: String?
     ): ResponseEntity<CollectionModel<MateriauRestRessource>> {
-        try {
             val pageable = PageRequest.of(pageNumber, pageSize)
             val materiaux = recupererMateriaux(pageable, critereDeRecherche)
 
@@ -56,23 +55,17 @@ class ReferentielDeMateriauController(
             )
 
             return ResponseEntity.ok(pagedModel)
-        } catch (e: MateriauNonTrouveException) {
-            return ResponseEntity.notFound().build()
-        }
     }
 
 
     @GetMapping("/{id}", produces = [APPLICATION_JSON_VALUE])
     override fun recupererMateriauParId( @PathVariable id: String): ResponseEntity<MateriauRestRessource> {
-        return try {
+
             val materiau : Materiau = recupererMateriauxParId(id)
 
             val materiauRestRessource = MateriauMapper.materiauToMateriauRestRessource(materiau)
 
-            ResponseEntity.ok(materiauRestRessource)
-        } catch (e: MateriauNonTrouveException) {
-            ResponseEntity.notFound().build()
-        }
+        return    ResponseEntity.ok(materiauRestRessource)
     }
 
     @PostMapping
@@ -109,6 +102,15 @@ class ReferentielDeMateriauController(
         val materiauRestRessource = MateriauMapper.materiauToMateriauRestRessource(persisterMateriau)
         return ResponseEntity.created(uriMateriau).body(materiauRestRessource)
     }
+
+
+    @SecurityRequirement(name = "Bearer Authentication")
+    @DeleteMapping("/{id}")
+    override fun supprimeMateriau(@PathVariable id: String): ResponseEntity<MateriauRestRessource> {
+        throw NotImplementedError("Not yet implemented")
+    }
+
+
 }
 
 

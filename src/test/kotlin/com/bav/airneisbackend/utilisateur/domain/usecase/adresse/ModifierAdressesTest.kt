@@ -21,7 +21,7 @@ class ModifierAdressesTest {
     @Test
     fun `quand j'essaye de modifier les adresses et que les adresses sont valides je n'ai pas d'exception`() {
         // Given
-        val adresses = listOf(
+        val adresses = mutableListOf(
             Adresse(
                 codePostal = "75000",
                 ville = "Paris",

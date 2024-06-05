@@ -2,6 +2,7 @@ package com.bav.airneisbackend.materiaux.userside.adaptater.controller.documenta
 
 import com.bav.airneisbackend.materiaux.userside.restressources.MateriauRestRessource
 import com.bav.airneisbackend.materiaux.userside.restressources.PourCreerMateriauRestRessource
+import com.bav.airneisbackend.produit.domain.model.Materiau
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
@@ -73,4 +74,18 @@ interface ReferentielDeMateriauxControllerDocumentation {
         ]
     )
     fun persisteMateriau(materiau: PourCreerMateriauRestRessource): ResponseEntity<Any>
+
+    @Operation(
+        summary = "Supprime un materiau",
+        description = "Supprime un materiau de la base de donnée"
+    )
+    @ApiResponses(
+        value = [
+            ApiResponse(
+                responseCode = "200",
+                description = "Le materiau a été supprimé"
+            )
+        ]
+    )
+    fun supprimeMateriau(id: String): ResponseEntity<MateriauRestRessource>
 }
