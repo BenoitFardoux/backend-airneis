@@ -5,6 +5,7 @@ import com.bav.airneisbackend.utilisateur.userside.restressource.UtilisateurRest
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.responses.ApiResponse
+import org.springframework.http.ResponseEntity
 
 interface AdresseControllerDocumentation {
     @Operation(
@@ -16,12 +17,22 @@ interface AdresseControllerDocumentation {
             ApiResponse(
                 responseCode = "200",
                 description = "Les adresses de l'utilisateur ont été modifiées"
-            ),
-            ApiResponse(
-                responseCode = "404",
-                description = "Aucune adresse n'a été trouvée"
             )
         ]
     )
-    fun modifierAdresses(adresses : List<Adresse>) : UtilisateurRestRessource
+    fun modifierAdresses(adresses : List<Adresse>) : ResponseEntity<UtilisateurRestRessource>
+
+    @Operation(
+        summary = "Ajoute une adresse à l'utilisateur actuel",
+        description = "Ajoute une adresse à l'utilisateur actuel"
+    )
+    @ApiResponses(
+        value = [
+            ApiResponse(
+                responseCode = "200",
+                description = "L'adresse a été ajoutée à l'utilisateur"
+            )
+        ]
+    )
+    fun ajouterAdresse(adresse : Adresse) : ResponseEntity<UtilisateurRestRessource>
 }
