@@ -6,7 +6,6 @@ import com.bav.airneisbackend.utilisateur.domain.model.Panier
 
 data class UtilisateurRestRessource(
     val verifie : Boolean,
-    val motDePasse : String,
     val email: String,
     val nom : String,
     val prenom : String,

@@ -13,7 +13,6 @@ object UtilisateurMapper {
     fun Utilisateur.toUtilisateurRestRessource() : UtilisateurRestRessource {
         return UtilisateurRestRessource(
             email = email,
-            motDePasse = motDePasse,
             nom = nom,
             numeroDeTelephone = numeroDeTelephone,
             prenom = prenom,
