@@ -21,8 +21,6 @@ object UtilisateurMapper {
             adresse = adresse,
             panierActuel = panierActuel,
             commandes = commandes,
-
-
         )
     }
 

@@ -33,7 +33,7 @@ class UtilisateurControllerAdvice {
         return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, exception.message)
     }
 
-    @ExceptionHandler(IllegalArgumentException::class)
+   @ExceptionHandler(IllegalArgumentException::class)
     fun error400(exception: IllegalArgumentException) : ProblemDetail{
         return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, exception.message?:"")
     }
