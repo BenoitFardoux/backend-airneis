@@ -48,6 +48,7 @@ docker pull mongo
 docker run -d -p 27017:27017 --name mongo ton_image_mongo
 ```
 
+
 #### Se connecter à mongo
 
 Via l'utilisation de [MongoDB Compass](https://www.mongodb.com/try/download/compass), se connecter à la db via l'URI :
@@ -55,6 +56,9 @@ Via l'utilisation de [MongoDB Compass](https://www.mongodb.com/try/download/comp
 ```
 mongodb://localhost:27017
 ```
+
+- Creez la base de données `airneis` dans mongodb compass
+- inserez les document airneis.categorie.json, airneis.materiau.json airneis.produit.json dans la base de données airneis
 
 ### Démarrer l'application via Intellij
 
@@ -77,7 +81,6 @@ Une fois le `.jar` généré, il suffit de démarrer l'application directement v
 
 Pour consulter la doc: [ici](http://localhost:8080/api/swagger-ui/index.html)
 
-![documentation](images/swagger-example.png)
 
 ## Monitorer l'application
 

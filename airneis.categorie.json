@@ -1,0 +1,90 @@
+[{
+  "_id": "6660336b8c5e593085f48112",
+  "nom": "Canapés",
+  "image": {
+    "url": "https://example.com/canapes.jpg",
+    "description": "Image d'un canapé moderne dans un salon contemporain"
+  },
+  "produits": []
+},
+{
+  "_id": "666033738c5e593085f48113",
+  "nom": "Tables",
+  "image": {
+    "url": "https://example.com/tables.jpg",
+    "description": "Image d'une table à manger en bois dans une salle à manger"
+  },
+  "produits": []
+},
+{
+  "_id": "666033778c5e593085f48114",
+  "nom": "Chaises",
+  "image": {
+    "url": "https://example.com/chaises.jpg",
+    "description": "Image d'un ensemble de chaises modernes autour d'une table"
+  },
+  "produits": []
+},
+{
+  "_id": "6660337b8c5e593085f48115",
+  "nom": "Lits",
+  "image": {
+    "url": "https://example.com/lits.jpg",
+    "description": "Image d'un lit confortable dans une chambre à coucher"
+  },
+  "produits": []
+},
+{
+  "_id": "666033808c5e593085f48116",
+  "nom": "Armoires",
+  "image": {
+    "url": "https://example.com/armoires.jpg",
+    "description": "Image d'une armoire spacieuse dans une chambre"
+  },
+  "produits": []
+},
+{
+  "_id": "666033838c5e593085f48117",
+  "nom": "Bureaux",
+  "image": {
+    "url": "https://example.com/bureaux.jpg",
+    "description": "Image d'un bureau moderne dans un espace de travail"
+  },
+  "produits": []
+},
+{
+  "_id": "666033878c5e593085f48118",
+  "nom": "Bibliothèques",
+  "image": {
+    "url": "https://example.com/bibliotheques.jpg",
+    "description": "Image d'une bibliothèque remplie de livres dans un salon"
+  },
+  "produits": []
+},
+{
+  "_id": "6660338b8c5e593085f48119",
+  "nom": "Meubles TV",
+  "image": {
+    "url": "https://example.com/meubles-tv.jpg",
+    "description": "Image d'un meuble TV moderne avec une télévision dessus"
+  },
+  "produits": []
+},
+{
+  "_id": "666033918c5e593085f4811a",
+  "nom": "Tables de chevet",
+  "image": {
+    "url": "https://example.com/tables-de-chevet.jpg",
+    "description": "Image d'une table de chevet à côté d'un lit"
+  },
+  "produits": []
+},
+{
+  "_id": "666033968c5e593085f4811b",
+  "nom": "Commodes",
+  "image": {
+    "url": "https://example.com/commodes.jpg",
+    "description": "Image d'une commode en bois dans une chambre"
+  },
+  "produits": []
+}]

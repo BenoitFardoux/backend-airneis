@@ -1,0 +1,180 @@
+[{
+  "_id": "6660317d8c5e593085f480fe",
+  "nom": "Chêne",
+  "type": "Bois",
+  "image": {
+    "url": "https://example.com/chene.jpg",
+    "description": "Bois dur utilisé pour les meubles de haute qualité."
+  }
+},
+{
+  "_id": "666031868c5e593085f480ff",
+  "nom": "Pin",
+  "type": "Bois",
+  "image": {
+    "url": "https://example.com/pin.jpg",
+    "description": "Bois tendre couramment utilisé pour les meubles et les étagères."
+  }
+},
+{
+  "_id": "6660318e8c5e593085f48100",
+  "nom": "Contreplaqué",
+  "type": "Bois composite",
+  "image": {
+    "url": "https://example.com/contreplaque.jpg",
+    "description": "Panneau de bois fabriqué à partir de couches de bois collées."
+  }
+},
+{
+  "_id": "666031938c5e593085f48101",
+  "nom": "MDF",
+  "type": "Bois composite",
+  "image": {
+    "url": "https://example.com/mdf.jpg",
+    "description": "Panneau de fibres de bois de densité moyenne utilisé pour les meubles."
+  }
+},
+{
+  "_id": "666031998c5e593085f48102",
+  "nom": "Acier inoxydable",
+  "type": "Métal",
+  "image": {
+    "url": "https://example.com/acier_inox.jpg",
+    "description": "Métal résistant à la corrosion utilisé pour les structures de meubles."
+  }
+},
+{
+  "_id": "6660319f8c5e593085f48103",
+  "nom": "Aluminium",
+  "type": "Métal",
+  "image": {
+    "url": "https://example.com/aluminium.jpg",
+    "description": "Métal léger utilisé pour les cadres de meubles modernes."
+  }
+},
+{
+  "_id": "666031a48c5e593085f48104",
+  "nom": "Cuir",
+  "type": "Tissu",
+  "image": {
+    "url": "https://example.com/cuir.jpg",
+    "description": "Matériau durable et luxueux utilisé pour le rembourrage des meubles."
+  }
+},
+{
+  "_id": "666031a98c5e593085f48105",
+  "nom": "Tissu en lin",
+  "type": "Tissu",
+  "image": {
+    "url": "https://example.com/tissu_lin.jpg",
+    "description": "Tissu naturel utilisé pour le rembourrage des meubles."
+  }
+},
+{
+  "_id": "666031b08c5e593085f48106",
+  "nom": "Verre trempé",
+  "type": "Verre",
+  "image": {
+    "url": "https://example.com/verre_trempe.jpg",
+    "description": "Verre renforcé utilisé pour les dessus de table et les étagères."
+  }
+},
+{
+  "_id": "666031b58c5e593085f48107",
+  "nom": "Bambou",
+  "type": "Bois",
+  "image": {
+    "url": "https://example.com/bambou.jpg",
+    "description": "Matériau écologique utilisé pour les meubles et les revêtements de sol."
+  }
+},
+{
+  "_id": "666031bf8c5e593085f48108",
+  "nom": "Rotin",
+  "type": "Plante",
+  "image": {
+    "url": "https://example.com/rotin.jpg",
+    "description": "Matériau naturel utilisé pour les meubles d'extérieur et les paniers."
+  }
+},
+{
+  "_id": "666031c58c5e593085f48109",
+  "nom": "Osier",
+  "type": "Plante",
+  "image": {
+    "url": "https://example.com/osier.jpg",
+    "description": "Matériau naturel utilisé pour les meubles tressés et les paniers."
+  }
+},
+{
+  "_id": "666031d18c5e593085f4810a",
+  "nom": "Marbre",
+  "type": "Pierre",
+  "image": {
+    "url": "https://example.com/marbre.jpg",
+    "description": "Pierre naturelle utilisée pour les dessus de table et les comptoirs."
+  }
+},
+{
+  "_id": "666031d58c5e593085f4810b",
+  "nom": "Granit",
+  "type": "Pierre",
+  "image": {
+    "url": "https://example.com/granit.jpg",
+    "description": "Pierre dure utilisée pour les comptoirs et les dessus de table."
+  }
+},
+{
+  "_id": "666031db8c5e593085f4810c",
+  "nom": "Laine",
+  "type": "Tissu",
+  "image": {
+    "url": "https://example.com/laine.jpg",
+    "description": "Tissu naturel utilisé pour les revêtements de sièges et les couvertures."
+  }
+},
+{
+  "_id": "666031e08c5e593085f4810d",
+  "nom": "Polyester",
+  "type": "Synthétique",
+  "image": {
+    "url": "https://example.com/polyester.jpg",
+    "description": "Tissu synthétique utilisé pour le rembourrage des meubles."
+  }
+},
+{
+  "_id": "666031e58c5e593085f4810e",
+  "nom": "Acajou",
+  "type": "Bois",
+  "image": {
+    "url": "https://example.com/acajou.jpg",
+    "description": "Bois dur tropical utilisé pour les meubles haut de gamme."
+  }
+},
+{
+  "_id": "666031eb8c5e593085f4810f",
+  "nom": "Teck",
+  "type": "Bois",
+  "image": {
+    "url": "https://example.com/teck.jpg",
+    "description": "Bois tropical résistant utilisé pour les meubles d'extérieur."
+  }
+},
+{
+  "_id": "666031ef8c5e593085f48110",
+  "nom": "Noyer",
+  "type": "Bois",
+  "image": {
+    "url": "https://example.com/noyer.jpg",
+    "description": "Bois dur foncé utilisé pour les meubles de qualité."
+  }
+},
+{
+  "_id": "666031f48c5e593085f48111",
+  "nom": "Erable",
+  "type": "Bois",
+  "image": {
+    "url": "https://example.com/erable.jpg",
+    "description": "Bois dur clair utilisé pour les meubles et les parquets."
+  }
+}]

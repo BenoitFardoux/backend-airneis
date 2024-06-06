@@ -1,0 +1,330 @@
+[{
+  "_id": "6660370a8c5e593085f48121",
+  "nom": "Canapé Bhrèagha en Cuir",
+  "description": "Un canapé élégant et confortable en cuir véritable, parfait pour tout salon contemporain.",
+  "prix": 500,
+  "images": [
+    {
+      "url": "https://example.com/canape_modern.jpg",
+      "description": "Image d'un canapé moderne en cuir dans un salon contemporain"
+    }
+  ],
+  "dimension": {
+    "hauteur": 85,
+    "largeur": 200,
+    "profondeur": 90
+  },
+  "categorie": {
+    "_id": {
+      "$oid": "6660336b8c5e593085f48112"
+    }
+  },
+  "materiaux": [
+    {
+      "_id": {
+        "$oid": "666031a48c5e593085f48104"
+      },
+      "nom": "Cuir"
+    }
+  ]
+},
+{
+  "_id": "666047628c5e593085f48122",
+  "nom": "Table Mhòr en Chêne",
+  "description": "Une belle table à manger en chêne massif, idéale pour des dîners en famille ou entre amis.",
+  "prix": 300,
+  "images": [
+    {
+      "url": "https://example.com/table_dining.jpg",
+      "description": "Image d'une table à manger en chêne dans une salle à manger"
+    }
+  ],
+  "dimension": {
+    "hauteur": 75,
+    "largeur": 180,
+    "profondeur": 90
+  },
+  "categorie": {
+    "_id": {
+      "$oid": "666033738c5e593085f48113"
+    }
+  },
+  "materiaux": [
+    {
+      "_id": {
+        "$oid": "6660317d8c5e593085f480fe"
+      },
+      "nom": "Chêne"
+    }
+  ]
+},
+{
+  "_id": "6660476d8c5e593085f48123",
+  "nom": "Cathair Nua en Métal",
+  "description": "Une chaise élégante et robuste en acier inoxydable, parfaite pour une cuisine ou une salle à manger moderne.",
+  "prix": 120,
+  "images": [
+    {
+      "url": "https://example.com/chaise_metal.jpg",
+      "description": "Image d'une chaise moderne en métal autour d'une table"
+    }
+  ],
+  "dimension": {
+    "hauteur": 90,
+    "largeur": 45,
+    "profondeur": 50
+  },
+  "categorie": {
+    "_id": {
+      "$oid": "666033778c5e593085f48114"
+    }
+  },
+  "materiaux": [
+    {
+      "_id": {
+        "$oid": "666031998c5e593085f48102"
+      },
+      "nom": "Acier inoxydable"
+    }
+  ]
+},
+{
+  "_id": "666047748c5e593085f48124",
+  "nom": "Leaba Chofhurtach en Noyer",
+  "description": "Un lit spacieux et confortable en bois de noyer, idéal pour une chambre à coucher élégante.",
+  "prix": 800,
+  "images": [
+    {
+      "url": "https://example.com/lit_noyer.jpg",
+      "description": "Image d'un lit confortable en noyer dans une chambre à coucher"
+    }
+  ],
+  "dimension": {
+    "hauteur": 120,
+    "largeur": 160,
+    "profondeur": 200
+  },
+  "categorie": {
+    "_id": {
+      "$oid": "6660337b8c5e593085f48115"
+    }
+  },
+  "materiaux": [
+    {
+      "_id": {
+        "$oid": "666031ef8c5e593085f48110"
+      },
+      "nom": "Noyer"
+    }
+  ]
+},
+{
+  "_id": "6660477b8c5e593085f48125",
+  "nom": "Almraich Fairsing en Pin",
+  "description": "Une armoire spacieuse en bois de pin, idéale pour ranger vos vêtements et accessoires.",
+  "prix": 400,
+  "images": [
+    {
+      "url": "https://example.com/armoire_pin.jpg",
+      "description": "Image d'une armoire spacieuse en pin dans une chambre"
+    }
+  ],
+  "dimension": {
+    "hauteur": 200,
+    "largeur": 100,
+    "profondeur": 60
+  },
+  "categorie": {
+    "_id": {
+      "$oid": "666033808c5e593085f48116"
+    }
+  },
+  "materiaux": [
+    {
+      "_id": {
+        "$oid": "666031868c5e593085f480ff"
+      },
+      "nom": "Pin"
+    }
+  ]
+},
+{
+  "_id": "666047838c5e593085f48126",
+  "nom": "Bòrd Leughaidh en Verre Trempé",
+  "description": "Une table basse élégante en verre trempé, parfaite pour les salons modernes.",
+  "prix": 150,
+  "images": [
+    {
+      "url": "https://example.com/table_verre.jpg",
+      "description": "Image d'une table basse en verre dans un salon moderne"
+    }
+  ],
+  "dimension": {
+    "hauteur": 45,
+    "largeur": 100,
+    "profondeur": 60
+  },
+  "categorie": {
+    "_id": {
+      "$oid": "666033738c5e593085f48113"
+    }
+  },
+  "materiaux": [
+    {
+      "_id": {
+        "$oid": "666031b08c5e593085f48106"
+      },
+      "nom": "Verre trempé"
+    }
+  ]
+},
+{
+  "_id": "6660478b8c5e593085f48127",
+  "nom": "Cathair Soilleir en Rotin",
+  "description": "Une chaise confortable en rotin, idéale pour un espace extérieur ou un jardin.",
+  "prix": 220,
+  "images": [
+    {
+      "url": "https://example.com/chaise_rotin.jpg",
+      "description": "Image d'une chaise en rotin dans un jardin"
+    }
+  ],
+  "dimension": {
+    "hauteur": 90,
+    "largeur": 60,
+    "profondeur": 60
+  },
+  "categorie": {
+    "_id": {
+      "$oid": "666033778c5e593085f48114"
+    }
+  },
+  "materiaux": [
+    {
+      "_id": {
+        "$oid": "666031bf8c5e593085f48108"
+      },
+      "nom": "Rotin"
+    }
+  ]
+},
+{
+  "_id": "666047938c5e593085f48128",
+  "nom": "Leaba Lìonta en Chêne",
+  "description": "Un lit king size en chêne massif avec un design classique, parfait pour toute chambre à coucher.",
+  "prix": 1000,
+  "images": [
+    {
+      "url": "https://example.com/lit_chene.jpg",
+      "description": "Image d'un lit king size en chêne dans une chambre à coucher"
+    }
+  ],
+  "dimension": {
+    "hauteur": 140,
+    "largeur": 180,
+    "profondeur": 200
+  },
+  "categorie": {
+    "_id": {
+      "$oid": "6660337b8c5e593085f48115"
+    }
+  },
+  "materiaux": [
+    {
+      "_id": {
+        "$oid": "6660317d8c5e593085f480fe"
+      },
+      "nom": "Chêne"
+    }
+  ]
+},
+{
+  "_id": "6660479a8c5e593085f48129",
+  "nom": "Arm Droma Fionnar en Bambou",
+  "description": "Une armoire écologique en bambou, parfaite pour ajouter une touche naturelle à votre chambre.",
+  "prix": 350,
+  "images": [
+    {
+      "url": "https://example.com/armoire_bambou.jpg",
+      "description": "Image d'une armoire en bambou dans une chambre"
+    }
+  ],
+  "dimension": {
+    "hauteur": 190,
+    "largeur": 100,
+    "profondeur": 55
+  },
+  "categorie": {
+    "_id": {
+      "$oid": "666033808c5e593085f48116"
+    }
+  },
+  "materiaux": [
+    {
+      "_id": {
+        "$oid": "666031b58c5e593085f48107"
+      },
+      "nom": "Bambou"
+    }
+  ]
+},
+{
+  "_id": "666047a48c5e593085f4812a",
+  "nom": "Clàr Sgrìobhaidh Stoidhle en Aluminium",
+  "description": "Un bureau moderne en aluminium, parfait pour un espace de travail stylé et fonctionnel.",
+  "prix": 600,
+  "images": [
+    {
+      "url": "https://example.com/bureau_aluminium.jpg",
+      "description": "Image d'un bureau en aluminium dans un espace de travail"
+    }
+  ],
+  "dimension": {
+    "hauteur": 75,
+    "largeur": 150,
+    "profondeur": 70
+  },
+  "categorie": {
+    "_id": {
+      "$oid": "666033838c5e593085f48117"
+    }
+  },
+  "materiaux": [
+    {
+      "_id": {
+        "$oid": "6660319f8c5e593085f48103"
+      },
+      "nom": "Aluminium"
+    }
+  ]
+},
+{
+  "_id": "666047b18c5e593085f4812b",
+  "nom": "Sofa Chùbhraidh en Laine",
+  "description": "Un canapé doux et confortable en laine, parfait pour un salon cosy.",
+  "prix": 450,
+  "images": [
+    {
+      "url": "https://example.com/sofa_laine.jpg",
+      "description": "Image d'un canapé en laine dans un salon cosy"
+    }
+  ],
+  "dimension": {
+    "hauteur": 90,
+    "largeur": 220,
+    "profondeur": 95
+  },
+  "categorie": {
+    "_id": {
+      "$oid": "6660336b8c5e593085f48112"
+    }
+  },
+  "materiaux": [
+    {
+      "_id": {
+        "$oid": "666031db8c5e593085f4810c"
+      },
+      "nom": "Laine"
+    }
+  ]
+}]
