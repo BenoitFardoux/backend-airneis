@@ -4,6 +4,7 @@ import com.bav.airneisbackend.categorie.CategorieFixture
 import com.bav.airneisbackend.categorie.domain.exception.CategorieInvalideException
 import com.bav.airneisbackend.categorie.domain.usecase.PersisterCategorie
 import com.bav.airneisbackend.categorie.domain.usecase.RecupererCategorie
+import com.bav.airneisbackend.categorie.domain.usecase.RecupererCategories
 import com.bav.airneisbackend.categorie.userside.mapper.CategorieMapper.toCategorie
 import com.bav.airneisbackend.produit.domain.usecase.RecupererUnProduit
 import com.bav.airneisbackend.utils.JwtService
@@ -44,6 +45,9 @@ class CategorieControllerTest {
 
     @MockBean
     private lateinit var recupererCategorie: RecupererCategorie
+
+    @MockBean
+    private lateinit var recupererCategories: RecupererCategories
 
     @Test
     fun `lorsque je fait une requete post pour persister une categorie, alors je dois avoir un status 201`() {
