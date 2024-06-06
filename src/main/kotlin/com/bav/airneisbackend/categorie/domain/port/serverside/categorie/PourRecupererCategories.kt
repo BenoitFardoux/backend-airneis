@@ -1,4 +1,7 @@
 package com.bav.airneisbackend.categorie.domain.port.serverside.categorie
 
-interface PourRecupererCategories {
+import com.bav.airneisbackend.categorie.domain.model.Categorie
+
+fun interface PourRecupererCategories {
+    operator fun invoke(): List<Categorie>
 }

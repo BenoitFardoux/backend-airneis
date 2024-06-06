@@ -6,4 +6,5 @@ import org.springframework.stereotype.Component
 
 @Component
 class RecupererCategories (val pourRecupererCategories: PourRecupererCategories) {
+    operator fun invoke() = pourRecupererCategories()
 }

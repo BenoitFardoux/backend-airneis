@@ -25,6 +25,21 @@ interface CategorieControllerDocumentation {
     )
     fun recupererCategorieParId(id: String): ResponseEntity<CategorieRestRessource>
 
+
+    @Operation(
+        summary = "recupère toute les categories",
+        description = "Recupère toute les categories",
+    )
+    @ApiResponses(
+        value = [
+            ApiResponse(
+                responseCode = "200",
+                description = "Les categories"
+            )
+        ]
+    )
+    fun recupererToutesLesCategories(): ResponseEntity<List<CategorieRestRessource>>
+
     @Operation(
         summary = "Persiste une categorie",
         description = "Persiste une categorie persite une categorie en base de donnée",

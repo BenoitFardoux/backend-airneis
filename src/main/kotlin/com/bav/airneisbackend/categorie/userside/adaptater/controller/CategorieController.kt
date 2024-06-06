@@ -3,6 +3,7 @@ package com.bav.airneisbackend.categorie.userside.adaptater.controller
 import com.bav.airneisbackend.categorie.domain.model.Image
 import com.bav.airneisbackend.categorie.domain.usecase.PersisterCategorie
 import com.bav.airneisbackend.categorie.domain.usecase.RecupererCategorie
+import com.bav.airneisbackend.categorie.domain.usecase.RecupererCategories
 import com.bav.airneisbackend.categorie.userside.adaptater.controller.documentation.CategorieControllerDocumentation
 import com.bav.airneisbackend.categorie.userside.dto.CategorieRestRessource
 import com.bav.airneisbackend.categorie.userside.dto.PourCreerCategorieRestRessource
@@ -26,7 +27,8 @@ import java.net.URI
 class CategorieController(
     private val persisterCategorie: PersisterCategorie,
     private val recupererProduit: RecupererUnProduit,
-    private val recupererCategorie: RecupererCategorie
+    private val recupererCategorie: RecupererCategorie,
+    private val recupererCategories: RecupererCategories
 ) : CategorieControllerDocumentation {
 
     @GetMapping("/{id}")
@@ -44,6 +46,23 @@ class CategorieController(
         }
 
         return ResponseEntity.ok(categorie.toCategorieRestRessource(produits))
+    }
+
+    @GetMapping
+    override fun recupererToutesLesCategories(): ResponseEntity<List<CategorieRestRessource>> {
+        val categories = recupererCategories()
+        return ResponseEntity.ok(categories.map { categorie ->
+            val produits = categorie.produits.map { recupererProduit(it.id) }.map {
+                ProduitPourCategorieRestRessource(
+                    it.id,
+                    it.nom,
+                    it.description,
+                    it.prix,
+                    Image(it.images[0].url, it.images[0].description)
+                )
+            }
+            categorie.toCategorieRestRessource(produits)
+        })
     }
 
 
